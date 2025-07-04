@@ -10,6 +10,18 @@
 *.userosscache
 *.sln.docstates
 
+# Unreal Engine klasörleri hariç tut
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Sadece kaynak kod dosyalarını tut
+*
+!*/
+!*.h
+!*.cpp
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
