@@ -6,10 +6,13 @@
 #include "Kismet/GameplayStatics.h"
 
 void UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(FCountrys FirstCountryStruct, FCountrys SecondCountryStruct, FRebellion Rebellions, UObject* WorldContextObject, TArray<int32>& WeaponCompareResults) {
-
+	
 	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
-	GI->LoadSaveGame();
-	TArray<FNewDesignedProductsStruct> DesignedProducts = GI->GetCurrentSaveData()->DesignedProducts;
+	GI->Implements<USaveInterface>();
+	UC_SaveGame* LoadedSave;
+	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
+
+	TArray<FNewDesignedProductsStruct> DesignedProducts = LoadedSave->DesignedProducts;
 	
 	TMap<int32, int32> FirstCountryAllWeaponIndexsAndCounts = FirstCountryStruct.WeaponsIndexsAndCountsInStorage;
 	TMap<int32, int32> SecondCountryAllWeaponIndexsAndCounts = SecondCountryStruct.WeaponsIndexsAndCountsInStorage;

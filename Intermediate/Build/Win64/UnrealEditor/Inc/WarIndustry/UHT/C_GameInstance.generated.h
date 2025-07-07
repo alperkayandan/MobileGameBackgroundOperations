@@ -9,27 +9,22 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class UC_SaveGame;
 #ifdef WARINDUSTRY_C_GameInstance_generated_h
 #error "C_GameInstance.generated.h already included, missing '#pragma once' in C_GameInstance.h"
 #endif
 #define WARINDUSTRY_C_GameInstance_generated_h
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
-	DECLARE_FUNCTION(execGetCurrentSaveData); \
-	DECLARE_FUNCTION(execLoadSaveGame);
-
-
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_17_INCLASS_NO_PURE_DECLS \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_18_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUC_GameInstance(); \
 	friend struct Z_Construct_UClass_UC_GameInstance_Statics; \
 public: \
 	DECLARE_CLASS(UC_GameInstance, UGameInstance, COMPILED_IN_FLAGS(0 | CLASS_Transient), CASTCLASS_None, TEXT("/Script/WarIndustry"), NO_API) \
-	DECLARE_SERIALIZER(UC_GameInstance)
+	DECLARE_SERIALIZER(UC_GameInstance) \
+	virtual UObject* _getUObject() const override { return const_cast<UC_GameInstance*>(this); }
 
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_17_ENHANCED_CONSTRUCTORS \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_18_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UC_GameInstance(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 private: \
@@ -43,13 +38,12 @@ public: \
 	NO_API virtual ~UC_GameInstance();
 
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_14_PROLOG
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_17_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_15_PROLOG
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_18_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_17_INCLASS_NO_PURE_DECLS \
-	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_17_ENHANCED_CONSTRUCTORS \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_18_INCLASS_NO_PURE_DECLS \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_18_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

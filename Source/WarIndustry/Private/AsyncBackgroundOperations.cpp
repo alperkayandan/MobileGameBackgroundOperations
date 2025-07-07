@@ -14,19 +14,27 @@ UAsyncBackgroundOperations* UAsyncBackgroundOperations::CreateAsyncBackgroundOpe
 void UAsyncBackgroundOperations::StartAsyncCreateRandomWeaponsData(UObject* WorldContextObject) {
        
         CountriesHasLocalProductions = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/CountriesHasLocalProductions.CountriesHasLocalProductions")));
-        
+    
         Async(EAsyncExecution::Thread, [this, WorldContextObject]() {
 
             TArray<FNewDesignedProductsStruct> CreatedData;
             UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
-            GI->LoadSaveGame();
-            TArray<FFactorys> AllGlobalFactories = GI->GetCurrentSaveData()->Factorys;
+            GI->Implements<USaveInterface>();
+            UC_SaveGame* LoadedSave;
+            ISaveInterface::Execute_GetGameData(GI, LoadedSave);
+           
+            TArray<FFactorys> AllGlobalFactories = LoadedSave->Factorys;
 
             CreateRandomWeapon(CreatedData, AllGlobalFactories);
 
+            ISaveInterface::Execute_SaveDesignedProducts(GI, CreatedData, false);
+            ISaveInterface::Execute_SaveGlobalFactory(GI, AllGlobalFactories, false);
+
             AsyncTask(ENamedThreads::GameThread, [this, CreatedData, AllGlobalFactories]() {
+
                     DataCreateIsFinished.Broadcast(CreatedData, AllGlobalFactories);
                     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Merhaba, bu c++'ın bittiğini gösterir"));
+
                 });
 
         });
@@ -38,12 +46,13 @@ void UAsyncBackgroundOperations::StartAsyncRandomWeaponsToCountries(UObject* Wor
     CountriesStartWeaponsDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/CountryWeaponsStart.CountryWeaponsStart")));
 
     Async(EAsyncExecution::Thread, [this, WorldContextObject]() {
+        TArray<FCountrys> Empty;
+        Empty = RandomWeaponsToCountries(WorldContextObject);
         
-        TArray<FCountrys> SaveCountrys;
-        SaveCountrys = RandomWeaponsToCountries(WorldContextObject);
-        
-        AsyncTask(ENamedThreads::GameThread, [this, SaveCountrys]() {
-            RandomWeaponsToCountriesIsFinished.Broadcast(SaveCountrys);
+        AsyncTask(ENamedThreads::GameThread, [this, Empty]() {
+
+
+            RandomWeaponsToCountriesIsFinished.Broadcast(Empty);
             GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Merhaba, bu ülkelere rastgele silah verildiğini gösterir."));
             });
 
@@ -1383,11 +1392,14 @@ int32 UAsyncBackgroundOperations::CalculateWeaponOverall(TArray<float> SelectedV
 }
 
 TArray<FCountrys> UAsyncBackgroundOperations::RandomWeaponsToCountries(UObject* WorldContextObject) {
-   
+    
     UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
-    GI->LoadSaveGame();
-    TArray<FNewDesignedProductsStruct> DesignedProducts = GI->GetCurrentSaveData()->DesignedProducts;
-    TArray<FCountrys> AllCountrys = GI->GetCurrentSaveData()->Countrys;
+    GI->Implements<USaveInterface>();
+    UC_SaveGame* LoadedSave;
+    ISaveInterface::Execute_GetGameData(GI, LoadedSave);
+
+    TArray<FNewDesignedProductsStruct> DesignedProducts = LoadedSave->DesignedProducts;
+    TArray<FCountrys> AllCountrys = LoadedSave->Countrys;
 
     TArray<FName> AllCountriesWithStartWeaponData = ReadCountriesStartWeaponsData();
     TMap<int32, FString> LocalDesignedWeaponIndexAndCountry;
@@ -1591,6 +1603,7 @@ TArray<FCountrys> UAsyncBackgroundOperations::RandomWeaponsToCountries(UObject* 
 
     }
 
+    ISaveInterface::Execute_SaveCountrys(GI, AllCountrys, false);
     return AllCountrys;
 }
 

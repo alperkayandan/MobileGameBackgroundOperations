@@ -11,11 +11,14 @@ UBackgroundLogicOperations* UBackgroundLogicOperations::CreateAsyncBackgroundLog
 }
 
 void UBackgroundLogicOperations::DistributeProducedWeapons(UObject* WorldContextObject, TArray<FFactorys>& GlobalFactorysData) {
+	UWorld* World = GetWorld();
+	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(World));
+	GI->Implements<USaveInterface>();
+	UC_SaveGame* LoadedSave;
+	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
 
-	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
-	GI->LoadSaveGame();
-	FGeneralDatas& GeneralDatas = GI->GetCurrentSaveData()->GeneralDatas;
-	GlobalFactorysData = GI->GetCurrentSaveData()->Factorys;
+	FGeneralDatas& GeneralDatas = LoadedSave->GeneralDatas;
+	GlobalFactorysData = LoadedSave->Factorys;
 
 	if (FDateTime::UtcNow() >= GeneralDatas.NextTimeControlGlobalFactories) {
 
@@ -26,10 +29,13 @@ void UBackgroundLogicOperations::DistributeProducedWeapons(UObject* WorldContext
 }
 
 void UBackgroundLogicOperations::ControlGlobalFactorysProducedWeapons(UObject* WorldContextObject, TArray<FFactorys>& GlobalFactorysData) {
+	UWorld* World = GetWorld();
+	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(World));
+	GI->Implements<USaveInterface>();
+	UC_SaveGame* LoadedSave;
+	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
 
-	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
-	GI->LoadSaveGame();
-	TArray<FNewDesignedProductsStruct>& DesignedProductsData = GI->GetCurrentSaveData()->DesignedProducts;
+	TArray<FNewDesignedProductsStruct>& DesignedProductsData = LoadedSave->DesignedProducts;
 	FDateTime CurrentTime = FDateTime::UtcNow();
 
 	for (FFactorys& FactoryData : GlobalFactorysData) {
