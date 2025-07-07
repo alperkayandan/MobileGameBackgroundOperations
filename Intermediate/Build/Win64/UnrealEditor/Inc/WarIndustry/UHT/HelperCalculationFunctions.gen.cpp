@@ -97,6 +97,7 @@ struct Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTe
 		FRebellion Rebellions;
 		UObject* WorldContextObject;
 		TArray<int32> WeaponCompareResults;
+		int64 FirstCountryTotalPower;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -110,6 +111,7 @@ struct Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTe
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_WorldContextObject;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_WeaponCompareResults_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_WeaponCompareResults;
+	static const UECodeGen_Private::FInt64PropertyParams NewProp_FirstCountryTotalPower;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
@@ -119,6 +121,7 @@ const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UHelperCalc
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventCompareWeaponPowerAndTechnoligies_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::NewProp_WeaponCompareResults_Inner = { "WeaponCompareResults", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::NewProp_WeaponCompareResults = { "WeaponCompareResults", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventCompareWeaponPowerAndTechnoligies_Parms, WeaponCompareResults), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FInt64PropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::NewProp_FirstCountryTotalPower = { "FirstCountryTotalPower", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Int64, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventCompareWeaponPowerAndTechnoligies_Parms, FirstCountryTotalPower), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::NewProp_FirstCountryStruct,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::NewProp_SecondCountryStruct,
@@ -126,6 +129,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHelpe
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::NewProp_WorldContextObject,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::NewProp_WeaponCompareResults_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::NewProp_WeaponCompareResults,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::NewProp_FirstCountryTotalPower,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UHelperCalculationFunctions, nullptr, "CompareWeaponPowerAndTechnoligies", nullptr, nullptr, Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::PropPointers), sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::HelperCalculationFunctions_eventCompareWeaponPowerAndTechnoligies_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::Function_MetaDataParams), Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics::Function_MetaDataParams) };
@@ -146,12 +150,130 @@ DEFINE_FUNCTION(UHelperCalculationFunctions::execCompareWeaponPowerAndTechnoligi
 	P_GET_STRUCT(FRebellion,Z_Param_Rebellions);
 	P_GET_OBJECT(UObject,Z_Param_WorldContextObject);
 	P_GET_TARRAY_REF(int32,Z_Param_Out_WeaponCompareResults);
+	P_GET_PROPERTY_REF(FInt64Property,Z_Param_Out_FirstCountryTotalPower);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(Z_Param_FirstCountryStruct,Z_Param_SecondCountryStruct,Z_Param_Rebellions,Z_Param_WorldContextObject,Z_Param_Out_WeaponCompareResults);
+	UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(Z_Param_FirstCountryStruct,Z_Param_SecondCountryStruct,Z_Param_Rebellions,Z_Param_WorldContextObject,Z_Param_Out_WeaponCompareResults,Z_Param_Out_FirstCountryTotalPower);
 	P_NATIVE_END;
 }
 // End Class UHelperCalculationFunctions Function CompareWeaponPowerAndTechnoligies
+
+// Begin Class UHelperCalculationFunctions Function SortCompaniesByCompanyValues
+struct Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics
+{
+	struct HelperCalculationFunctions_eventSortCompaniesByCompanyValues_Parms
+	{
+		UObject* WorldContextObject;
+		TArray<int32> AllCompanyPlacements;
+		int32 MyCompanyPlacement;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Sortting" },
+		{ "ModuleRelativePath", "Public/HelperCalculationFunctions.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_WorldContextObject;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_AllCompanyPlacements_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_AllCompanyPlacements;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_MyCompanyPlacement;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventSortCompaniesByCompanyValues_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::NewProp_AllCompanyPlacements_Inner = { "AllCompanyPlacements", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::NewProp_AllCompanyPlacements = { "AllCompanyPlacements", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventSortCompaniesByCompanyValues_Parms, AllCompanyPlacements), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::NewProp_MyCompanyPlacement = { "MyCompanyPlacement", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventSortCompaniesByCompanyValues_Parms, MyCompanyPlacement), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::NewProp_WorldContextObject,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::NewProp_AllCompanyPlacements_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::NewProp_AllCompanyPlacements,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::NewProp_MyCompanyPlacement,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UHelperCalculationFunctions, nullptr, "SortCompaniesByCompanyValues", nullptr, nullptr, Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::PropPointers), sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::HelperCalculationFunctions_eventSortCompaniesByCompanyValues_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::Function_MetaDataParams), Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::HelperCalculationFunctions_eventSortCompaniesByCompanyValues_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UHelperCalculationFunctions::execSortCompaniesByCompanyValues)
+{
+	P_GET_OBJECT(UObject,Z_Param_WorldContextObject);
+	P_GET_TARRAY_REF(int32,Z_Param_Out_AllCompanyPlacements);
+	P_GET_PROPERTY_REF(FIntProperty,Z_Param_Out_MyCompanyPlacement);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	UHelperCalculationFunctions::SortCompaniesByCompanyValues(Z_Param_WorldContextObject,Z_Param_Out_AllCompanyPlacements,Z_Param_Out_MyCompanyPlacement);
+	P_NATIVE_END;
+}
+// End Class UHelperCalculationFunctions Function SortCompaniesByCompanyValues
+
+// Begin Class UHelperCalculationFunctions Function SortCountriesByPower
+struct Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics
+{
+	struct HelperCalculationFunctions_eventSortCountriesByPower_Parms
+	{
+		UObject* WorldContextObject;
+		TArray<int32> TopTenCountryIndexs;
+		int32 MyCountryPlacement;
+		int32 MyCountryIndex;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Sortting" },
+		{ "ModuleRelativePath", "Public/HelperCalculationFunctions.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_WorldContextObject;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_TopTenCountryIndexs_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_TopTenCountryIndexs;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_MyCountryPlacement;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_MyCountryIndex;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventSortCountriesByPower_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::NewProp_TopTenCountryIndexs_Inner = { "TopTenCountryIndexs", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::NewProp_TopTenCountryIndexs = { "TopTenCountryIndexs", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventSortCountriesByPower_Parms, TopTenCountryIndexs), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::NewProp_MyCountryPlacement = { "MyCountryPlacement", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventSortCountriesByPower_Parms, MyCountryPlacement), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::NewProp_MyCountryIndex = { "MyCountryIndex", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventSortCountriesByPower_Parms, MyCountryIndex), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::NewProp_WorldContextObject,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::NewProp_TopTenCountryIndexs_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::NewProp_TopTenCountryIndexs,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::NewProp_MyCountryPlacement,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::NewProp_MyCountryIndex,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UHelperCalculationFunctions, nullptr, "SortCountriesByPower", nullptr, nullptr, Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::PropPointers), sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::HelperCalculationFunctions_eventSortCountriesByPower_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::Function_MetaDataParams), Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::HelperCalculationFunctions_eventSortCountriesByPower_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UHelperCalculationFunctions::execSortCountriesByPower)
+{
+	P_GET_OBJECT(UObject,Z_Param_WorldContextObject);
+	P_GET_TARRAY_REF(int32,Z_Param_Out_TopTenCountryIndexs);
+	P_GET_PROPERTY_REF(FIntProperty,Z_Param_Out_MyCountryPlacement);
+	P_GET_PROPERTY_REF(FIntProperty,Z_Param_Out_MyCountryIndex);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	UHelperCalculationFunctions::SortCountriesByPower(Z_Param_WorldContextObject,Z_Param_Out_TopTenCountryIndexs,Z_Param_Out_MyCountryPlacement,Z_Param_Out_MyCountryIndex);
+	P_NATIVE_END;
+}
+// End Class UHelperCalculationFunctions Function SortCountriesByPower
 
 // Begin Class UHelperCalculationFunctions
 void UHelperCalculationFunctions::StaticRegisterNativesUHelperCalculationFunctions()
@@ -159,6 +281,8 @@ void UHelperCalculationFunctions::StaticRegisterNativesUHelperCalculationFunctio
 	UClass* Class = UHelperCalculationFunctions::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
 		{ "CompareWeaponPowerAndTechnoligies", &UHelperCalculationFunctions::execCompareWeaponPowerAndTechnoligies },
+		{ "SortCompaniesByCompanyValues", &UHelperCalculationFunctions::execSortCompaniesByCompanyValues },
+		{ "SortCountriesByPower", &UHelperCalculationFunctions::execSortCountriesByPower },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -177,7 +301,9 @@ struct Z_Construct_UClass_UHelperCalculationFunctions_Statics
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies, "CompareWeaponPowerAndTechnoligies" }, // 3651126864
+		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies, "CompareWeaponPowerAndTechnoligies" }, // 1880048125
+		{ &Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues, "SortCompaniesByCompanyValues" }, // 1047267460
+		{ &Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower, "SortCountriesByPower" }, // 2184963336
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -229,10 +355,10 @@ struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndust
 		{ EWeaponCategory_StaticEnum, TEXT("EWeaponCategory"), &Z_Registration_Info_UEnum_EWeaponCategory, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1371502666U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UHelperCalculationFunctions, UHelperCalculationFunctions::StaticClass, TEXT("UHelperCalculationFunctions"), &Z_Registration_Info_UClass_UHelperCalculationFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHelperCalculationFunctions), 3142823988U) },
+		{ Z_Construct_UClass_UHelperCalculationFunctions, UHelperCalculationFunctions::StaticClass, TEXT("UHelperCalculationFunctions"), &Z_Registration_Info_UClass_UHelperCalculationFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHelperCalculationFunctions), 3823744820U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_2249806374(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_2004389985(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::ClassInfo),
 	nullptr, 0,
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::EnumInfo));

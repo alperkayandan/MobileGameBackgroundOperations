@@ -31,7 +31,13 @@ class WARINDUSTRY_API UHelperCalculationFunctions : public UBlueprintFunctionLib
 	public:
 
         UFUNCTION(BlueprintCallable, Category = "Calculations")
-		static void CompareWeaponPowerAndTechnoligies(FCountrys FirstCountryStruct, FCountrys SecondCountryStruct,  FRebellion Rebellions, UObject* WorldContextObject, TArray<int32>& WeaponCompareResults);
+		static void CompareWeaponPowerAndTechnoligies(FCountrys FirstCountryStruct, FCountrys SecondCountryStruct, FRebellion Rebellions, UObject* WorldContextObject, TArray<int32>& WeaponCompareResults, int64& FirstCountryTotalPower);
+
+        UFUNCTION(BlueprintCallable, Category = "Sortting")
+        static void SortCountriesByPower(UObject* WorldContextObject, TArray<int32>& TopTenCountryIndexs, int32& MyCountryPlacement, int32& MyCountryIndex);
+
+        UFUNCTION(BlueprintCallable, Category = "Sortting")
+        static void SortCompaniesByCompanyValues(UObject* WorldContextObject, TArray<int32>& AllCompanyPlacements, int32& MyCompanyPlacement);
 			
 	private:
 

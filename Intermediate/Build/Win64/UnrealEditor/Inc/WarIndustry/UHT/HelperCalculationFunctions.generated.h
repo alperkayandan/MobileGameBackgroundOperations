@@ -18,6 +18,8 @@ struct FRebellion;
 #define WARINDUSTRY_HelperCalculationFunctions_generated_h
 
 #define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execSortCompaniesByCompanyValues); \
+	DECLARE_FUNCTION(execSortCountriesByPower); \
 	DECLARE_FUNCTION(execCompareWeaponPowerAndTechnoligies);
 
 

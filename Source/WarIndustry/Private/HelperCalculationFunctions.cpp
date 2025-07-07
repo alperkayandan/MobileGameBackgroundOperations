@@ -5,7 +5,8 @@
 #include "C_GameInstance.h"
 #include "Kismet/GameplayStatics.h"
 
-void UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(FCountrys FirstCountryStruct, FCountrys SecondCountryStruct, FRebellion Rebellions, UObject* WorldContextObject, TArray<int32>& WeaponCompareResults) {
+
+void UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(FCountrys FirstCountryStruct, FCountrys SecondCountryStruct, FRebellion Rebellions, UObject* WorldContextObject, TArray<int32>& WeaponCompareResults, int64& FirstCountryTotalPower) {
 	
 	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
 	GI->Implements<USaveInterface>();
@@ -64,13 +65,12 @@ void UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(FCountrys Fi
 
 		int32* SelectedWeaponCount = SearchIn.Find(WeaponIndex);
 		int32 SelectedWeaponOverall = DesignedProducts[WeaponIndex].Overall;
-	
+
 
 		for (FString FightingAgainstCategory : FightingAgainstKeys) {
-			int32* FeatureMultiplier = 0;
+
+			int32* FeatureMultiplier = WeaponFightingAgainstAndStrength.Find(FightingAgainstCategory);
 			int32 NightTimeAdvantage = 0;
-			FeatureMultiplier = WeaponFightingAgainstAndStrength.Find(FightingAgainstCategory);
-			int alper = 0;
 
 			if (DesignedProducts[WeaponIndex].FeaturesAndValues.Num() > 0) {
 				
@@ -81,82 +81,84 @@ void UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(FCountrys Fi
 			case EWeaponCategory::LongRangeRifles:
 
 				if (i == 1) {
-					SecondCountryDayFightingAgainstTotalPower[0] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					SecondCountryNightFightingAgainstTotalPower[0] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					SecondCountryDayFightingAgainstTotalPower[0] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					SecondCountryNightFightingAgainstTotalPower[0] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				else {
-					FirstCountryDayFightingAgainstTotalPower[0] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					FirstCountryNightFightingAgainstTotalPower[0] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					FirstCountryDayFightingAgainstTotalPower[0] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					FirstCountryNightFightingAgainstTotalPower[0] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
+					UE_LOG(LogTemp, Error, TEXT("(Feature Multiplier %d + Selected Weapon Overall %d) * (SelectedWeaponCount %d) = (Result %d)"), *FeatureMultiplier, SelectedWeaponOverall, *SelectedWeaponCount, FirstCountryDayFightingAgainstTotalPower[0]);
 				}	
 				break;
 			case EWeaponCategory::Rockets:
 				if (i == 1) {
-					SecondCountryDayFightingAgainstTotalPower[1] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					SecondCountryNightFightingAgainstTotalPower[1] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					SecondCountryDayFightingAgainstTotalPower[1] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					SecondCountryNightFightingAgainstTotalPower[1] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				else {
-					FirstCountryDayFightingAgainstTotalPower[1] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					FirstCountryNightFightingAgainstTotalPower[1] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					FirstCountryDayFightingAgainstTotalPower[1] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					FirstCountryNightFightingAgainstTotalPower[1] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
+					
 				}
 				break;
 			case EWeaponCategory::Tanks:
 				if (i == 1) {
-					SecondCountryDayFightingAgainstTotalPower[2] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					SecondCountryNightFightingAgainstTotalPower[2] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					SecondCountryDayFightingAgainstTotalPower[2] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					SecondCountryNightFightingAgainstTotalPower[2] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				else {
-					FirstCountryDayFightingAgainstTotalPower[2] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					FirstCountryNightFightingAgainstTotalPower[2] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					FirstCountryDayFightingAgainstTotalPower[2] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					FirstCountryNightFightingAgainstTotalPower[2] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				break;
 			case EWeaponCategory::ArmoredVehicles:
 				if (i == 1) {
-					SecondCountryDayFightingAgainstTotalPower[3] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					SecondCountryNightFightingAgainstTotalPower[3] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					SecondCountryDayFightingAgainstTotalPower[3] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					SecondCountryNightFightingAgainstTotalPower[3] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				else {
-					FirstCountryDayFightingAgainstTotalPower[3] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					FirstCountryNightFightingAgainstTotalPower[3] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					FirstCountryDayFightingAgainstTotalPower[3] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					FirstCountryNightFightingAgainstTotalPower[3] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				break;
 			case EWeaponCategory::Uavs:
 				if (i == 1) {
-					SecondCountryDayFightingAgainstTotalPower[4] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					SecondCountryNightFightingAgainstTotalPower[4] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					SecondCountryDayFightingAgainstTotalPower[4] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					SecondCountryNightFightingAgainstTotalPower[4] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				else {
-					FirstCountryDayFightingAgainstTotalPower[4] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					FirstCountryNightFightingAgainstTotalPower[4] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					FirstCountryDayFightingAgainstTotalPower[4] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					FirstCountryNightFightingAgainstTotalPower[4] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				break;
 			case EWeaponCategory::Helicopters:
 				if (i == 1) {
-					SecondCountryDayFightingAgainstTotalPower[5] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					SecondCountryNightFightingAgainstTotalPower[5] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					SecondCountryDayFightingAgainstTotalPower[5] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					SecondCountryNightFightingAgainstTotalPower[5] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				else {
-					FirstCountryDayFightingAgainstTotalPower[5] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					FirstCountryNightFightingAgainstTotalPower[5] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					FirstCountryDayFightingAgainstTotalPower[5] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					FirstCountryNightFightingAgainstTotalPower[5] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				break;
 			case EWeaponCategory::FighterJets:
 				if (i == 1) {
-					SecondCountryDayFightingAgainstTotalPower[6] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					SecondCountryNightFightingAgainstTotalPower[6] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					SecondCountryDayFightingAgainstTotalPower[6] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					SecondCountryNightFightingAgainstTotalPower[6] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				else {
-					FirstCountryDayFightingAgainstTotalPower[6] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					FirstCountryNightFightingAgainstTotalPower[6] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					FirstCountryDayFightingAgainstTotalPower[6] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					FirstCountryNightFightingAgainstTotalPower[6] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				break;
 			case EWeaponCategory::AirDefensseSystems:
 				if (i == 1) {
-					SecondCountryDayFightingAgainstTotalPower[7] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					SecondCountryNightFightingAgainstTotalPower[7] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					SecondCountryDayFightingAgainstTotalPower[7] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					SecondCountryNightFightingAgainstTotalPower[7] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				else {
-					FirstCountryDayFightingAgainstTotalPower[7] += (*FeatureMultiplier + SelectedWeaponOverall) * *SelectedWeaponCount;
-					FirstCountryNightFightingAgainstTotalPower[7] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * *SelectedWeaponCount;
+					FirstCountryDayFightingAgainstTotalPower[7] += (*FeatureMultiplier + SelectedWeaponOverall) * (*SelectedWeaponCount);
+					FirstCountryNightFightingAgainstTotalPower[7] += (*FeatureMultiplier + SelectedWeaponOverall + NightTimeAdvantage) * (*SelectedWeaponCount);
 				}
 				break;
 
@@ -174,6 +176,8 @@ void UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(FCountrys Fi
 
 	for (int i = 0; i <= 7; i++) {
 		WeaponCompareResults.Add(FirstCountryDayFightingAgainstTotalPower[i] - SecondCountryDayFightingAgainstTotalPower[i]);
+		FirstCountryTotalPower += FirstCountryDayFightingAgainstTotalPower[i] + FirstCountryNightFightingAgainstTotalPower[i];
+		UE_LOG(LogTemp, Warning, TEXT("Indeks [%d] Day Power %lld + Night Power %lld Toplam Guc = %lld"), i,FirstCountryDayFightingAgainstTotalPower[i], FirstCountryNightFightingAgainstTotalPower[i],FirstCountryTotalPower);
 	}
 }
 
@@ -197,4 +201,134 @@ EWeaponCategory UHelperCalculationFunctions::ConvertWeaponCategoryToEnum(const F
 		return EWeaponCategory::AirDefensseSystems;
 	else
 		return EWeaponCategory::Default;
+}
+
+void UHelperCalculationFunctions::SortCountriesByPower(UObject* WorldContextObject, TArray<int32>& TopTenCountryIndexs, int32& MyCountryPlacement, int32& MyCountryIndex) {
+
+	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
+	GI->Implements<USaveInterface>();
+	UC_SaveGame* LoadedSave;
+	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
+
+	TArray<FCountrys> AllCountries = LoadedSave->Countrys;
+	FString MyCountryName = LoadedSave->GeneralDatas.Country;
+	TArray<int32> EmptyArray;
+	TMap<int32, int64> CountryIndexAndTotalPower;
+	int32 index = 0;
+	TArray<TPair<int32, int64>> SortedArray;
+	bool IsMyCountryPlacementFound = false;
+
+	for (FCountrys SelectedCountry : AllCountries) {
+
+		int64 TotalPowerOfWeapons = 0;
+		CompareWeaponPowerAndTechnoligies(SelectedCountry, FCountrys(), FRebellion(), WorldContextObject, EmptyArray, TotalPowerOfWeapons);
+		UE_LOG(LogTemp, Warning, TEXT("%d"), TotalPowerOfWeapons);
+		
+		CountryIndexAndTotalPower.Add(index, TotalPowerOfWeapons);
+		if (MyCountryName.Equals(SelectedCountry.CountryName)) {
+			MyCountryIndex = index;
+		}
+
+		index += 1;
+
+	}
+
+	for (const TPair<int32, int64>& Pair : CountryIndexAndTotalPower)
+	{
+		SortedArray.Add(Pair);
+	}
+
+	SortedArray.Sort([](const TPair<int32, int64>& A, const TPair<int32, int64>& B)
+
+	{
+			return A.Value > B.Value; 
+	});
+
+	for (int i = 0; i < SortedArray.Num(); i++) {
+
+		if (IsMyCountryPlacementFound && i >= 10) {
+			break;
+		}
+		else {
+
+			if (SortedArray[i].Key == MyCountryIndex) {
+
+				IsMyCountryPlacementFound = true;
+				MyCountryPlacement = i + 1;
+			}
+		
+			if (i < 10) {
+
+				TopTenCountryIndexs.Add(SortedArray[i].Key);
+
+			}
+		}
+		
+	}
+
+}
+
+void UHelperCalculationFunctions::SortCompaniesByCompanyValues(UObject* WorldContextObject, TArray<int32>& AllCompanyPlacements, int32& MyCompanyPlacement){
+
+	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
+	GI->Implements<USaveInterface>();
+	UC_SaveGame* LoadedSave;
+	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
+
+	TArray<FFactorys> AllCompanies = LoadedSave->Factorys;
+	FGeneralDatas GeneralDatas = LoadedSave->GeneralDatas;
+	FDateTime CurrentControlTime = FDateTime::UtcNow();
+	TMap<int32, double> CompanyIndexAndCompanyValue; //Benim þirketim -1 indeksli olacak 
+	TArray<TPair<int32, double>> SortedArray;
+	int32 index = 0;
+
+	// 1 saat geçmiþ mi kontrol et 
+	if (CurrentControlTime >= GeneralDatas.LastEntrance + FTimespan(1, 0, 0)) {
+
+		GeneralDatas.OldGrowthRate = ((GeneralDatas.OldMyCompanyValue - GeneralDatas.MyCompanyValue) / GeneralDatas.OldMyCompanyValue) * 100;
+		GeneralDatas.OldMyCompanyValue = GeneralDatas.MyCompanyValue;
+		GeneralDatas.LastEntrance = CurrentControlTime;
+		ISaveInterface::Execute_SaveGeneralData(GI, GeneralDatas, false);
+		
+
+		for (FFactorys GlobalCompany : AllCompanies) {
+				
+			GlobalCompany.OldGrowthRate = ((GlobalCompany.OldCompanyValue - GlobalCompany.CompanyValue) / GlobalCompany.OldCompanyValue) * 100;
+			GlobalCompany.OldCompanyValue = GlobalCompany.CompanyValue;
+			AllCompanies[index] = GlobalCompany;
+
+			index += 1;
+		}
+
+		ISaveInterface::Execute_SaveGlobalFactory(GI, AllCompanies, false);
+
+	}
+	
+	index = 0;
+	for (FFactorys GlobalCompany : AllCompanies) {
+			
+			CompanyIndexAndCompanyValue.Add(index, GlobalCompany.OldCompanyValue);
+			index += 1;
+	}
+
+	CompanyIndexAndCompanyValue.Add(-1, GeneralDatas.OldMyCompanyValue);
+	
+	for (const TPair<int32, double>& Pair : CompanyIndexAndCompanyValue){
+		SortedArray.Add(Pair);
+	}
+
+	SortedArray.Sort([](const TPair<int32, double>& A, const TPair<int32, double>& B){
+			return A.Value > B.Value;
+	});
+
+	for (int i = 0; i < SortedArray.Num(); i++) {
+	
+		if (SortedArray[i].Key == -1) {
+			MyCompanyPlacement = i + 1;
+		}
+		
+		AllCompanyPlacements.Add(SortedArray[i].Key);
+	
+	}
+
 }
