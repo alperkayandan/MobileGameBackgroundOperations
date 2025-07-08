@@ -357,6 +357,7 @@ void UAsyncBackgroundOperations::CreateRandomWeapon(TArray<FNewDesignedProductsS
                 DesignedProductsStruct.FightingAgainstAndStrength = WeaponsFightingAgainstAndStrengthsMap;
 
                 DesignedProductsStruct.ProductionTime = UHelperCalculationFunctions::CalculateWeaponProductionTime(DesignedProductsStruct);
+                DesignedProductsStruct.FeaturesAndValues = UHelperCalculationFunctions::CalculateDesignWeaponFeatures(DesignedProductsStruct);
 
                 DesignedProductsArray.Add(DesignedProductsStruct);
             }

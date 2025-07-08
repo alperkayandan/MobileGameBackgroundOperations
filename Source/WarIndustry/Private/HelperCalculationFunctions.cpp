@@ -4,6 +4,7 @@
 #include "HelperCalculationFunctions.h"
 #include "C_GameInstance.h"
 #include "Kismet/GameplayStatics.h"
+#include "AsyncBackgroundOperations.h"
 
 
 void UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(FCountrys FirstCountryStruct, FCountrys SecondCountryStruct, FRebellion Rebellions, UObject* WorldContextObject, TArray<int32>& WeaponCompareResults, int64& FirstCountryTotalPower) {
@@ -418,26 +419,141 @@ TMap<FString, int32> UHelperCalculationFunctions::CalculateDesignWeaponFeatures(
 
 	UDataTable* AllFeaturesDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/AllWeaponFeatures.AllWeaponFeatures")));
 	TArray<FName> AllRowNames;
+	TArray<float> WeaponProperties;
+	TArray<float> EmptyWeightMultipliers;
+	TMap<FString, int32> WeaponFeaturesAndValues;
 
+	WeaponProperties.Add(DesignedProduct.FirstProperty);
+	WeaponProperties.Add(DesignedProduct.SecondProperty);
+	WeaponProperties.Add(DesignedProduct.ThirdProperty);
+	WeaponProperties.Add(DesignedProduct.FourthProperty);
+	WeaponProperties.Add(DesignedProduct.FifthProperty);
+	WeaponProperties.Add(DesignedProduct.SixthProperty);
+	
 	if (!AllFeaturesDataTable) {
 
 		UE_LOG(LogTemp, Error, TEXT("WeaponDataTable not assigned."));
 	}
 	else {
 		AllRowNames = AllFeaturesDataTable->GetRowNames();
-	}
 
-	for (FName RowName : AllRowNames) {
+		for (FName RowName : AllRowNames) {
 
-		 FWeaponFeatures* FoundRow = AllFeaturesDataTable->FindRow<FWeaponFeatures>(RowName, TEXT("Bu ozellik tablodan alinamadi"));
+			FWeaponFeatures* FoundRow = AllFeaturesDataTable->FindRow<FWeaponFeatures>(RowName, TEXT("Bu ozellik tablodan alinamadi"));
+			
+			TArray<int32> WeaponTypeMaxValues;
+			TArray<int32> WeaponTypeMinValues;
 
-		 if (FoundRow->IsSpecialAbility == false && FoundRow->CompatibleWeaponTypes.Find(DesignedProduct.Type)) {
 
-		 }
+			if (FoundRow->IsSpecialAbility == false && FoundRow->CompatibleWeaponTypes.Find(DesignedProduct.Type)) {
+
+				UAsyncBackgroundOperations* AsyncFunctionsObj = NewObject<UAsyncBackgroundOperations>();
+				AsyncFunctionsObj->WeaponsMaxAndMinValues(DesignedProduct.Type, WeaponTypeMaxValues, WeaponTypeMinValues, EmptyWeightMultipliers);
+				
+				for (int32 propertyIndex = 0; propertyIndex < FoundRow->ThisIndexsGoodToBeHigher.Num(); propertyIndex++) {
+
+					int32 SafeZone = ((WeaponTypeMaxValues[propertyIndex] - WeaponTypeMinValues[propertyIndex]) * 25) / 100;
+					
+					if (FoundRow->ThisIndexsGoodToBeHigher[propertyIndex]) {
+
+						if (WeaponProperties[propertyIndex] >= (WeaponTypeMaxValues[propertyIndex] - SafeZone)) {
+							
+							float Spaces = (WeaponTypeMaxValues[propertyIndex] - (WeaponTypeMaxValues[propertyIndex] - SafeZone)) / 3;
+
+							if (WeaponProperties[propertyIndex] >= ((WeaponTypeMaxValues[propertyIndex] - SafeZone) + Spaces * 3)) {
+									
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 3);
+							
+							}
+							else if (WeaponProperties[propertyIndex] >= ((WeaponTypeMaxValues[propertyIndex] - SafeZone) + Spaces * 2)) {
+								
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 2);
+							
+							}
+							else {
+
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 1);
+							
+							}
+							
+
+						}
+						else if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + SafeZone)) {
+							
+							float Spaces = ((WeaponTypeMinValues[propertyIndex] + SafeZone) - WeaponTypeMinValues[propertyIndex]) / 3;
+
+							if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + Spaces)) {
+								
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -3);
+
+							}
+							else if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + Spaces * 2)) {
+								
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -2);
+							
+							}
+							else {
+								
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -1);
+							
+							}
+						}
+
+					}
+					else {
+						
+						if (WeaponProperties[propertyIndex] >= (WeaponTypeMaxValues[propertyIndex] - SafeZone)) {
+
+							float Spaces = (WeaponTypeMaxValues[propertyIndex] - (WeaponTypeMaxValues[propertyIndex] - SafeZone)) / 3;
+
+							if (WeaponProperties[propertyIndex] >= ((WeaponTypeMaxValues[propertyIndex] - SafeZone) + Spaces * 2)) {
+
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -3);
+
+							}
+							else if (WeaponProperties[propertyIndex] >= ((WeaponTypeMaxValues[propertyIndex] - SafeZone) + Spaces)) {
+
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -2);
+
+							}
+							else {
+
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -1);
+
+							}
+
+
+						}
+						else if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + SafeZone)) {
+
+							float Spaces = ((WeaponTypeMinValues[propertyIndex] + SafeZone) - WeaponTypeMinValues[propertyIndex]) / 3;
+
+							if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + Spaces)) {
+
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 3);
+
+							}
+							else if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + Spaces * 2)) {
+
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 2);
+
+							}
+							else {
+
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 1);
+
+							}
+						}
+
+					}
+
+				}
+
+			}
 		 
-	}
+		}
 
-	TMap<FString, int32> WeaponFeaturesAndValues;
+	}
 
 	return WeaponFeaturesAndValues;
 }
