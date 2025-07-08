@@ -12,80 +12,115 @@ void EmptyLinkFunctionForGeneratedCodeHelperCalculationFunctions() {}
 
 // Begin Cross Module References
 COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FTimespan();
 ENGINE_API UClass* Z_Construct_UClass_UBlueprintFunctionLibrary();
 UPackage* Z_Construct_UPackage__Script_WarIndustry();
 WARINDUSTRY_API UClass* Z_Construct_UClass_UHelperCalculationFunctions();
 WARINDUSTRY_API UClass* Z_Construct_UClass_UHelperCalculationFunctions_NoRegister();
-WARINDUSTRY_API UEnum* Z_Construct_UEnum_WarIndustry_EWeaponCategory();
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FCountrys();
+WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FNewDesignedProductsStruct();
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FRebellion();
 // End Cross Module References
 
-// Begin Enum EWeaponCategory
-static FEnumRegistrationInfo Z_Registration_Info_UEnum_EWeaponCategory;
-static UEnum* EWeaponCategory_StaticEnum()
+// Begin Class UHelperCalculationFunctions Function CalculateDesignWeaponFeatures
+struct Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics
 {
-	if (!Z_Registration_Info_UEnum_EWeaponCategory.OuterSingleton)
+	struct HelperCalculationFunctions_eventCalculateDesignWeaponFeatures_Parms
 	{
-		Z_Registration_Info_UEnum_EWeaponCategory.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_WarIndustry_EWeaponCategory, (UObject*)Z_Construct_UPackage__Script_WarIndustry(), TEXT("EWeaponCategory"));
-	}
-	return Z_Registration_Info_UEnum_EWeaponCategory.OuterSingleton;
-}
-template<> WARINDUSTRY_API UEnum* StaticEnum<EWeaponCategory>()
-{
-	return EWeaponCategory_StaticEnum();
-}
-struct Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics
-{
+		FNewDesignedProductsStruct DesignedProduct;
+		TMap<FString,int32> ReturnValue;
+	};
 #if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
-		{ "AirDefensseSystems.Name", "EWeaponCategory::AirDefensseSystems" },
-		{ "ArmoredVehicles.Name", "EWeaponCategory::ArmoredVehicles" },
-		{ "BlueprintType", "true" },
-		{ "Default.Name", "EWeaponCategory::Default" },
-		{ "FighterJets.Name", "EWeaponCategory::FighterJets" },
-		{ "Helicopters.Name", "EWeaponCategory::Helicopters" },
-		{ "LongRangeRifles.Name", "EWeaponCategory::LongRangeRifles" },
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Calculations|WeaponDesign" },
 		{ "ModuleRelativePath", "Public/HelperCalculationFunctions.h" },
-		{ "Rockets.Name", "EWeaponCategory::Rockets" },
-		{ "Tanks.Name", "EWeaponCategory::Tanks" },
-		{ "Uavs.Name", "EWeaponCategory::Uavs" },
 	};
 #endif // WITH_METADATA
-	static constexpr UECodeGen_Private::FEnumeratorParam Enumerators[] = {
-		{ "EWeaponCategory::LongRangeRifles", (int64)EWeaponCategory::LongRangeRifles },
-		{ "EWeaponCategory::Rockets", (int64)EWeaponCategory::Rockets },
-		{ "EWeaponCategory::Tanks", (int64)EWeaponCategory::Tanks },
-		{ "EWeaponCategory::ArmoredVehicles", (int64)EWeaponCategory::ArmoredVehicles },
-		{ "EWeaponCategory::Uavs", (int64)EWeaponCategory::Uavs },
-		{ "EWeaponCategory::Helicopters", (int64)EWeaponCategory::Helicopters },
-		{ "EWeaponCategory::FighterJets", (int64)EWeaponCategory::FighterJets },
-		{ "EWeaponCategory::AirDefensseSystems", (int64)EWeaponCategory::AirDefensseSystems },
-		{ "EWeaponCategory::Default", (int64)EWeaponCategory::Default },
-	};
-	static const UECodeGen_Private::FEnumParams EnumParams;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_DesignedProduct;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_ReturnValue_ValueProp;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_ReturnValue_Key_KeyProp;
+	static const UECodeGen_Private::FMapPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FEnumParams Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::EnumParams = {
-	(UObject*(*)())Z_Construct_UPackage__Script_WarIndustry,
-	nullptr,
-	"EWeaponCategory",
-	"EWeaponCategory",
-	Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::Enumerators,
-	RF_Public|RF_Transient|RF_MarkAsNative,
-	UE_ARRAY_COUNT(Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::Enumerators),
-	EEnumFlags::None,
-	(uint8)UEnum::ECppForm::EnumClass,
-	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::Enum_MetaDataParams), Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::Enum_MetaDataParams)
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::NewProp_DesignedProduct = { "DesignedProduct", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventCalculateDesignWeaponFeatures_Parms, DesignedProduct), Z_Construct_UScriptStruct_FNewDesignedProductsStruct, METADATA_PARAMS(0, nullptr) }; // 4217424401
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::NewProp_ReturnValue_ValueProp = { "ReturnValue", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::NewProp_ReturnValue_Key_KeyProp = { "ReturnValue_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventCalculateDesignWeaponFeatures_Parms, ReturnValue), EMapPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::NewProp_DesignedProduct,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::NewProp_ReturnValue_ValueProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::NewProp_ReturnValue_Key_KeyProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::NewProp_ReturnValue,
 };
-UEnum* Z_Construct_UEnum_WarIndustry_EWeaponCategory()
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UHelperCalculationFunctions, nullptr, "CalculateDesignWeaponFeatures", nullptr, nullptr, Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::PropPointers), sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::HelperCalculationFunctions_eventCalculateDesignWeaponFeatures_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::Function_MetaDataParams), Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::HelperCalculationFunctions_eventCalculateDesignWeaponFeatures_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures()
 {
-	if (!Z_Registration_Info_UEnum_EWeaponCategory.InnerSingleton)
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
 	{
-		UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_EWeaponCategory.InnerSingleton, Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::EnumParams);
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics::FuncParams);
 	}
-	return Z_Registration_Info_UEnum_EWeaponCategory.InnerSingleton;
+	return ReturnFunction;
 }
-// End Enum EWeaponCategory
+DEFINE_FUNCTION(UHelperCalculationFunctions::execCalculateDesignWeaponFeatures)
+{
+	P_GET_STRUCT(FNewDesignedProductsStruct,Z_Param_DesignedProduct);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(TMap<FString,int32>*)Z_Param__Result=UHelperCalculationFunctions::CalculateDesignWeaponFeatures(Z_Param_DesignedProduct);
+	P_NATIVE_END;
+}
+// End Class UHelperCalculationFunctions Function CalculateDesignWeaponFeatures
+
+// Begin Class UHelperCalculationFunctions Function CalculateWeaponProductionTime
+struct Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics
+{
+	struct HelperCalculationFunctions_eventCalculateWeaponProductionTime_Parms
+	{
+		FNewDesignedProductsStruct DesignedProduct;
+		FTimespan ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Calculations|WeaponDesign" },
+		{ "ModuleRelativePath", "Public/HelperCalculationFunctions.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStructPropertyParams NewProp_DesignedProduct;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::NewProp_DesignedProduct = { "DesignedProduct", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventCalculateWeaponProductionTime_Parms, DesignedProduct), Z_Construct_UScriptStruct_FNewDesignedProductsStruct, METADATA_PARAMS(0, nullptr) }; // 4217424401
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventCalculateWeaponProductionTime_Parms, ReturnValue), Z_Construct_UScriptStruct_FTimespan, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::NewProp_DesignedProduct,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UHelperCalculationFunctions, nullptr, "CalculateWeaponProductionTime", nullptr, nullptr, Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::PropPointers), sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::HelperCalculationFunctions_eventCalculateWeaponProductionTime_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04822401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::Function_MetaDataParams), Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::HelperCalculationFunctions_eventCalculateWeaponProductionTime_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UHelperCalculationFunctions::execCalculateWeaponProductionTime)
+{
+	P_GET_STRUCT(FNewDesignedProductsStruct,Z_Param_DesignedProduct);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(FTimespan*)Z_Param__Result=UHelperCalculationFunctions::CalculateWeaponProductionTime(Z_Param_DesignedProduct);
+	P_NATIVE_END;
+}
+// End Class UHelperCalculationFunctions Function CalculateWeaponProductionTime
 
 // Begin Class UHelperCalculationFunctions Function CompareWeaponPowerAndTechnoligies
 struct Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies_Statics
@@ -280,6 +315,8 @@ void UHelperCalculationFunctions::StaticRegisterNativesUHelperCalculationFunctio
 {
 	UClass* Class = UHelperCalculationFunctions::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "CalculateDesignWeaponFeatures", &UHelperCalculationFunctions::execCalculateDesignWeaponFeatures },
+		{ "CalculateWeaponProductionTime", &UHelperCalculationFunctions::execCalculateWeaponProductionTime },
 		{ "CompareWeaponPowerAndTechnoligies", &UHelperCalculationFunctions::execCompareWeaponPowerAndTechnoligies },
 		{ "SortCompaniesByCompanyValues", &UHelperCalculationFunctions::execSortCompaniesByCompanyValues },
 		{ "SortCountriesByPower", &UHelperCalculationFunctions::execSortCountriesByPower },
@@ -301,6 +338,8 @@ struct Z_Construct_UClass_UHelperCalculationFunctions_Statics
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures, "CalculateDesignWeaponFeatures" }, // 2760996271
+		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime, "CalculateWeaponProductionTime" }, // 3502352295
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies, "CompareWeaponPowerAndTechnoligies" }, // 1880048125
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues, "SortCompaniesByCompanyValues" }, // 1047267460
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower, "SortCountriesByPower" }, // 2184963336
@@ -351,16 +390,13 @@ UHelperCalculationFunctions::~UHelperCalculationFunctions() {}
 // Begin Registration
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics
 {
-	static constexpr FEnumRegisterCompiledInInfo EnumInfo[] = {
-		{ EWeaponCategory_StaticEnum, TEXT("EWeaponCategory"), &Z_Registration_Info_UEnum_EWeaponCategory, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1371502666U) },
-	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UHelperCalculationFunctions, UHelperCalculationFunctions::StaticClass, TEXT("UHelperCalculationFunctions"), &Z_Registration_Info_UClass_UHelperCalculationFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHelperCalculationFunctions), 3823744820U) },
+		{ Z_Construct_UClass_UHelperCalculationFunctions, UHelperCalculationFunctions::StaticClass, TEXT("UHelperCalculationFunctions"), &Z_Registration_Info_UClass_UHelperCalculationFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHelperCalculationFunctions), 3210082722U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_2004389985(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_1608840814(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::ClassInfo),
 	nullptr, 0,
-	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::EnumInfo));
+	nullptr, 0);
 // End Registration
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

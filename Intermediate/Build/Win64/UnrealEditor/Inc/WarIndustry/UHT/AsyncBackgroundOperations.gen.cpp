@@ -6,7 +6,6 @@
 
 #include "UObject/GeneratedCppIncludes.h"
 #include "WarIndustry/Public/AsyncBackgroundOperations.h"
-#include "WarIndustry/Public/AllStructs.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeAsyncBackgroundOperations() {}
 
@@ -17,160 +16,12 @@ ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FTableRowBase();
 UPackage* Z_Construct_UPackage__Script_WarIndustry();
 WARINDUSTRY_API UClass* Z_Construct_UClass_UAsyncBackgroundOperations();
 WARINDUSTRY_API UClass* Z_Construct_UClass_UAsyncBackgroundOperations_NoRegister();
-WARINDUSTRY_API UEnum* Z_Construct_UEnum_WarIndustry_EWeaponType();
 WARINDUSTRY_API UFunction* Z_Construct_UDelegateFunction_WarIndustry_OnAsyncProgressUpdated__DelegateSignature();
 WARINDUSTRY_API UFunction* Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature();
 WARINDUSTRY_API UFunction* Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature();
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FCountriesThatCanProduceWeapons();
-WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FCountrys();
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FCountryWeaponsStartData();
-WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FFactorys();
-WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FNewDesignedProductsStruct();
 // End Cross Module References
-
-// Begin Enum EWeaponType
-static FEnumRegistrationInfo Z_Registration_Info_UEnum_EWeaponType;
-static UEnum* EWeaponType_StaticEnum()
-{
-	if (!Z_Registration_Info_UEnum_EWeaponType.OuterSingleton)
-	{
-		Z_Registration_Info_UEnum_EWeaponType.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_WarIndustry_EWeaponType, (UObject*)Z_Construct_UPackage__Script_WarIndustry(), TEXT("EWeaponType"));
-	}
-	return Z_Registration_Info_UEnum_EWeaponType.OuterSingleton;
-}
-template<> WARINDUSTRY_API UEnum* StaticEnum<EWeaponType>()
-{
-	return EWeaponType_StaticEnum();
-}
-struct Z_Construct_UEnum_WarIndustry_EWeaponType_Statics
-{
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
-		{ "AirAttackMachineGun.DisplayName", "AirAttackMachineGun" },
-		{ "AirAttackMachineGun.Name", "EWeaponType::AirAttackMachineGun" },
-		{ "AirToAirMissile.DisplayName", "AirToAirMissile" },
-		{ "AirToAirMissile.Name", "EWeaponType::AirToAirMissile" },
-		{ "AirToLandMissile.DisplayName", "AirToLandMissile" },
-		{ "AirToLandMissile.Name", "EWeaponType::AirToLandMissile" },
-		{ "AmphibiousArmoredPersonnelCarrier.DisplayName", "AmphibiousArmoredPersonnelCarrier" },
-		{ "AmphibiousArmoredPersonnelCarrier.Name", "EWeaponType::AmphibiousArmoredPersonnelCarrier" },
-		{ "AmphibiousTank.DisplayName", "AmphibiousTank" },
-		{ "AmphibiousTank.Name", "EWeaponType::AmphibiousTank" },
-		{ "AntiDroneSystems.DisplayName", "AntiDroneSystems" },
-		{ "AntiDroneSystems.Name", "EWeaponType::AntiDroneSystems" },
-		{ "ArmedUAV.DisplayName", "ArmedUAV" },
-		{ "ArmedUAV.Name", "EWeaponType::ArmedUAV" },
-		{ "ArmoredFightingVehicle.DisplayName", "ArmoredFightingVehicle" },
-		{ "ArmoredFightingVehicle.Name", "EWeaponType::ArmoredFightingVehicle" },
-		{ "AssultRifle.DisplayName", "AssultRifle" },
-		{ "AssultRifle.Name", "EWeaponType::AssultRifle" },
-		{ "AttackHelicopter.DisplayName", "AttackHelicopter" },
-		{ "AttackHelicopter.Name", "EWeaponType::AttackHelicopter" },
-		{ "BlueprintType", "true" },
-		{ "BomberPlane.DisplayName", "BomberPlane" },
-		{ "BomberPlane.Name", "EWeaponType::BomberPlane" },
-		{ "CargoHelicopter.DisplayName", "CargoHelicoper" },
-		{ "CargoHelicopter.Name", "EWeaponType::CargoHelicopter" },
-		{ "CoactionalMachineGun.DisplayName", "CoactionalMachineGun" },
-		{ "CoactionalMachineGun.Name", "EWeaponType::CoactionalMachineGun" },
-		{ "Empty.DisplayName", "Empty" },
-		{ "Empty.Name", "EWeaponType::Empty" },
-		{ "FighterJet.DisplayName", "FighterJet" },
-		{ "FighterJet.Name", "EWeaponType::FighterJet" },
-		{ "HeavyTank.DisplayName", "HeavyTank" },
-		{ "HeavyTank.Name", "EWeaponType::HeavyTank" },
-		{ "KamikazeUAV.DisplayName", "KamikazeUAV" },
-		{ "KamikazeUAV.Name", "EWeaponType::KamikazeUAV" },
-		{ "LandingHelicopter.DisplayName", "LandingHelicopter" },
-		{ "LandingHelicopter.Name", "EWeaponType::LandingHelicopter" },
-		{ "LandToAirMissile.DisplayName", "LandToAirMissile" },
-		{ "LandToAirMissile.Name", "EWeaponType::LandToAirMissile" },
-		{ "LightTank.DisplayName", "LightTank" },
-		{ "LightTank.Name", "EWeaponType::LightTank" },
-		{ "LongRangeAirDefenseSystems.DisplayName", "LongRangeAirDefenseSystems" },
-		{ "LongRangeAirDefenseSystems.Name", "EWeaponType::LongRangeAirDefenseSystems" },
-		{ "MainBattleTank.DisplayName", "MainBattleTank" },
-		{ "MainBattleTank.Name", "EWeaponType::MainBattleTank" },
-		{ "MarineHelicopter.DisplayName", "MarineHelicopter" },
-		{ "MarineHelicopter.Name", "EWeaponType::MarineHelicopter" },
-		{ "MediumRangeAirDefenseSystems.DisplayName", "MediumRangeAirDefenseSystems" },
-		{ "MediumRangeAirDefenseSystems.Name", "EWeaponType::MediumRangeAirDefenseSystems" },
-		{ "ModuleRelativePath", "Public/AsyncBackgroundOperations.h" },
-		{ "SniperRifle.DisplayName", "SniperRifle" },
-		{ "SniperRifle.Name", "EWeaponType::SniperRifle" },
-		{ "SubmachineGun.DisplayName", "SubmachineGun" },
-		{ "SubmachineGun.Name", "EWeaponType::SubmachineGun" },
-		{ "TrackedArmoredPersonnelCarrier.DisplayName", "TrackedArmoredPersonnelCarrier" },
-		{ "TrackedArmoredPersonnelCarrier.Name", "EWeaponType::TrackedArmoredPersonnelCarrier" },
-		{ "TrainAircraft.DisplayName", "TrainAircraft" },
-		{ "TrainAircraft.Name", "EWeaponType::TrainAircraft" },
-		{ "UAV.DisplayName", "Uav" },
-		{ "UAV.Name", "EWeaponType::UAV" },
-		{ "UnmannedFighterJet.DisplayName", "UnmannedFighterJet" },
-		{ "UnmannedFighterJet.Name", "EWeaponType::UnmannedFighterJet" },
-		{ "VerticalTakeOffJets.DisplayName", "VerticalTakeOffJets" },
-		{ "VerticalTakeOffJets.Name", "EWeaponType::VerticalTakeOffJets" },
-		{ "WheeledArmoredPersonnelCarrier.DisplayName", "WheeledArmoredPersonnelCarrier" },
-		{ "WheeledArmoredPersonnelCarrier.Name", "EWeaponType::WheeledArmoredPersonnelCarrier" },
-	};
-#endif // WITH_METADATA
-	static constexpr UECodeGen_Private::FEnumeratorParam Enumerators[] = {
-		{ "EWeaponType::Empty", (int64)EWeaponType::Empty },
-		{ "EWeaponType::AssultRifle", (int64)EWeaponType::AssultRifle },
-		{ "EWeaponType::SniperRifle", (int64)EWeaponType::SniperRifle },
-		{ "EWeaponType::SubmachineGun", (int64)EWeaponType::SubmachineGun },
-		{ "EWeaponType::AirAttackMachineGun", (int64)EWeaponType::AirAttackMachineGun },
-		{ "EWeaponType::CoactionalMachineGun", (int64)EWeaponType::CoactionalMachineGun },
-		{ "EWeaponType::LandToAirMissile", (int64)EWeaponType::LandToAirMissile },
-		{ "EWeaponType::AirToLandMissile", (int64)EWeaponType::AirToLandMissile },
-		{ "EWeaponType::AirToAirMissile", (int64)EWeaponType::AirToAirMissile },
-		{ "EWeaponType::LightTank", (int64)EWeaponType::LightTank },
-		{ "EWeaponType::MainBattleTank", (int64)EWeaponType::MainBattleTank },
-		{ "EWeaponType::HeavyTank", (int64)EWeaponType::HeavyTank },
-		{ "EWeaponType::AmphibiousTank", (int64)EWeaponType::AmphibiousTank },
-		{ "EWeaponType::WheeledArmoredPersonnelCarrier", (int64)EWeaponType::WheeledArmoredPersonnelCarrier },
-		{ "EWeaponType::TrackedArmoredPersonnelCarrier", (int64)EWeaponType::TrackedArmoredPersonnelCarrier },
-		{ "EWeaponType::ArmoredFightingVehicle", (int64)EWeaponType::ArmoredFightingVehicle },
-		{ "EWeaponType::AmphibiousArmoredPersonnelCarrier", (int64)EWeaponType::AmphibiousArmoredPersonnelCarrier },
-		{ "EWeaponType::UAV", (int64)EWeaponType::UAV },
-		{ "EWeaponType::KamikazeUAV", (int64)EWeaponType::KamikazeUAV },
-		{ "EWeaponType::ArmedUAV", (int64)EWeaponType::ArmedUAV },
-		{ "EWeaponType::UnmannedFighterJet", (int64)EWeaponType::UnmannedFighterJet },
-		{ "EWeaponType::LandingHelicopter", (int64)EWeaponType::LandingHelicopter },
-		{ "EWeaponType::AttackHelicopter", (int64)EWeaponType::AttackHelicopter },
-		{ "EWeaponType::CargoHelicopter", (int64)EWeaponType::CargoHelicopter },
-		{ "EWeaponType::MarineHelicopter", (int64)EWeaponType::MarineHelicopter },
-		{ "EWeaponType::TrainAircraft", (int64)EWeaponType::TrainAircraft },
-		{ "EWeaponType::FighterJet", (int64)EWeaponType::FighterJet },
-		{ "EWeaponType::BomberPlane", (int64)EWeaponType::BomberPlane },
-		{ "EWeaponType::VerticalTakeOffJets", (int64)EWeaponType::VerticalTakeOffJets },
-		{ "EWeaponType::AntiDroneSystems", (int64)EWeaponType::AntiDroneSystems },
-		{ "EWeaponType::MediumRangeAirDefenseSystems", (int64)EWeaponType::MediumRangeAirDefenseSystems },
-		{ "EWeaponType::LongRangeAirDefenseSystems", (int64)EWeaponType::LongRangeAirDefenseSystems },
-	};
-	static const UECodeGen_Private::FEnumParams EnumParams;
-};
-const UECodeGen_Private::FEnumParams Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::EnumParams = {
-	(UObject*(*)())Z_Construct_UPackage__Script_WarIndustry,
-	nullptr,
-	"EWeaponType",
-	"EWeaponType",
-	Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::Enumerators,
-	RF_Public|RF_Transient|RF_MarkAsNative,
-	UE_ARRAY_COUNT(Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::Enumerators),
-	EEnumFlags::None,
-	(uint8)UEnum::ECppForm::EnumClass,
-	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::Enum_MetaDataParams), Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::Enum_MetaDataParams)
-};
-UEnum* Z_Construct_UEnum_WarIndustry_EWeaponType()
-{
-	if (!Z_Registration_Info_UEnum_EWeaponType.InnerSingleton)
-	{
-		UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_EWeaponType.InnerSingleton, Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::EnumParams);
-	}
-	return Z_Registration_Info_UEnum_EWeaponType.InnerSingleton;
-}
-// End Enum EWeaponType
 
 // Begin ScriptStruct FCountriesThatCanProduceWeapons
 static_assert(std::is_polymorphic<FCountriesThatCanProduceWeapons>() == std::is_polymorphic<FTableRowBase>(), "USTRUCT FCountriesThatCanProduceWeapons cannot be polymorphic unless super FTableRowBase is polymorphic");
@@ -388,42 +239,14 @@ void FOnAsyncProgressUpdated_DelegateWrapper(const FMulticastScriptDelegate& OnA
 // Begin Delegate FOnWeaponsCreated
 struct Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics
 {
-	struct _Script_WarIndustry_eventOnWeaponsCreated_Parms
-	{
-		TArray<FNewDesignedProductsStruct> CreatedWeapons;
-		TArray<FFactorys> GlobalFactorys;
-	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "ModuleRelativePath", "Public/AsyncBackgroundOperations.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CreatedWeapons_MetaData[] = {
-		{ "NativeConst", "" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_GlobalFactorys_MetaData[] = {
-		{ "NativeConst", "" },
-	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FStructPropertyParams NewProp_CreatedWeapons_Inner;
-	static const UECodeGen_Private::FArrayPropertyParams NewProp_CreatedWeapons;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_GlobalFactorys_Inner;
-	static const UECodeGen_Private::FArrayPropertyParams NewProp_GlobalFactorys;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::NewProp_CreatedWeapons_Inner = { "CreatedWeapons", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FNewDesignedProductsStruct, METADATA_PARAMS(0, nullptr) }; // 4217424401
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::NewProp_CreatedWeapons = { "CreatedWeapons", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_WarIndustry_eventOnWeaponsCreated_Parms, CreatedWeapons), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CreatedWeapons_MetaData), NewProp_CreatedWeapons_MetaData) }; // 4217424401
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::NewProp_GlobalFactorys_Inner = { "GlobalFactorys", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FFactorys, METADATA_PARAMS(0, nullptr) }; // 499567656
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::NewProp_GlobalFactorys = { "GlobalFactorys", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_WarIndustry_eventOnWeaponsCreated_Parms, GlobalFactorys), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GlobalFactorys_MetaData), NewProp_GlobalFactorys_MetaData) }; // 499567656
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::NewProp_CreatedWeapons_Inner,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::NewProp_CreatedWeapons,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::NewProp_GlobalFactorys_Inner,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::NewProp_GlobalFactorys,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_WarIndustry, nullptr, "OnWeaponsCreated__DelegateSignature", nullptr, nullptr, Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::_Script_WarIndustry_eventOnWeaponsCreated_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::Function_MetaDataParams) };
-static_assert(sizeof(Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::_Script_WarIndustry_eventOnWeaponsCreated_Parms) < MAX_uint16);
+const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_WarIndustry, nullptr, "OnWeaponsCreated__DelegateSignature", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature_Statics::Function_MetaDataParams) };
 UFunction* Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature()
 {
 	static UFunction* ReturnFunction = nullptr;
@@ -433,49 +256,23 @@ UFunction* Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateS
 	}
 	return ReturnFunction;
 }
-void FOnWeaponsCreated_DelegateWrapper(const FMulticastScriptDelegate& OnWeaponsCreated, TArray<FNewDesignedProductsStruct> const& CreatedWeapons, TArray<FFactorys> const& GlobalFactorys)
+void FOnWeaponsCreated_DelegateWrapper(const FMulticastScriptDelegate& OnWeaponsCreated)
 {
-	struct _Script_WarIndustry_eventOnWeaponsCreated_Parms
-	{
-		TArray<FNewDesignedProductsStruct> CreatedWeapons;
-		TArray<FFactorys> GlobalFactorys;
-	};
-	_Script_WarIndustry_eventOnWeaponsCreated_Parms Parms;
-	Parms.CreatedWeapons=CreatedWeapons;
-	Parms.GlobalFactorys=GlobalFactorys;
-	OnWeaponsCreated.ProcessMulticastDelegate<UObject>(&Parms);
+	OnWeaponsCreated.ProcessMulticastDelegate<UObject>(NULL);
 }
 // End Delegate FOnWeaponsCreated
 
 // Begin Delegate FOnRandomWeaponsToCountries
 struct Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics
 {
-	struct _Script_WarIndustry_eventOnRandomWeaponsToCountries_Parms
-	{
-		TArray<FCountrys> SaveCountrys;
-	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "ModuleRelativePath", "Public/AsyncBackgroundOperations.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SaveCountrys_MetaData[] = {
-		{ "NativeConst", "" },
-	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FStructPropertyParams NewProp_SaveCountrys_Inner;
-	static const UECodeGen_Private::FArrayPropertyParams NewProp_SaveCountrys;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::NewProp_SaveCountrys_Inner = { "SaveCountrys", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FCountrys, METADATA_PARAMS(0, nullptr) }; // 4030937518
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::NewProp_SaveCountrys = { "SaveCountrys", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_WarIndustry_eventOnRandomWeaponsToCountries_Parms, SaveCountrys), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SaveCountrys_MetaData), NewProp_SaveCountrys_MetaData) }; // 4030937518
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::NewProp_SaveCountrys_Inner,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::NewProp_SaveCountrys,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_WarIndustry, nullptr, "OnRandomWeaponsToCountries__DelegateSignature", nullptr, nullptr, Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::PropPointers), sizeof(Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::_Script_WarIndustry_eventOnRandomWeaponsToCountries_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::Function_MetaDataParams) };
-static_assert(sizeof(Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::_Script_WarIndustry_eventOnRandomWeaponsToCountries_Parms) < MAX_uint16);
+const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_WarIndustry, nullptr, "OnRandomWeaponsToCountries__DelegateSignature", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::Function_MetaDataParams), Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature_Statics::Function_MetaDataParams) };
 UFunction* Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature()
 {
 	static UFunction* ReturnFunction = nullptr;
@@ -485,15 +282,9 @@ UFunction* Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries_
 	}
 	return ReturnFunction;
 }
-void FOnRandomWeaponsToCountries_DelegateWrapper(const FMulticastScriptDelegate& OnRandomWeaponsToCountries, TArray<FCountrys> const& SaveCountrys)
+void FOnRandomWeaponsToCountries_DelegateWrapper(const FMulticastScriptDelegate& OnRandomWeaponsToCountries)
 {
-	struct _Script_WarIndustry_eventOnRandomWeaponsToCountries_Parms
-	{
-		TArray<FCountrys> SaveCountrys;
-	};
-	_Script_WarIndustry_eventOnRandomWeaponsToCountries_Parms Parms;
-	Parms.SaveCountrys=SaveCountrys;
-	OnRandomWeaponsToCountries.ProcessMulticastDelegate<UObject>(&Parms);
+	OnRandomWeaponsToCountries.ProcessMulticastDelegate<UObject>(NULL);
 }
 // End Delegate FOnRandomWeaponsToCountries
 
@@ -874,8 +665,8 @@ struct Z_Construct_UClass_UAsyncBackgroundOperations_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAsyncBackgroundOperations_Statics::NewProp_DataCreateIsFinished = { "DataCreateIsFinished", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAsyncBackgroundOperations, DataCreateIsFinished), Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DataCreateIsFinished_MetaData), NewProp_DataCreateIsFinished_MetaData) }; // 1058997334
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAsyncBackgroundOperations_Statics::NewProp_RandomWeaponsToCountriesIsFinished = { "RandomWeaponsToCountriesIsFinished", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAsyncBackgroundOperations, RandomWeaponsToCountriesIsFinished), Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RandomWeaponsToCountriesIsFinished_MetaData), NewProp_RandomWeaponsToCountriesIsFinished_MetaData) }; // 1444204527
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAsyncBackgroundOperations_Statics::NewProp_DataCreateIsFinished = { "DataCreateIsFinished", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAsyncBackgroundOperations, DataCreateIsFinished), Z_Construct_UDelegateFunction_WarIndustry_OnWeaponsCreated__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DataCreateIsFinished_MetaData), NewProp_DataCreateIsFinished_MetaData) }; // 4112389994
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAsyncBackgroundOperations_Statics::NewProp_RandomWeaponsToCountriesIsFinished = { "RandomWeaponsToCountriesIsFinished", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAsyncBackgroundOperations, RandomWeaponsToCountriesIsFinished), Z_Construct_UDelegateFunction_WarIndustry_OnRandomWeaponsToCountries__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RandomWeaponsToCountriesIsFinished_MetaData), NewProp_RandomWeaponsToCountriesIsFinished_MetaData) }; // 2812210442
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UAsyncBackgroundOperations_Statics::NewProp_OnProgressUpdated = { "OnProgressUpdated", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UAsyncBackgroundOperations, OnProgressUpdated), Z_Construct_UDelegateFunction_WarIndustry_OnAsyncProgressUpdated__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnProgressUpdated_MetaData), NewProp_OnProgressUpdated_MetaData) }; // 3583266922
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAsyncBackgroundOperations_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAsyncBackgroundOperations_Statics::NewProp_DataCreateIsFinished,
@@ -923,20 +714,17 @@ UAsyncBackgroundOperations::~UAsyncBackgroundOperations() {}
 // Begin Registration
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AsyncBackgroundOperations_h_Statics
 {
-	static constexpr FEnumRegisterCompiledInInfo EnumInfo[] = {
-		{ EWeaponType_StaticEnum, TEXT("EWeaponType"), &Z_Registration_Info_UEnum_EWeaponType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1483231284U) },
-	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
 		{ FCountriesThatCanProduceWeapons::StaticStruct, Z_Construct_UScriptStruct_FCountriesThatCanProduceWeapons_Statics::NewStructOps, TEXT("CountriesThatCanProduceWeapons"), &Z_Registration_Info_UScriptStruct_CountriesThatCanProduceWeapons, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCountriesThatCanProduceWeapons), 115735686U) },
 		{ FCountryWeaponsStartData::StaticStruct, Z_Construct_UScriptStruct_FCountryWeaponsStartData_Statics::NewStructOps, TEXT("CountryWeaponsStartData"), &Z_Registration_Info_UScriptStruct_CountryWeaponsStartData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCountryWeaponsStartData), 4246942051U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UAsyncBackgroundOperations, UAsyncBackgroundOperations::StaticClass, TEXT("UAsyncBackgroundOperations"), &Z_Registration_Info_UClass_UAsyncBackgroundOperations, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAsyncBackgroundOperations), 1725196150U) },
+		{ Z_Construct_UClass_UAsyncBackgroundOperations, UAsyncBackgroundOperations::StaticClass, TEXT("UAsyncBackgroundOperations"), &Z_Registration_Info_UClass_UAsyncBackgroundOperations, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAsyncBackgroundOperations), 1935666342U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AsyncBackgroundOperations_h_2641779179(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AsyncBackgroundOperations_h_1652572152(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AsyncBackgroundOperations_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AsyncBackgroundOperations_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AsyncBackgroundOperations_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AsyncBackgroundOperations_h_Statics::ScriptStructInfo),
-	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AsyncBackgroundOperations_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AsyncBackgroundOperations_h_Statics::EnumInfo));
+	nullptr, 0);
 // End Registration
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

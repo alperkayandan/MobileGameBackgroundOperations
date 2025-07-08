@@ -181,6 +181,147 @@ void UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(FCountrys Fi
 	}
 }
 
+FTimespan UHelperCalculationFunctions::CalculateWeaponProductionTime(FNewDesignedProductsStruct DesignedProduct) {
+
+	FTimespan TypeBaseProductionTime;
+	float LocalityRate = DesignedProduct.LocalityRate;
+	TArray<FString> Features;
+	DesignedProduct.FeaturesAndValues.GetKeys(Features);
+	int32 FeaturesWorkload = 0;
+	int32 Overall = DesignedProduct.Overall;
+	
+	if (DesignedProduct.FeaturesAndValues.Num() > 0) {
+		for (FString Feature : Features) {
+			int32* FeatureValue = DesignedProduct.FeaturesAndValues.Find(Feature);
+
+			if (*FeatureValue <= 0) {
+			FeaturesWorkload = *FeatureValue * -4;
+			}
+			else {
+			FeaturesWorkload = *FeatureValue * 2;
+			}
+
+		}
+	} //Feature work load
+	
+	switch (ConvertWeaponTypeToEnum(DesignedProduct.Type)) {
+
+		case EWeaponType::AssultRifle:
+			TypeBaseProductionTime = FTimespan(0,1,0,0); // 1 Saat 
+			break;
+		case EWeaponType::SniperRifle:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::SubmachineGun:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::AirAttackMachineGun:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::CoactionalMachineGun:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::LandToAirMissile:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::AirToLandMissile:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::AirToAirMissile:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::LightTank:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::MainBattleTank:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::HeavyTank:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::AmphibiousTank:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::WheeledArmoredPersonnelCarrier:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::TrackedArmoredPersonnelCarrier:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::ArmoredFightingVehicle:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::AmphibiousArmoredPersonnelCarrier:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::UAV:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::KamikazeUAV:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::ArmedUAV:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::UnmannedFighterJet:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::LandingHelicopter:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::AttackHelicopter:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::CargoHelicopter:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::MarineHelicopter:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::TrainAircraft:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::FighterJet:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::BomberPlane:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::VerticalTakeOffJets:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::AntiDroneSystems:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::MediumRangeAirDefenseSystems:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		case EWeaponType::LongRangeAirDefenseSystems:
+			TypeBaseProductionTime = FTimespan(0, 1, 0, 0);
+			break;
+		default:
+			UE_LOG(LogTemp, Error, TEXT("Hesaplanmaya calisilan uretim zamanina dair boyle bir silah kategorisi yok. Bulunamayan silah turu: %s"), *DesignedProduct.Type.ToString());
+			break;
+	}
+
+	float NormalizedOverall = FMath::Clamp((Overall - 10.0f) / (150.0f - 10.0f), 0.0f, 1.0f);
+	float NormalizedLocalityRate = FMath::Clamp((LocalityRate / 100.0f), 0.0f, 1.0f);
+	float NormalizedFeaturesWorkload = FMath::Clamp((FeaturesWorkload / 40.0f), 0.0f, 1.0f);
+
+	float TimeMultiplier = 1.0f + (NormalizedOverall * 1.0f) - (NormalizedLocalityRate * 0.75f) + (NormalizedFeaturesWorkload * 0.5f);
+
+
+	TypeBaseProductionTime = TypeBaseProductionTime * TimeMultiplier;
+
+	int32 TotalFinalSeconds = TypeBaseProductionTime.GetTotalSeconds();
+
+	int32 RoundedSeconds = FMath::RoundToInt(TotalFinalSeconds / 30.0f) * 30; // 30 saniye aralýklarla yuvarlanmýþ zaman
+
+	TypeBaseProductionTime = FTimespan::FromSeconds(RoundedSeconds);
+
+	return TypeBaseProductionTime;
+}
+
 EWeaponCategory UHelperCalculationFunctions::ConvertWeaponCategoryToEnum(const FString& WeaponCategory) {
 	
 	if (WeaponCategory == "Long Range Rifles")
@@ -201,6 +342,104 @@ EWeaponCategory UHelperCalculationFunctions::ConvertWeaponCategoryToEnum(const F
 		return EWeaponCategory::AirDefensseSystems;
 	else
 		return EWeaponCategory::Default;
+}
+
+EWeaponType UHelperCalculationFunctions::ConvertWeaponTypeToEnum(const FName& WeaponType) {
+
+	if (WeaponType == FName(TEXT("Assult Rifle")))
+		return EWeaponType::AssultRifle;
+	if (WeaponType == FName(TEXT("Sniper Rifle")))
+		return EWeaponType::SniperRifle;
+	if (WeaponType == FName(TEXT("Submachine Gun")))
+		return EWeaponType::SubmachineGun;
+	if (WeaponType == FName(TEXT("Air Attack Machine Gun")))
+		return EWeaponType::AirAttackMachineGun;
+	if (WeaponType == FName(TEXT("Coactional Machine Gun")))
+		return EWeaponType::CoactionalMachineGun;
+	if (WeaponType == FName(TEXT("Land To Air Missile")))
+		return EWeaponType::LandToAirMissile;
+	if (WeaponType == FName(TEXT("Air To Land Missile")))
+		return EWeaponType::AirToLandMissile;
+	if (WeaponType == FName(TEXT("Air To Air Missile")))
+		return EWeaponType::AirToAirMissile;
+	if (WeaponType == FName(TEXT("Light Tank")))
+		return EWeaponType::LightTank;
+	if (WeaponType == FName(TEXT("Main Battle Tank")))
+		return EWeaponType::MainBattleTank;
+	if (WeaponType == FName(TEXT("Heavy Tank")))
+		return EWeaponType::HeavyTank;
+	if (WeaponType == FName(TEXT("Amphibious Tank")))
+		return EWeaponType::AmphibiousTank;
+	if (WeaponType == FName(TEXT("Wheeled Armored Personnel Carrier")))
+		return EWeaponType::WheeledArmoredPersonnelCarrier;
+	if (WeaponType == FName(TEXT("Tracked Armored Personnel Carrier")))
+		return EWeaponType::TrackedArmoredPersonnelCarrier;
+	if (WeaponType == FName(TEXT("Armored Fighting Vehicle")))
+		return EWeaponType::ArmoredFightingVehicle;
+	if (WeaponType == FName(TEXT("Amphibious Armored Personnel Carrier")))
+		return EWeaponType::AmphibiousArmoredPersonnelCarrier;
+	if (WeaponType == FName(TEXT("Unmanned Air Vehicle")))
+		return EWeaponType::UAV;
+	if (WeaponType == FName(TEXT("Kamikaze UAV")))
+		return EWeaponType::KamikazeUAV;
+	if (WeaponType == FName(TEXT("Armed UAV")))
+		return EWeaponType::ArmedUAV;
+	if (WeaponType == FName(TEXT("Unmanned Fighter Jet")))
+		return EWeaponType::UnmannedFighterJet;
+	if (WeaponType == FName(TEXT("Landing Helicopter")))
+		return EWeaponType::LandingHelicopter;
+	if (WeaponType == FName(TEXT("Attack Helicopter")))
+		return EWeaponType::AttackHelicopter;
+	if (WeaponType == FName(TEXT("Cargo Helicopter")))
+		return EWeaponType::CargoHelicopter;
+	if (WeaponType == FName(TEXT("Marine Helicopter")))
+		return EWeaponType::MarineHelicopter;
+	if (WeaponType == FName(TEXT("Train Aircraft")))
+		return EWeaponType::TrainAircraft;
+	if (WeaponType == FName(TEXT("Fighter Jet")))
+		return EWeaponType::FighterJet;
+	if (WeaponType == FName(TEXT("Bomber Plane")))
+		return EWeaponType::BomberPlane;
+	if (WeaponType == FName(TEXT("Vertical TakeOff Jet")))
+		return EWeaponType::VerticalTakeOffJets;
+	if (WeaponType == FName(TEXT("Anti Drone System")))
+		return EWeaponType::AntiDroneSystems;
+	if (WeaponType == FName(TEXT("Medium Range Air Defense System")))
+		return EWeaponType::MediumRangeAirDefenseSystems;
+	if (WeaponType == FName(TEXT("Long Range Air Defense System")))
+		return EWeaponType::LongRangeAirDefenseSystems;
+
+	else
+		return EWeaponType::Empty;
+
+}
+
+TMap<FString, int32> UHelperCalculationFunctions::CalculateDesignWeaponFeatures(FNewDesignedProductsStruct DesignedProduct) {
+
+	UDataTable* AllFeaturesDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/AllWeaponFeatures.AllWeaponFeatures")));
+	TArray<FName> AllRowNames;
+
+	if (!AllFeaturesDataTable) {
+
+		UE_LOG(LogTemp, Error, TEXT("WeaponDataTable not assigned."));
+	}
+	else {
+		AllRowNames = AllFeaturesDataTable->GetRowNames();
+	}
+
+	for (FName RowName : AllRowNames) {
+
+		 FWeaponFeatures* FoundRow = AllFeaturesDataTable->FindRow<FWeaponFeatures>(RowName, TEXT("Bu ozellik tablodan alinamadi"));
+
+		 if (FoundRow->IsSpecialAbility == false && FoundRow->CompatibleWeaponTypes.Find(DesignedProduct.Type)) {
+
+		 }
+		 
+	}
+
+	TMap<FString, int32> WeaponFeaturesAndValues;
+
+	return WeaponFeaturesAndValues;
 }
 
 void UHelperCalculationFunctions::SortCountriesByPower(UObject* WorldContextObject, TArray<int32>& TopTenCountryIndexs, int32& MyCountryPlacement, int32& MyCountryIndex) {

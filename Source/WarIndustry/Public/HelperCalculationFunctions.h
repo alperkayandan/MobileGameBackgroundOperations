@@ -8,21 +8,6 @@
 
 #include "HelperCalculationFunctions.generated.h"
 
-UENUM(BlueprintType)
-enum class EWeaponCategory : uint8
-{
-    LongRangeRifles,         
-    Rockets,                 
-    Tanks,                   
-    ArmoredVehicles,
-    Uavs,
-    Helicopters,
-    FighterJets,
-    AirDefensseSystems,
-    Default 
-};
-
-
 UCLASS()
 class WARINDUSTRY_API UHelperCalculationFunctions : public UBlueprintFunctionLibrary
 {
@@ -33,6 +18,12 @@ class WARINDUSTRY_API UHelperCalculationFunctions : public UBlueprintFunctionLib
         UFUNCTION(BlueprintCallable, Category = "Calculations")
 		static void CompareWeaponPowerAndTechnoligies(FCountrys FirstCountryStruct, FCountrys SecondCountryStruct, FRebellion Rebellions, UObject* WorldContextObject, TArray<int32>& WeaponCompareResults, int64& FirstCountryTotalPower);
 
+        UFUNCTION(BlueprintCallable, Category = "Calculations|WeaponDesign")
+        static FTimespan CalculateWeaponProductionTime(FNewDesignedProductsStruct DesignedProduct);
+
+        UFUNCTION(BlueprintCallable, Category = "Calculations|WeaponDesign")
+        static TMap<FString, int32> CalculateDesignWeaponFeatures(FNewDesignedProductsStruct DesignedProduct);
+
         UFUNCTION(BlueprintCallable, Category = "Sortting")
         static void SortCountriesByPower(UObject* WorldContextObject, TArray<int32>& TopTenCountryIndexs, int32& MyCountryPlacement, int32& MyCountryIndex);
 
@@ -42,4 +33,5 @@ class WARINDUSTRY_API UHelperCalculationFunctions : public UBlueprintFunctionLib
 	private:
 
         static EWeaponCategory ConvertWeaponCategoryToEnum(const FString& WeaponCategory);
+		static EWeaponType ConvertWeaponTypeToEnum(const FName& WeaponType);
 };

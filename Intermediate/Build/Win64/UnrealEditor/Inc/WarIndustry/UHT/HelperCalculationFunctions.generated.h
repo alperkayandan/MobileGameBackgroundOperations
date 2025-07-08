@@ -9,21 +9,26 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+ 
 class UObject;
 struct FCountrys;
+struct FNewDesignedProductsStruct;
 struct FRebellion;
+struct FTimespan;
 #ifdef WARINDUSTRY_HelperCalculationFunctions_generated_h
 #error "HelperCalculationFunctions.generated.h already included, missing '#pragma once' in HelperCalculationFunctions.h"
 #endif
 #define WARINDUSTRY_HelperCalculationFunctions_generated_h
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execSortCompaniesByCompanyValues); \
 	DECLARE_FUNCTION(execSortCountriesByPower); \
+	DECLARE_FUNCTION(execCalculateDesignWeaponFeatures); \
+	DECLARE_FUNCTION(execCalculateWeaponProductionTime); \
 	DECLARE_FUNCTION(execCompareWeaponPowerAndTechnoligies);
 
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_29_INCLASS_NO_PURE_DECLS \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_14_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUHelperCalculationFunctions(); \
 	friend struct Z_Construct_UClass_UHelperCalculationFunctions_Statics; \
@@ -32,7 +37,7 @@ public: \
 	DECLARE_SERIALIZER(UHelperCalculationFunctions)
 
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_29_ENHANCED_CONSTRUCTORS \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_14_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UHelperCalculationFunctions(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 private: \
@@ -46,13 +51,13 @@ public: \
 	NO_API virtual ~UHelperCalculationFunctions();
 
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_26_PROLOG
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_29_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_11_PROLOG
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_14_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_29_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_29_INCLASS_NO_PURE_DECLS \
-	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_29_ENHANCED_CONSTRUCTORS \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_14_INCLASS_NO_PURE_DECLS \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_14_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -62,20 +67,5 @@ template<> WARINDUSTRY_API UClass* StaticClass<class UHelperCalculationFunctions
 #undef CURRENT_FILE_ID
 #define CURRENT_FILE_ID FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h
 
-
-#define FOREACH_ENUM_EWEAPONCATEGORY(op) \
-	op(EWeaponCategory::LongRangeRifles) \
-	op(EWeaponCategory::Rockets) \
-	op(EWeaponCategory::Tanks) \
-	op(EWeaponCategory::ArmoredVehicles) \
-	op(EWeaponCategory::Uavs) \
-	op(EWeaponCategory::Helicopters) \
-	op(EWeaponCategory::FighterJets) \
-	op(EWeaponCategory::AirDefensseSystems) \
-	op(EWeaponCategory::Default) 
-
-enum class EWeaponCategory : uint8;
-template<> struct TIsUEnumClass<EWeaponCategory> { enum { Value = true }; };
-template<> WARINDUSTRY_API UEnum* StaticEnum<EWeaponCategory>();
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

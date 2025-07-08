@@ -3,6 +3,7 @@
 #include "Engine/Engine.h"
 #include "AllStructs.h"
 #include "C_GameInstance.h"
+#include "HelperCalculationFunctions.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -30,9 +31,9 @@ void UAsyncBackgroundOperations::StartAsyncCreateRandomWeaponsData(UObject* Worl
             ISaveInterface::Execute_SaveDesignedProducts(GI, CreatedData, false);
             ISaveInterface::Execute_SaveGlobalFactory(GI, AllGlobalFactories, false);
 
-            AsyncTask(ENamedThreads::GameThread, [this, CreatedData, AllGlobalFactories]() {
+            AsyncTask(ENamedThreads::GameThread, [this]() {
 
-                    DataCreateIsFinished.Broadcast(CreatedData, AllGlobalFactories);
+                    DataCreateIsFinished.Broadcast();
                     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Merhaba, bu c++'ın bittiğini gösterir"));
 
                 });
@@ -46,13 +47,13 @@ void UAsyncBackgroundOperations::StartAsyncRandomWeaponsToCountries(UObject* Wor
     CountriesStartWeaponsDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/CountryWeaponsStart.CountryWeaponsStart")));
 
     Async(EAsyncExecution::Thread, [this, WorldContextObject]() {
-        TArray<FCountrys> Empty;
-        Empty = RandomWeaponsToCountries(WorldContextObject);
         
-        AsyncTask(ENamedThreads::GameThread, [this, Empty]() {
+        RandomWeaponsToCountries(WorldContextObject);
+        
+        AsyncTask(ENamedThreads::GameThread, [this]() {
 
 
-            RandomWeaponsToCountriesIsFinished.Broadcast(Empty);
+            RandomWeaponsToCountriesIsFinished.Broadcast();
             GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Merhaba, bu ülkelere rastgele silah verildiğini gösterir."));
             });
 
@@ -353,8 +354,9 @@ void UAsyncBackgroundOperations::CreateRandomWeapon(TArray<FNewDesignedProductsS
                 DesignedProductsStruct.FifthProperty = SelectedFeatureValuesOfWeapon[4];
                 DesignedProductsStruct.SixthProperty = SelectedFeatureValuesOfWeapon[5];
                 DesignedProductsStruct.Overall = DesignOverall;
-
                 DesignedProductsStruct.FightingAgainstAndStrength = WeaponsFightingAgainstAndStrengthsMap;
+
+                DesignedProductsStruct.ProductionTime = UHelperCalculationFunctions::CalculateWeaponProductionTime(DesignedProductsStruct);
 
                 DesignedProductsArray.Add(DesignedProductsStruct);
             }
@@ -1391,7 +1393,7 @@ int32 UAsyncBackgroundOperations::CalculateWeaponOverall(TArray<float> SelectedV
     return Overall = FMath::RoundToInt32((NormalizedWeightSum * 140.0f) + 10.0f);
 }
 
-TArray<FCountrys> UAsyncBackgroundOperations::RandomWeaponsToCountries(UObject* WorldContextObject) {
+void UAsyncBackgroundOperations::RandomWeaponsToCountries(UObject* WorldContextObject) {
     
     UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
     GI->Implements<USaveInterface>();
@@ -1604,7 +1606,7 @@ TArray<FCountrys> UAsyncBackgroundOperations::RandomWeaponsToCountries(UObject* 
     }
 
     ISaveInterface::Execute_SaveCountrys(GI, AllCountrys, false);
-    return AllCountrys;
+    
 }
 
 TArray<FName> UAsyncBackgroundOperations::ReadCountriesStartWeaponsData() {

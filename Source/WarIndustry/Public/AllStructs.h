@@ -8,6 +8,57 @@
 
 #include "AllStructs.generated.h"
 
+UENUM(BlueprintType)
+enum class EWeaponCategory : uint8
+{
+	LongRangeRifles,
+	Rockets,
+	Tanks,
+	ArmoredVehicles,
+	Uavs,
+	Helicopters,
+	FighterJets,
+	AirDefensseSystems,
+	Default
+};
+
+UENUM(BlueprintType)
+enum class EWeaponType : uint8
+{
+	Empty,
+	AssultRifle,
+	SniperRifle,
+	SubmachineGun,
+	AirAttackMachineGun,
+	CoactionalMachineGun,
+	LandToAirMissile,
+	AirToLandMissile,
+	AirToAirMissile,
+	LightTank,
+	MainBattleTank,
+	HeavyTank,
+	AmphibiousTank,
+	WheeledArmoredPersonnelCarrier,
+	TrackedArmoredPersonnelCarrier,
+	ArmoredFightingVehicle,
+	AmphibiousArmoredPersonnelCarrier,
+	UAV,
+	KamikazeUAV,
+	ArmedUAV,
+	UnmannedFighterJet,
+	LandingHelicopter,
+	AttackHelicopter,
+	CargoHelicopter,
+	MarineHelicopter,
+	TrainAircraft,
+	FighterJet,
+	BomberPlane,
+	VerticalTakeOffJets,
+	AntiDroneSystems,
+	MediumRangeAirDefenseSystems,
+	LongRangeAirDefenseSystems
+};
+
 USTRUCT(BlueprintType)
 struct FGeneralDatas 
 {
@@ -393,7 +444,7 @@ struct FMyFactorys : public FTableRowBase
 USTRUCT(BlueprintType)
 struct FResearchItems : public FTableRowBase
 {
-	GENERATED_BODY();
+	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString MaterialName;
@@ -736,8 +787,7 @@ struct FDesignedProductsProduction
 		: ProductionStartTime()
 		, ProductionFactoryIndex(0)
 		, RequestedNumber(0)
-	{
-	}
+	{}
 };
 
 USTRUCT(BlueprintType)
@@ -849,6 +899,49 @@ struct FNewDesignedProductsStruct
 	{}
 
 
+};
+
+USTRUCT(BlueprintType)
+struct FWeaponFeatures : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString FeatureName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsSpecialAbility;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName WeaponCategory;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<bool> ThisIndexsGoodToBeHigher;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FName> CompatibleWeaponTypes;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FName> StrongAgainstCategories;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool StrongAgainstLocation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool StrongAgainstTime;
+
+	FWeaponFeatures() 
+		: FeatureName("")
+		, IsSpecialAbility(false)
+		, WeaponCategory("")
+		, CompatibleWeaponTypes()
+		, StrongAgainstCategories()
+		, StrongAgainstLocation(false)
+		, StrongAgainstTime(false)
+
+	{
+		ThisIndexsGoodToBeHigher.Init(false, 6);
+	}
 };
 
 

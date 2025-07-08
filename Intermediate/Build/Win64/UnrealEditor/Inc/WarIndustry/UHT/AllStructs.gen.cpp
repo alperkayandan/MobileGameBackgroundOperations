@@ -16,6 +16,8 @@ COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FTimespan();
 ENGINE_API UClass* Z_Construct_UClass_UTexture2D_NoRegister();
 ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FTableRowBase();
 UPackage* Z_Construct_UPackage__Script_WarIndustry();
+WARINDUSTRY_API UEnum* Z_Construct_UEnum_WarIndustry_EWeaponCategory();
+WARINDUSTRY_API UEnum* Z_Construct_UEnum_WarIndustry_EWeaponType();
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FContracts();
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FCountrys();
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FCurrentWars();
@@ -28,7 +30,186 @@ WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FNewDesignedProductsStr
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FNews();
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FRebellion();
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FResearchItems();
+WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FWeaponFeatures();
 // End Cross Module References
+
+// Begin Enum EWeaponCategory
+static FEnumRegistrationInfo Z_Registration_Info_UEnum_EWeaponCategory;
+static UEnum* EWeaponCategory_StaticEnum()
+{
+	if (!Z_Registration_Info_UEnum_EWeaponCategory.OuterSingleton)
+	{
+		Z_Registration_Info_UEnum_EWeaponCategory.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_WarIndustry_EWeaponCategory, (UObject*)Z_Construct_UPackage__Script_WarIndustry(), TEXT("EWeaponCategory"));
+	}
+	return Z_Registration_Info_UEnum_EWeaponCategory.OuterSingleton;
+}
+template<> WARINDUSTRY_API UEnum* StaticEnum<EWeaponCategory>()
+{
+	return EWeaponCategory_StaticEnum();
+}
+struct Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
+		{ "AirDefensseSystems.Name", "EWeaponCategory::AirDefensseSystems" },
+		{ "ArmoredVehicles.Name", "EWeaponCategory::ArmoredVehicles" },
+		{ "BlueprintType", "true" },
+		{ "Default.Name", "EWeaponCategory::Default" },
+		{ "FighterJets.Name", "EWeaponCategory::FighterJets" },
+		{ "Helicopters.Name", "EWeaponCategory::Helicopters" },
+		{ "LongRangeRifles.Name", "EWeaponCategory::LongRangeRifles" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+		{ "Rockets.Name", "EWeaponCategory::Rockets" },
+		{ "Tanks.Name", "EWeaponCategory::Tanks" },
+		{ "Uavs.Name", "EWeaponCategory::Uavs" },
+	};
+#endif // WITH_METADATA
+	static constexpr UECodeGen_Private::FEnumeratorParam Enumerators[] = {
+		{ "EWeaponCategory::LongRangeRifles", (int64)EWeaponCategory::LongRangeRifles },
+		{ "EWeaponCategory::Rockets", (int64)EWeaponCategory::Rockets },
+		{ "EWeaponCategory::Tanks", (int64)EWeaponCategory::Tanks },
+		{ "EWeaponCategory::ArmoredVehicles", (int64)EWeaponCategory::ArmoredVehicles },
+		{ "EWeaponCategory::Uavs", (int64)EWeaponCategory::Uavs },
+		{ "EWeaponCategory::Helicopters", (int64)EWeaponCategory::Helicopters },
+		{ "EWeaponCategory::FighterJets", (int64)EWeaponCategory::FighterJets },
+		{ "EWeaponCategory::AirDefensseSystems", (int64)EWeaponCategory::AirDefensseSystems },
+		{ "EWeaponCategory::Default", (int64)EWeaponCategory::Default },
+	};
+	static const UECodeGen_Private::FEnumParams EnumParams;
+};
+const UECodeGen_Private::FEnumParams Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::EnumParams = {
+	(UObject*(*)())Z_Construct_UPackage__Script_WarIndustry,
+	nullptr,
+	"EWeaponCategory",
+	"EWeaponCategory",
+	Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::Enumerators,
+	RF_Public|RF_Transient|RF_MarkAsNative,
+	UE_ARRAY_COUNT(Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::Enumerators),
+	EEnumFlags::None,
+	(uint8)UEnum::ECppForm::EnumClass,
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::Enum_MetaDataParams), Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::Enum_MetaDataParams)
+};
+UEnum* Z_Construct_UEnum_WarIndustry_EWeaponCategory()
+{
+	if (!Z_Registration_Info_UEnum_EWeaponCategory.InnerSingleton)
+	{
+		UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_EWeaponCategory.InnerSingleton, Z_Construct_UEnum_WarIndustry_EWeaponCategory_Statics::EnumParams);
+	}
+	return Z_Registration_Info_UEnum_EWeaponCategory.InnerSingleton;
+}
+// End Enum EWeaponCategory
+
+// Begin Enum EWeaponType
+static FEnumRegistrationInfo Z_Registration_Info_UEnum_EWeaponType;
+static UEnum* EWeaponType_StaticEnum()
+{
+	if (!Z_Registration_Info_UEnum_EWeaponType.OuterSingleton)
+	{
+		Z_Registration_Info_UEnum_EWeaponType.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_WarIndustry_EWeaponType, (UObject*)Z_Construct_UPackage__Script_WarIndustry(), TEXT("EWeaponType"));
+	}
+	return Z_Registration_Info_UEnum_EWeaponType.OuterSingleton;
+}
+template<> WARINDUSTRY_API UEnum* StaticEnum<EWeaponType>()
+{
+	return EWeaponType_StaticEnum();
+}
+struct Z_Construct_UEnum_WarIndustry_EWeaponType_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
+		{ "AirAttackMachineGun.Name", "EWeaponType::AirAttackMachineGun" },
+		{ "AirToAirMissile.Name", "EWeaponType::AirToAirMissile" },
+		{ "AirToLandMissile.Name", "EWeaponType::AirToLandMissile" },
+		{ "AmphibiousArmoredPersonnelCarrier.Name", "EWeaponType::AmphibiousArmoredPersonnelCarrier" },
+		{ "AmphibiousTank.Name", "EWeaponType::AmphibiousTank" },
+		{ "AntiDroneSystems.Name", "EWeaponType::AntiDroneSystems" },
+		{ "ArmedUAV.Name", "EWeaponType::ArmedUAV" },
+		{ "ArmoredFightingVehicle.Name", "EWeaponType::ArmoredFightingVehicle" },
+		{ "AssultRifle.Name", "EWeaponType::AssultRifle" },
+		{ "AttackHelicopter.Name", "EWeaponType::AttackHelicopter" },
+		{ "BlueprintType", "true" },
+		{ "BomberPlane.Name", "EWeaponType::BomberPlane" },
+		{ "CargoHelicopter.Name", "EWeaponType::CargoHelicopter" },
+		{ "CoactionalMachineGun.Name", "EWeaponType::CoactionalMachineGun" },
+		{ "Empty.Name", "EWeaponType::Empty" },
+		{ "FighterJet.Name", "EWeaponType::FighterJet" },
+		{ "HeavyTank.Name", "EWeaponType::HeavyTank" },
+		{ "KamikazeUAV.Name", "EWeaponType::KamikazeUAV" },
+		{ "LandingHelicopter.Name", "EWeaponType::LandingHelicopter" },
+		{ "LandToAirMissile.Name", "EWeaponType::LandToAirMissile" },
+		{ "LightTank.Name", "EWeaponType::LightTank" },
+		{ "LongRangeAirDefenseSystems.Name", "EWeaponType::LongRangeAirDefenseSystems" },
+		{ "MainBattleTank.Name", "EWeaponType::MainBattleTank" },
+		{ "MarineHelicopter.Name", "EWeaponType::MarineHelicopter" },
+		{ "MediumRangeAirDefenseSystems.Name", "EWeaponType::MediumRangeAirDefenseSystems" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+		{ "SniperRifle.Name", "EWeaponType::SniperRifle" },
+		{ "SubmachineGun.Name", "EWeaponType::SubmachineGun" },
+		{ "TrackedArmoredPersonnelCarrier.Name", "EWeaponType::TrackedArmoredPersonnelCarrier" },
+		{ "TrainAircraft.Name", "EWeaponType::TrainAircraft" },
+		{ "UAV.Name", "EWeaponType::UAV" },
+		{ "UnmannedFighterJet.Name", "EWeaponType::UnmannedFighterJet" },
+		{ "VerticalTakeOffJets.Name", "EWeaponType::VerticalTakeOffJets" },
+		{ "WheeledArmoredPersonnelCarrier.Name", "EWeaponType::WheeledArmoredPersonnelCarrier" },
+	};
+#endif // WITH_METADATA
+	static constexpr UECodeGen_Private::FEnumeratorParam Enumerators[] = {
+		{ "EWeaponType::Empty", (int64)EWeaponType::Empty },
+		{ "EWeaponType::AssultRifle", (int64)EWeaponType::AssultRifle },
+		{ "EWeaponType::SniperRifle", (int64)EWeaponType::SniperRifle },
+		{ "EWeaponType::SubmachineGun", (int64)EWeaponType::SubmachineGun },
+		{ "EWeaponType::AirAttackMachineGun", (int64)EWeaponType::AirAttackMachineGun },
+		{ "EWeaponType::CoactionalMachineGun", (int64)EWeaponType::CoactionalMachineGun },
+		{ "EWeaponType::LandToAirMissile", (int64)EWeaponType::LandToAirMissile },
+		{ "EWeaponType::AirToLandMissile", (int64)EWeaponType::AirToLandMissile },
+		{ "EWeaponType::AirToAirMissile", (int64)EWeaponType::AirToAirMissile },
+		{ "EWeaponType::LightTank", (int64)EWeaponType::LightTank },
+		{ "EWeaponType::MainBattleTank", (int64)EWeaponType::MainBattleTank },
+		{ "EWeaponType::HeavyTank", (int64)EWeaponType::HeavyTank },
+		{ "EWeaponType::AmphibiousTank", (int64)EWeaponType::AmphibiousTank },
+		{ "EWeaponType::WheeledArmoredPersonnelCarrier", (int64)EWeaponType::WheeledArmoredPersonnelCarrier },
+		{ "EWeaponType::TrackedArmoredPersonnelCarrier", (int64)EWeaponType::TrackedArmoredPersonnelCarrier },
+		{ "EWeaponType::ArmoredFightingVehicle", (int64)EWeaponType::ArmoredFightingVehicle },
+		{ "EWeaponType::AmphibiousArmoredPersonnelCarrier", (int64)EWeaponType::AmphibiousArmoredPersonnelCarrier },
+		{ "EWeaponType::UAV", (int64)EWeaponType::UAV },
+		{ "EWeaponType::KamikazeUAV", (int64)EWeaponType::KamikazeUAV },
+		{ "EWeaponType::ArmedUAV", (int64)EWeaponType::ArmedUAV },
+		{ "EWeaponType::UnmannedFighterJet", (int64)EWeaponType::UnmannedFighterJet },
+		{ "EWeaponType::LandingHelicopter", (int64)EWeaponType::LandingHelicopter },
+		{ "EWeaponType::AttackHelicopter", (int64)EWeaponType::AttackHelicopter },
+		{ "EWeaponType::CargoHelicopter", (int64)EWeaponType::CargoHelicopter },
+		{ "EWeaponType::MarineHelicopter", (int64)EWeaponType::MarineHelicopter },
+		{ "EWeaponType::TrainAircraft", (int64)EWeaponType::TrainAircraft },
+		{ "EWeaponType::FighterJet", (int64)EWeaponType::FighterJet },
+		{ "EWeaponType::BomberPlane", (int64)EWeaponType::BomberPlane },
+		{ "EWeaponType::VerticalTakeOffJets", (int64)EWeaponType::VerticalTakeOffJets },
+		{ "EWeaponType::AntiDroneSystems", (int64)EWeaponType::AntiDroneSystems },
+		{ "EWeaponType::MediumRangeAirDefenseSystems", (int64)EWeaponType::MediumRangeAirDefenseSystems },
+		{ "EWeaponType::LongRangeAirDefenseSystems", (int64)EWeaponType::LongRangeAirDefenseSystems },
+	};
+	static const UECodeGen_Private::FEnumParams EnumParams;
+};
+const UECodeGen_Private::FEnumParams Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::EnumParams = {
+	(UObject*(*)())Z_Construct_UPackage__Script_WarIndustry,
+	nullptr,
+	"EWeaponType",
+	"EWeaponType",
+	Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::Enumerators,
+	RF_Public|RF_Transient|RF_MarkAsNative,
+	UE_ARRAY_COUNT(Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::Enumerators),
+	EEnumFlags::None,
+	(uint8)UEnum::ECppForm::EnumClass,
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::Enum_MetaDataParams), Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::Enum_MetaDataParams)
+};
+UEnum* Z_Construct_UEnum_WarIndustry_EWeaponType()
+{
+	if (!Z_Registration_Info_UEnum_EWeaponType.InnerSingleton)
+	{
+		UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_EWeaponType.InnerSingleton, Z_Construct_UEnum_WarIndustry_EWeaponType_Statics::EnumParams);
+	}
+	return Z_Registration_Info_UEnum_EWeaponType.InnerSingleton;
+}
+// End Enum EWeaponType
 
 // Begin ScriptStruct FGeneralDatas
 static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_GeneralDatas;
@@ -2197,9 +2378,149 @@ UScriptStruct* Z_Construct_UScriptStruct_FNewDesignedProductsStruct()
 }
 // End ScriptStruct FNewDesignedProductsStruct
 
+// Begin ScriptStruct FWeaponFeatures
+static_assert(std::is_polymorphic<FWeaponFeatures>() == std::is_polymorphic<FTableRowBase>(), "USTRUCT FWeaponFeatures cannot be polymorphic unless super FTableRowBase is polymorphic");
+static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_WeaponFeatures;
+class UScriptStruct* FWeaponFeatures::StaticStruct()
+{
+	if (!Z_Registration_Info_UScriptStruct_WeaponFeatures.OuterSingleton)
+	{
+		Z_Registration_Info_UScriptStruct_WeaponFeatures.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FWeaponFeatures, (UObject*)Z_Construct_UPackage__Script_WarIndustry(), TEXT("WeaponFeatures"));
+	}
+	return Z_Registration_Info_UScriptStruct_WeaponFeatures.OuterSingleton;
+}
+template<> WARINDUSTRY_API UScriptStruct* StaticStruct<FWeaponFeatures>()
+{
+	return FWeaponFeatures::StaticStruct();
+}
+struct Z_Construct_UScriptStruct_FWeaponFeatures_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_FeatureName_MetaData[] = {
+		{ "Category", "WeaponFeatures" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_IsSpecialAbility_MetaData[] = {
+		{ "Category", "WeaponFeatures" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_WeaponCategory_MetaData[] = {
+		{ "Category", "WeaponFeatures" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ThisIndexsGoodToBeHigher_MetaData[] = {
+		{ "Category", "WeaponFeatures" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CompatibleWeaponTypes_MetaData[] = {
+		{ "Category", "WeaponFeatures" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_StrongAgainstCategories_MetaData[] = {
+		{ "Category", "WeaponFeatures" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_StrongAgainstLocation_MetaData[] = {
+		{ "Category", "WeaponFeatures" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_StrongAgainstTime_MetaData[] = {
+		{ "Category", "WeaponFeatures" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStrPropertyParams NewProp_FeatureName;
+	static void NewProp_IsSpecialAbility_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_IsSpecialAbility;
+	static const UECodeGen_Private::FNamePropertyParams NewProp_WeaponCategory;
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_ThisIndexsGoodToBeHigher_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_ThisIndexsGoodToBeHigher;
+	static const UECodeGen_Private::FNamePropertyParams NewProp_CompatibleWeaponTypes_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_CompatibleWeaponTypes;
+	static const UECodeGen_Private::FNamePropertyParams NewProp_StrongAgainstCategories_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_StrongAgainstCategories;
+	static void NewProp_StrongAgainstLocation_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_StrongAgainstLocation;
+	static void NewProp_StrongAgainstTime_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_StrongAgainstTime;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static void* NewStructOps()
+	{
+		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FWeaponFeatures>();
+	}
+	static const UECodeGen_Private::FStructParams StructParams;
+};
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_FeatureName = { "FeatureName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FWeaponFeatures, FeatureName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_FeatureName_MetaData), NewProp_FeatureName_MetaData) };
+void Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_IsSpecialAbility_SetBit(void* Obj)
+{
+	((FWeaponFeatures*)Obj)->IsSpecialAbility = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_IsSpecialAbility = { "IsSpecialAbility", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FWeaponFeatures), &Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_IsSpecialAbility_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IsSpecialAbility_MetaData), NewProp_IsSpecialAbility_MetaData) };
+const UECodeGen_Private::FNamePropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_WeaponCategory = { "WeaponCategory", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FWeaponFeatures, WeaponCategory), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeaponCategory_MetaData), NewProp_WeaponCategory_MetaData) };
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeHigher_Inner = { "ThisIndexsGoodToBeHigher", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), 0, nullptr, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeHigher = { "ThisIndexsGoodToBeHigher", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FWeaponFeatures, ThisIndexsGoodToBeHigher), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ThisIndexsGoodToBeHigher_MetaData), NewProp_ThisIndexsGoodToBeHigher_MetaData) };
+const UECodeGen_Private::FNamePropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_CompatibleWeaponTypes_Inner = { "CompatibleWeaponTypes", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_CompatibleWeaponTypes = { "CompatibleWeaponTypes", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FWeaponFeatures, CompatibleWeaponTypes), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CompatibleWeaponTypes_MetaData), NewProp_CompatibleWeaponTypes_MetaData) };
+const UECodeGen_Private::FNamePropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstCategories_Inner = { "StrongAgainstCategories", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstCategories = { "StrongAgainstCategories", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FWeaponFeatures, StrongAgainstCategories), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StrongAgainstCategories_MetaData), NewProp_StrongAgainstCategories_MetaData) };
+void Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstLocation_SetBit(void* Obj)
+{
+	((FWeaponFeatures*)Obj)->StrongAgainstLocation = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstLocation = { "StrongAgainstLocation", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FWeaponFeatures), &Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstLocation_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StrongAgainstLocation_MetaData), NewProp_StrongAgainstLocation_MetaData) };
+void Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstTime_SetBit(void* Obj)
+{
+	((FWeaponFeatures*)Obj)->StrongAgainstTime = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstTime = { "StrongAgainstTime", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FWeaponFeatures), &Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstTime_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StrongAgainstTime_MetaData), NewProp_StrongAgainstTime_MetaData) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FWeaponFeatures_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_FeatureName,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_IsSpecialAbility,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_WeaponCategory,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeHigher_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeHigher,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_CompatibleWeaponTypes_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_CompatibleWeaponTypes,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstCategories_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstCategories,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstLocation,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstTime,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FWeaponFeatures_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::StructParams = {
+	(UObject* (*)())Z_Construct_UPackage__Script_WarIndustry,
+	Z_Construct_UScriptStruct_FTableRowBase,
+	&NewStructOps,
+	"WeaponFeatures",
+	Z_Construct_UScriptStruct_FWeaponFeatures_Statics::PropPointers,
+	UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FWeaponFeatures_Statics::PropPointers),
+	sizeof(FWeaponFeatures),
+	alignof(FWeaponFeatures),
+	RF_Public|RF_Transient|RF_MarkAsNative,
+	EStructFlags(0x00000001),
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FWeaponFeatures_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FWeaponFeatures_Statics::Struct_MetaDataParams)
+};
+UScriptStruct* Z_Construct_UScriptStruct_FWeaponFeatures()
+{
+	if (!Z_Registration_Info_UScriptStruct_WeaponFeatures.InnerSingleton)
+	{
+		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_WeaponFeatures.InnerSingleton, Z_Construct_UScriptStruct_FWeaponFeatures_Statics::StructParams);
+	}
+	return Z_Registration_Info_UScriptStruct_WeaponFeatures.InnerSingleton;
+}
+// End ScriptStruct FWeaponFeatures
+
 // Begin Registration
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics
 {
+	static constexpr FEnumRegisterCompiledInInfo EnumInfo[] = {
+		{ EWeaponCategory_StaticEnum, TEXT("EWeaponCategory"), &Z_Registration_Info_UEnum_EWeaponCategory, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 4285974581U) },
+		{ EWeaponType_StaticEnum, TEXT("EWeaponType"), &Z_Registration_Info_UEnum_EWeaponType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2690430185U) },
+	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
 		{ FGeneralDatas::StaticStruct, Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewStructOps, TEXT("GeneralDatas"), &Z_Registration_Info_UScriptStruct_GeneralDatas, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FGeneralDatas), 3939461807U) },
 		{ FLastSlot::StaticStruct, Z_Construct_UScriptStruct_FLastSlot_Statics::NewStructOps, TEXT("LastSlot"), &Z_Registration_Info_UScriptStruct_LastSlot, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FLastSlot), 2546034666U) },
@@ -2213,11 +2534,12 @@ struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndust
 		{ FNews::StaticStruct, Z_Construct_UScriptStruct_FNews_Statics::NewStructOps, TEXT("News"), &Z_Registration_Info_UScriptStruct_News, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FNews), 3825443321U) },
 		{ FDesignedProductsProduction::StaticStruct, Z_Construct_UScriptStruct_FDesignedProductsProduction_Statics::NewStructOps, TEXT("DesignedProductsProduction"), &Z_Registration_Info_UScriptStruct_DesignedProductsProduction, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FDesignedProductsProduction), 3789060387U) },
 		{ FNewDesignedProductsStruct::StaticStruct, Z_Construct_UScriptStruct_FNewDesignedProductsStruct_Statics::NewStructOps, TEXT("NewDesignedProductsStruct"), &Z_Registration_Info_UScriptStruct_NewDesignedProductsStruct, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FNewDesignedProductsStruct), 4217424401U) },
+		{ FWeaponFeatures::StaticStruct, Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewStructOps, TEXT("WeaponFeatures"), &Z_Registration_Info_UScriptStruct_WeaponFeatures, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWeaponFeatures), 2466370717U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_374901135(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_2388205430(TEXT("/Script/WarIndustry"),
 	nullptr, 0,
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ScriptStructInfo),
-	nullptr, 0);
+	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::EnumInfo));
 // End Registration
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
