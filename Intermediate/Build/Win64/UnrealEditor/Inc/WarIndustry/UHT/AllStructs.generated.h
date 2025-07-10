@@ -110,6 +110,41 @@ template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FNewDesignedProduc
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FWeaponFeatures>();
 
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_955_INCLASS_NO_PURE_DECLS \
+private: \
+	static void StaticRegisterNativesUAllStructs(); \
+	friend struct Z_Construct_UClass_UAllStructs_Statics; \
+public: \
+	DECLARE_CLASS(UAllStructs, UObject, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/WarIndustry"), NO_API) \
+	DECLARE_SERIALIZER(UAllStructs)
+
+
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_955_ENHANCED_CONSTRUCTORS \
+	/** Standard constructor, called after all reflected properties have been initialized */ \
+	NO_API UAllStructs(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
+private: \
+	/** Private move- and copy-constructors, should never be used */ \
+	UAllStructs(UAllStructs&&); \
+	UAllStructs(const UAllStructs&); \
+public: \
+	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UAllStructs); \
+	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UAllStructs); \
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UAllStructs) \
+	NO_API virtual ~UAllStructs();
+
+
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_951_PROLOG
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_955_GENERATED_BODY \
+PRAGMA_DISABLE_DEPRECATION_WARNINGS \
+public: \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_955_INCLASS_NO_PURE_DECLS \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_955_ENHANCED_CONSTRUCTORS \
+private: \
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+
+
+template<> WARINDUSTRY_API UClass* StaticClass<class UAllStructs>();
+
 #undef CURRENT_FILE_ID
 #define CURRENT_FILE_ID FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h
 

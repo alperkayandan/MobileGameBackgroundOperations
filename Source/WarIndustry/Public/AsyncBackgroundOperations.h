@@ -83,7 +83,6 @@ private:
 	TArray<FName> ReadCountriesLocalWeaponsData();
 	TArray<FName> ReadCountriesStartWeaponsData();
 	void CreateRandomWeapon(TArray<FNewDesignedProductsStruct>& DesignedProductsData, TArray<FFactorys>& AllGlobalFactories);
-	static EWeaponType ConvertWeaponTypeToEnum(FName WeaponType);
 	UDataTable* CountriesHasLocalProductions;
 	UDataTable* CountriesStartWeaponsDataTable;
 	void RandomWeaponsToCountries(UObject* WorldContextObject);

@@ -32,6 +32,4 @@ class WARINDUSTRY_API UHelperCalculationFunctions : public UBlueprintFunctionLib
 			
 	private:
 
-        static EWeaponCategory ConvertWeaponCategoryToEnum(const FString& WeaponCategory);
-		static EWeaponType ConvertWeaponTypeToEnum(const FName& WeaponType);
 };

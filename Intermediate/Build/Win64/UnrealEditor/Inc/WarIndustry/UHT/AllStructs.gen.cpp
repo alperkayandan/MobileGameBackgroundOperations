@@ -10,12 +10,15 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeAllStructs() {}
 
 // Begin Cross Module References
+COREUOBJECT_API UClass* Z_Construct_UClass_UObject();
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FDateTime();
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FLinearColor();
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FTimespan();
 ENGINE_API UClass* Z_Construct_UClass_UTexture2D_NoRegister();
 ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FTableRowBase();
 UPackage* Z_Construct_UPackage__Script_WarIndustry();
+WARINDUSTRY_API UClass* Z_Construct_UClass_UAllStructs();
+WARINDUSTRY_API UClass* Z_Construct_UClass_UAllStructs_NoRegister();
 WARINDUSTRY_API UEnum* Z_Construct_UEnum_WarIndustry_EWeaponCategory();
 WARINDUSTRY_API UEnum* Z_Construct_UEnum_WarIndustry_EWeaponType();
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FContracts();
@@ -2416,6 +2419,10 @@ struct Z_Construct_UScriptStruct_FWeaponFeatures_Statics
 		{ "Category", "WeaponFeatures" },
 		{ "ModuleRelativePath", "Public/AllStructs.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ThisIndexsGoodToBeLower_MetaData[] = {
+		{ "Category", "WeaponFeatures" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CompatibleWeaponTypes_MetaData[] = {
 		{ "Category", "WeaponFeatures" },
 		{ "ModuleRelativePath", "Public/AllStructs.h" },
@@ -2439,6 +2446,8 @@ struct Z_Construct_UScriptStruct_FWeaponFeatures_Statics
 	static const UECodeGen_Private::FNamePropertyParams NewProp_WeaponCategory;
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_ThisIndexsGoodToBeHigher_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_ThisIndexsGoodToBeHigher;
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_ThisIndexsGoodToBeLower_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_ThisIndexsGoodToBeLower;
 	static const UECodeGen_Private::FNamePropertyParams NewProp_CompatibleWeaponTypes_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_CompatibleWeaponTypes;
 	static const UECodeGen_Private::FNamePropertyParams NewProp_StrongAgainstCategories_Inner;
@@ -2463,6 +2472,8 @@ const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FWeaponFe
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_WeaponCategory = { "WeaponCategory", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FWeaponFeatures, WeaponCategory), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeaponCategory_MetaData), NewProp_WeaponCategory_MetaData) };
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeHigher_Inner = { "ThisIndexsGoodToBeHigher", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeHigher = { "ThisIndexsGoodToBeHigher", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FWeaponFeatures, ThisIndexsGoodToBeHigher), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ThisIndexsGoodToBeHigher_MetaData), NewProp_ThisIndexsGoodToBeHigher_MetaData) };
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeLower_Inner = { "ThisIndexsGoodToBeLower", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), 0, nullptr, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeLower = { "ThisIndexsGoodToBeLower", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FWeaponFeatures, ThisIndexsGoodToBeLower), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ThisIndexsGoodToBeLower_MetaData), NewProp_ThisIndexsGoodToBeLower_MetaData) };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_CompatibleWeaponTypes_Inner = { "CompatibleWeaponTypes", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_CompatibleWeaponTypes = { "CompatibleWeaponTypes", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FWeaponFeatures, CompatibleWeaponTypes), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CompatibleWeaponTypes_MetaData), NewProp_CompatibleWeaponTypes_MetaData) };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstCategories_Inner = { "StrongAgainstCategories", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
@@ -2483,6 +2494,8 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FW
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_WeaponCategory,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeHigher_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeHigher,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeLower_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_ThisIndexsGoodToBeLower,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_CompatibleWeaponTypes_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_CompatibleWeaponTypes,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewProp_StrongAgainstCategories_Inner,
@@ -2514,6 +2527,66 @@ UScriptStruct* Z_Construct_UScriptStruct_FWeaponFeatures()
 }
 // End ScriptStruct FWeaponFeatures
 
+// Begin Class UAllStructs
+void UAllStructs::StaticRegisterNativesUAllStructs()
+{
+}
+IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(UAllStructs);
+UClass* Z_Construct_UClass_UAllStructs_NoRegister()
+{
+	return UAllStructs::StaticClass();
+}
+struct Z_Construct_UClass_UAllStructs_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
+		{ "IncludePath", "AllStructs.h" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
+#endif // WITH_METADATA
+	static UObject* (*const DependentSingletons[])();
+	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
+		TCppClassTypeTraits<UAllStructs>::IsAbstract,
+	};
+	static const UECodeGen_Private::FClassParams ClassParams;
+};
+UObject* (*const Z_Construct_UClass_UAllStructs_Statics::DependentSingletons[])() = {
+	(UObject* (*)())Z_Construct_UClass_UObject,
+	(UObject* (*)())Z_Construct_UPackage__Script_WarIndustry,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAllStructs_Statics::DependentSingletons) < 16);
+const UECodeGen_Private::FClassParams Z_Construct_UClass_UAllStructs_Statics::ClassParams = {
+	&UAllStructs::StaticClass,
+	nullptr,
+	&StaticCppClassTypeInfo,
+	DependentSingletons,
+	nullptr,
+	nullptr,
+	nullptr,
+	UE_ARRAY_COUNT(DependentSingletons),
+	0,
+	0,
+	0,
+	0x001000A0u,
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAllStructs_Statics::Class_MetaDataParams), Z_Construct_UClass_UAllStructs_Statics::Class_MetaDataParams)
+};
+UClass* Z_Construct_UClass_UAllStructs()
+{
+	if (!Z_Registration_Info_UClass_UAllStructs.OuterSingleton)
+	{
+		UECodeGen_Private::ConstructUClass(Z_Registration_Info_UClass_UAllStructs.OuterSingleton, Z_Construct_UClass_UAllStructs_Statics::ClassParams);
+	}
+	return Z_Registration_Info_UClass_UAllStructs.OuterSingleton;
+}
+template<> WARINDUSTRY_API UClass* StaticClass<UAllStructs>()
+{
+	return UAllStructs::StaticClass();
+}
+UAllStructs::UAllStructs(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
+DEFINE_VTABLE_PTR_HELPER_CTOR(UAllStructs);
+UAllStructs::~UAllStructs() {}
+// End Class UAllStructs
+
 // Begin Registration
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics
 {
@@ -2534,11 +2607,14 @@ struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndust
 		{ FNews::StaticStruct, Z_Construct_UScriptStruct_FNews_Statics::NewStructOps, TEXT("News"), &Z_Registration_Info_UScriptStruct_News, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FNews), 3825443321U) },
 		{ FDesignedProductsProduction::StaticStruct, Z_Construct_UScriptStruct_FDesignedProductsProduction_Statics::NewStructOps, TEXT("DesignedProductsProduction"), &Z_Registration_Info_UScriptStruct_DesignedProductsProduction, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FDesignedProductsProduction), 3789060387U) },
 		{ FNewDesignedProductsStruct::StaticStruct, Z_Construct_UScriptStruct_FNewDesignedProductsStruct_Statics::NewStructOps, TEXT("NewDesignedProductsStruct"), &Z_Registration_Info_UScriptStruct_NewDesignedProductsStruct, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FNewDesignedProductsStruct), 4217424401U) },
-		{ FWeaponFeatures::StaticStruct, Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewStructOps, TEXT("WeaponFeatures"), &Z_Registration_Info_UScriptStruct_WeaponFeatures, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWeaponFeatures), 2466370717U) },
+		{ FWeaponFeatures::StaticStruct, Z_Construct_UScriptStruct_FWeaponFeatures_Statics::NewStructOps, TEXT("WeaponFeatures"), &Z_Registration_Info_UScriptStruct_WeaponFeatures, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWeaponFeatures), 2535297194U) },
+	};
+	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
+		{ Z_Construct_UClass_UAllStructs, UAllStructs::StaticClass, TEXT("UAllStructs"), &Z_Registration_Info_UClass_UAllStructs, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllStructs), 2848953886U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_2388205430(TEXT("/Script/WarIndustry"),
-	nullptr, 0,
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_1591373968(TEXT("/Script/WarIndustry"),
+	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ScriptStructInfo),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::EnumInfo));
 // End Registration

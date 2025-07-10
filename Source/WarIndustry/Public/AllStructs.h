@@ -919,6 +919,9 @@ struct FWeaponFeatures : public FTableRowBase
 	TArray<bool> ThisIndexsGoodToBeHigher;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<bool> ThisIndexsGoodToBeLower;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FName> CompatibleWeaponTypes;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -941,7 +944,20 @@ struct FWeaponFeatures : public FTableRowBase
 
 	{
 		ThisIndexsGoodToBeHigher.Init(false, 6);
+		ThisIndexsGoodToBeLower.Init(false, 6);
 	}
 };
 
+UCLASS()
+class WARINDUSTRY_API UAllStructs : public UObject
+
+{
+	GENERATED_BODY()
+
+public:
+
+	static EWeaponCategory ConvertWeaponCategoryToEnum(const FString& WeaponCategory);
+	static EWeaponType ConvertWeaponTypeToEnum(const FName& WeaponType);
+
+};
 

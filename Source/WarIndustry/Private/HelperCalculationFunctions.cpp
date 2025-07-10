@@ -77,7 +77,7 @@ void UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(FCountrys Fi
 				
 			}
 			
-			switch (ConvertWeaponCategoryToEnum(FightingAgainstCategory)) {
+			switch (UAllStructs::ConvertWeaponCategoryToEnum(FightingAgainstCategory)) {
 
 			case EWeaponCategory::LongRangeRifles:
 
@@ -205,7 +205,7 @@ FTimespan UHelperCalculationFunctions::CalculateWeaponProductionTime(FNewDesigne
 		}
 	} //Feature work load
 	
-	switch (ConvertWeaponTypeToEnum(DesignedProduct.Type)) {
+	switch (UAllStructs::ConvertWeaponTypeToEnum(DesignedProduct.Type)) {
 
 		case EWeaponType::AssultRifle:
 			TypeBaseProductionTime = FTimespan(0,1,0,0); // 1 Saat 
@@ -323,98 +323,6 @@ FTimespan UHelperCalculationFunctions::CalculateWeaponProductionTime(FNewDesigne
 	return TypeBaseProductionTime;
 }
 
-EWeaponCategory UHelperCalculationFunctions::ConvertWeaponCategoryToEnum(const FString& WeaponCategory) {
-	
-	if (WeaponCategory == "Long Range Rifles")
-		return EWeaponCategory::LongRangeRifles;
-	else if (WeaponCategory == "Rockets")
-		return EWeaponCategory::Rockets;
-	else if (WeaponCategory == "Tanks")
-		return EWeaponCategory::Tanks;
-	else if (WeaponCategory == "Armored Vehicles")
-		return EWeaponCategory::ArmoredVehicles;
-	else if (WeaponCategory == "Unmanned Air Vehicles")
-		return EWeaponCategory::Uavs;
-	else if (WeaponCategory == "Helicopters")
-		return EWeaponCategory::Helicopters;
-	else if (WeaponCategory == "Fighter Jets")
-		return EWeaponCategory::FighterJets;
-	else if (WeaponCategory == "Air Defense Systems")
-		return EWeaponCategory::AirDefensseSystems;
-	else
-		return EWeaponCategory::Default;
-}
-
-EWeaponType UHelperCalculationFunctions::ConvertWeaponTypeToEnum(const FName& WeaponType) {
-
-	if (WeaponType == FName(TEXT("Assult Rifle")))
-		return EWeaponType::AssultRifle;
-	if (WeaponType == FName(TEXT("Sniper Rifle")))
-		return EWeaponType::SniperRifle;
-	if (WeaponType == FName(TEXT("Submachine Gun")))
-		return EWeaponType::SubmachineGun;
-	if (WeaponType == FName(TEXT("Air Attack Machine Gun")))
-		return EWeaponType::AirAttackMachineGun;
-	if (WeaponType == FName(TEXT("Coactional Machine Gun")))
-		return EWeaponType::CoactionalMachineGun;
-	if (WeaponType == FName(TEXT("Land To Air Missile")))
-		return EWeaponType::LandToAirMissile;
-	if (WeaponType == FName(TEXT("Air To Land Missile")))
-		return EWeaponType::AirToLandMissile;
-	if (WeaponType == FName(TEXT("Air To Air Missile")))
-		return EWeaponType::AirToAirMissile;
-	if (WeaponType == FName(TEXT("Light Tank")))
-		return EWeaponType::LightTank;
-	if (WeaponType == FName(TEXT("Main Battle Tank")))
-		return EWeaponType::MainBattleTank;
-	if (WeaponType == FName(TEXT("Heavy Tank")))
-		return EWeaponType::HeavyTank;
-	if (WeaponType == FName(TEXT("Amphibious Tank")))
-		return EWeaponType::AmphibiousTank;
-	if (WeaponType == FName(TEXT("Wheeled Armored Personnel Carrier")))
-		return EWeaponType::WheeledArmoredPersonnelCarrier;
-	if (WeaponType == FName(TEXT("Tracked Armored Personnel Carrier")))
-		return EWeaponType::TrackedArmoredPersonnelCarrier;
-	if (WeaponType == FName(TEXT("Armored Fighting Vehicle")))
-		return EWeaponType::ArmoredFightingVehicle;
-	if (WeaponType == FName(TEXT("Amphibious Armored Personnel Carrier")))
-		return EWeaponType::AmphibiousArmoredPersonnelCarrier;
-	if (WeaponType == FName(TEXT("Unmanned Air Vehicle")))
-		return EWeaponType::UAV;
-	if (WeaponType == FName(TEXT("Kamikaze UAV")))
-		return EWeaponType::KamikazeUAV;
-	if (WeaponType == FName(TEXT("Armed UAV")))
-		return EWeaponType::ArmedUAV;
-	if (WeaponType == FName(TEXT("Unmanned Fighter Jet")))
-		return EWeaponType::UnmannedFighterJet;
-	if (WeaponType == FName(TEXT("Landing Helicopter")))
-		return EWeaponType::LandingHelicopter;
-	if (WeaponType == FName(TEXT("Attack Helicopter")))
-		return EWeaponType::AttackHelicopter;
-	if (WeaponType == FName(TEXT("Cargo Helicopter")))
-		return EWeaponType::CargoHelicopter;
-	if (WeaponType == FName(TEXT("Marine Helicopter")))
-		return EWeaponType::MarineHelicopter;
-	if (WeaponType == FName(TEXT("Train Aircraft")))
-		return EWeaponType::TrainAircraft;
-	if (WeaponType == FName(TEXT("Fighter Jet")))
-		return EWeaponType::FighterJet;
-	if (WeaponType == FName(TEXT("Bomber Plane")))
-		return EWeaponType::BomberPlane;
-	if (WeaponType == FName(TEXT("Vertical TakeOff Jet")))
-		return EWeaponType::VerticalTakeOffJets;
-	if (WeaponType == FName(TEXT("Anti Drone System")))
-		return EWeaponType::AntiDroneSystems;
-	if (WeaponType == FName(TEXT("Medium Range Air Defense System")))
-		return EWeaponType::MediumRangeAirDefenseSystems;
-	if (WeaponType == FName(TEXT("Long Range Air Defense System")))
-		return EWeaponType::LongRangeAirDefenseSystems;
-
-	else
-		return EWeaponType::Empty;
-
-}
-
 TMap<FString, int32> UHelperCalculationFunctions::CalculateDesignWeaponFeatures(FNewDesignedProductsStruct DesignedProduct) {
 
 	UDataTable* AllFeaturesDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/AllWeaponFeatures.AllWeaponFeatures")));
@@ -429,89 +337,109 @@ TMap<FString, int32> UHelperCalculationFunctions::CalculateDesignWeaponFeatures(
 	WeaponProperties.Add(DesignedProduct.FourthProperty);
 	WeaponProperties.Add(DesignedProduct.FifthProperty);
 	WeaponProperties.Add(DesignedProduct.SixthProperty);
-	
+
 	if (!AllFeaturesDataTable) {
 
 		UE_LOG(LogTemp, Error, TEXT("WeaponDataTable not assigned."));
 	}
 	else {
 		AllRowNames = AllFeaturesDataTable->GetRowNames();
-
+		UAsyncBackgroundOperations* AsyncFunctionsObj = NewObject<UAsyncBackgroundOperations>();
+		
 		for (FName RowName : AllRowNames) {
 
 			FWeaponFeatures* FoundRow = AllFeaturesDataTable->FindRow<FWeaponFeatures>(RowName, TEXT("Bu ozellik tablodan alinamadi"));
-			
+
 			TArray<int32> WeaponTypeMaxValues;
 			TArray<int32> WeaponTypeMinValues;
+			
 
+			if (!FoundRow->IsSpecialAbility && FoundRow->CompatibleWeaponTypes.Contains(DesignedProduct.Type)) {
 
-			if (FoundRow->IsSpecialAbility == false && FoundRow->CompatibleWeaponTypes.Find(DesignedProduct.Type)) {
-
-				UAsyncBackgroundOperations* AsyncFunctionsObj = NewObject<UAsyncBackgroundOperations>();
 				AsyncFunctionsObj->WeaponsMaxAndMinValues(DesignedProduct.Type, WeaponTypeMaxValues, WeaponTypeMinValues, EmptyWeightMultipliers);
-				
-				for (int32 propertyIndex = 0; propertyIndex < FoundRow->ThisIndexsGoodToBeHigher.Num(); propertyIndex++) {
+					
+				for (int32 propertyIndex = 0; propertyIndex < 6; propertyIndex++) {
 
 					int32 SafeZone = ((WeaponTypeMaxValues[propertyIndex] - WeaponTypeMinValues[propertyIndex]) * 25) / 100;
-					
+
 					if (FoundRow->ThisIndexsGoodToBeHigher[propertyIndex]) {
 
+						UE_LOG(LogTemp, Warning, TEXT("Buraya Girdi."));
+
 						if (WeaponProperties[propertyIndex] >= (WeaponTypeMaxValues[propertyIndex] - SafeZone)) {
-							
+
 							float Spaces = (WeaponTypeMaxValues[propertyIndex] - (WeaponTypeMaxValues[propertyIndex] - SafeZone)) / 3;
 
 							if (WeaponProperties[propertyIndex] >= ((WeaponTypeMaxValues[propertyIndex] - SafeZone) + Spaces * 3)) {
-									
+
 								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 3);
-							
+
 							}
 							else if (WeaponProperties[propertyIndex] >= ((WeaponTypeMaxValues[propertyIndex] - SafeZone) + Spaces * 2)) {
-								
+
 								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 2);
-							
+
 							}
 							else {
 
 								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 1);
-							
-							}
-							
 
+							}
 						}
+
 						else if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + SafeZone)) {
-							
+
 							float Spaces = ((WeaponTypeMinValues[propertyIndex] + SafeZone) - WeaponTypeMinValues[propertyIndex]) / 3;
 
 							if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + Spaces)) {
-								
+
 								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -3);
 
 							}
-							else if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + Spaces * 2)) {
-								
+							else if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + Spaces) * 2) {
+
 								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -2);
-							
+
 							}
 							else {
-								
+
 								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -1);
-							
+
 							}
 						}
 
-					}
-					else {
-						
-						if (WeaponProperties[propertyIndex] >= (WeaponTypeMaxValues[propertyIndex] - SafeZone)) {
+					}if (FoundRow->ThisIndexsGoodToBeLower[propertyIndex]) {
+
+						if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + SafeZone)) {
+
+							float Spaces = ((WeaponTypeMinValues[propertyIndex] + SafeZone) - WeaponTypeMinValues[propertyIndex]) / 3;
+
+							if (WeaponProperties[propertyIndex] <= ((WeaponTypeMinValues[propertyIndex] + SafeZone) - Spaces * 3)) {
+
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 3);
+
+							}
+							else if (WeaponProperties[propertyIndex] <= ((WeaponTypeMinValues[propertyIndex] + SafeZone) - Spaces * 2)) {
+
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 2);
+
+							}
+							else {
+
+								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 1);
+
+							}
+						}
+						else if (WeaponProperties[propertyIndex] >= (WeaponTypeMaxValues[propertyIndex] - SafeZone)) {
 
 							float Spaces = (WeaponTypeMaxValues[propertyIndex] - (WeaponTypeMaxValues[propertyIndex] - SafeZone)) / 3;
 
-							if (WeaponProperties[propertyIndex] >= ((WeaponTypeMaxValues[propertyIndex] - SafeZone) + Spaces * 2)) {
+							if (WeaponProperties[propertyIndex] >= (WeaponTypeMaxValues[propertyIndex] - Spaces)) {
 
 								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -3);
 
 							}
-							else if (WeaponProperties[propertyIndex] >= ((WeaponTypeMaxValues[propertyIndex] - SafeZone) + Spaces)) {
+							else if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] - Spaces) * 2) {
 
 								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -2);
 
@@ -519,28 +447,6 @@ TMap<FString, int32> UHelperCalculationFunctions::CalculateDesignWeaponFeatures(
 							else {
 
 								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, -1);
-
-							}
-
-
-						}
-						else if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + SafeZone)) {
-
-							float Spaces = ((WeaponTypeMinValues[propertyIndex] + SafeZone) - WeaponTypeMinValues[propertyIndex]) / 3;
-
-							if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + Spaces)) {
-
-								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 3);
-
-							}
-							else if (WeaponProperties[propertyIndex] <= (WeaponTypeMinValues[propertyIndex] + Spaces * 2)) {
-
-								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 2);
-
-							}
-							else {
-
-								WeaponFeaturesAndValues.Add(FoundRow->FeatureName, 1);
 
 							}
 						}
@@ -550,12 +456,13 @@ TMap<FString, int32> UHelperCalculationFunctions::CalculateDesignWeaponFeatures(
 				}
 
 			}
-		 
-		}
 
+		}
+	
 	}
 
 	return WeaponFeaturesAndValues;
+
 }
 
 void UHelperCalculationFunctions::SortCountriesByPower(UObject* WorldContextObject, TArray<int32>& TopTenCountryIndexs, int32& MyCountryPlacement, int32& MyCountryIndex) {

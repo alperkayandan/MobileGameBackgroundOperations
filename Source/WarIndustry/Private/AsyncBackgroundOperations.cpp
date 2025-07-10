@@ -392,7 +392,7 @@ TMap<FString, int32> UAsyncBackgroundOperations::WeaponsFightingAgainstAndStreng
 
     TMap<FString, int32> WeaponFightingAgainstAndStrengths;
 
-    switch (ConvertWeaponTypeToEnum(WeaponType))
+    switch (UAllStructs::ConvertWeaponTypeToEnum(WeaponType))
     {
     case EWeaponType::AssultRifle:
         WeaponFightingAgainstAndStrengths.Add(FString(TEXT("Long Range Rifles"), 0));
@@ -679,82 +679,12 @@ TMap<FString, int32> UAsyncBackgroundOperations::WeaponsFightingAgainstAndStreng
     return WeaponFightingAgainstAndStrengths;
 }
 
-EWeaponType UAsyncBackgroundOperations::ConvertWeaponTypeToEnum(FName WeaponType) {
-
-    if(WeaponType == FName(TEXT("Assult Rifle")))
-        return EWeaponType::AssultRifle;
-    if (WeaponType == FName(TEXT("Sniper Rifle")))
-        return EWeaponType::SniperRifle;
-    if (WeaponType == FName(TEXT("Submachine Gun")))
-        return EWeaponType::SubmachineGun;
-    if (WeaponType == FName(TEXT("Air Attack Machine Gun")))
-        return EWeaponType::AirAttackMachineGun;
-    if (WeaponType == FName(TEXT("Coactional Machine Gun")))
-        return EWeaponType::CoactionalMachineGun;
-    if (WeaponType == FName(TEXT("Land To Air Missile")))
-        return EWeaponType::LandToAirMissile;
-    if (WeaponType == FName(TEXT("Air To Land Missile")))
-        return EWeaponType::AirToLandMissile;
-    if (WeaponType == FName(TEXT("Air To Air Missile")))
-        return EWeaponType::AirToAirMissile;
-    if (WeaponType == FName(TEXT("Light Tank")))
-        return EWeaponType::LightTank;
-    if (WeaponType == FName(TEXT("Main Battle Tank")))
-        return EWeaponType::MainBattleTank;
-    if (WeaponType == FName(TEXT("Heavy Tank")))
-        return EWeaponType::HeavyTank;
-    if (WeaponType == FName(TEXT("Amphibious Tank")))
-        return EWeaponType::AmphibiousTank;
-    if (WeaponType == FName(TEXT("Wheeled Armored Personnel Carrier")))
-        return EWeaponType::WheeledArmoredPersonnelCarrier;
-    if (WeaponType == FName(TEXT("Tracked Armored Personnel Carrier")))
-        return EWeaponType::TrackedArmoredPersonnelCarrier;
-    if (WeaponType == FName(TEXT("Armored Fighting Vehicle")))
-        return EWeaponType::ArmoredFightingVehicle;
-    if (WeaponType == FName(TEXT("Amphibious Armored Personnel Carrier")))
-        return EWeaponType::AmphibiousArmoredPersonnelCarrier;
-    if (WeaponType == FName(TEXT("Unmanned Air Vehicle")))
-        return EWeaponType::UAV;
-    if (WeaponType == FName(TEXT("Kamikaze UAV")))
-        return EWeaponType::KamikazeUAV;
-    if (WeaponType == FName(TEXT("Armed UAV")))
-        return EWeaponType::ArmedUAV;
-    if (WeaponType == FName(TEXT("Unmanned Fighter Jet")))
-        return EWeaponType::UnmannedFighterJet;
-    if (WeaponType == FName(TEXT("Landing Helicopter")))
-        return EWeaponType::LandingHelicopter;
-    if (WeaponType == FName(TEXT("Attack Helicopter")))
-        return EWeaponType::AttackHelicopter;
-    if (WeaponType == FName(TEXT("Cargo Helicopter")))
-        return EWeaponType::CargoHelicopter;
-    if (WeaponType == FName(TEXT("Marine Helicopter")))
-        return EWeaponType::MarineHelicopter;
-    if (WeaponType == FName(TEXT("Train Aircraft")))
-        return EWeaponType::TrainAircraft;
-    if (WeaponType == FName(TEXT("Fighter Jet")))
-        return EWeaponType::FighterJet;
-    if (WeaponType == FName(TEXT("Bomber Plane")))
-        return EWeaponType::BomberPlane;
-    if (WeaponType == FName(TEXT("Vertical TakeOff Jet")))
-        return EWeaponType::VerticalTakeOffJets;
-    if (WeaponType == FName(TEXT("Anti Drone System")))
-        return EWeaponType::AntiDroneSystems;
-    if (WeaponType == FName(TEXT("Medium Range Air Defense System")))
-        return EWeaponType::MediumRangeAirDefenseSystems;
-    if (WeaponType == FName(TEXT("Long Range Air Defense System")))
-        return EWeaponType::LongRangeAirDefenseSystems;
-
-    else
-        return EWeaponType::Empty;
-
-}
-
 void UAsyncBackgroundOperations::WeaponsMaxAndMinValues(FName WeaponType,TArray<int32>& MaxValues, TArray<int32>& MinValues, TArray<float>& WeightMultiplier){
     MaxValues.SetNum(6);
     MinValues.SetNum(6);
     WeightMultiplier.SetNum(6);
 
-    switch (ConvertWeaponTypeToEnum(WeaponType)) {
+    switch (UAllStructs::ConvertWeaponTypeToEnum(WeaponType)) {
     case EWeaponType::AssultRifle:
         UE_LOG(LogTemp, Warning, TEXT("AssultRiflea girdi."));
         MinValues[0] = 600;
