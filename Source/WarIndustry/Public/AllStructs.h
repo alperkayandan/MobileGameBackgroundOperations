@@ -948,6 +948,22 @@ struct FWeaponFeatures : public FTableRowBase
 	}
 };
 
+USTRUCT(BlueprintType)
+struct FCountryWeaponsStartData : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FString CountryName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TArray<int32> CountryWeaponCountsGoal;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TArray<int32> CountryWeaponOverallsGoal;
+
+};
+
 UCLASS()
 class WARINDUSTRY_API UAllStructs : public UObject
 

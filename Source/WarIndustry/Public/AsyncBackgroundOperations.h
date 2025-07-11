@@ -24,22 +24,6 @@ struct FCountriesThatCanProduceWeapons : public FTableRowBase
 	TArray<int32> CategoriesTechRanges;
 };
 
-USTRUCT(BlueprintType)
-struct FCountryWeaponsStartData : public FTableRowBase
-{
-	GENERATED_BODY()
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FString CountryName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TArray<int32> CountryWeaponCountsGoal;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TArray<int32> CountryWeaponOverallsGoal;
-
-};
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAsyncProgressUpdated, float, Progress);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWeaponsCreated);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnRandomWeaponsToCountries);

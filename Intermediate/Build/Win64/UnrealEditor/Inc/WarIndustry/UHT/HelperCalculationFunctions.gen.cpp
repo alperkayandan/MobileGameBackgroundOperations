@@ -75,6 +75,54 @@ DEFINE_FUNCTION(UHelperCalculationFunctions::execCalculateDesignWeaponFeatures)
 }
 // End Class UHelperCalculationFunctions Function CalculateDesignWeaponFeatures
 
+// Begin Class UHelperCalculationFunctions Function CalculateGameDifficultyByCountries
+struct Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics
+{
+	struct HelperCalculationFunctions_eventCalculateGameDifficultyByCountries_Parms
+	{
+		TMap<FString,float> ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Calculations" },
+		{ "ModuleRelativePath", "Public/HelperCalculationFunctions.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue_ValueProp;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_ReturnValue_Key_KeyProp;
+	static const UECodeGen_Private::FMapPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::NewProp_ReturnValue_ValueProp = { "ReturnValue", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::NewProp_ReturnValue_Key_KeyProp = { "ReturnValue_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventCalculateGameDifficultyByCountries_Parms, ReturnValue), EMapPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::NewProp_ReturnValue_ValueProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::NewProp_ReturnValue_Key_KeyProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UHelperCalculationFunctions, nullptr, "CalculateGameDifficultyByCountries", nullptr, nullptr, Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::PropPointers), sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::HelperCalculationFunctions_eventCalculateGameDifficultyByCountries_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::Function_MetaDataParams), Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::HelperCalculationFunctions_eventCalculateGameDifficultyByCountries_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UHelperCalculationFunctions::execCalculateGameDifficultyByCountries)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(TMap<FString,float>*)Z_Param__Result=UHelperCalculationFunctions::CalculateGameDifficultyByCountries();
+	P_NATIVE_END;
+}
+// End Class UHelperCalculationFunctions Function CalculateGameDifficultyByCountries
+
 // Begin Class UHelperCalculationFunctions Function CalculateWeaponProductionTime
 struct Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime_Statics
 {
@@ -316,6 +364,7 @@ void UHelperCalculationFunctions::StaticRegisterNativesUHelperCalculationFunctio
 	UClass* Class = UHelperCalculationFunctions::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
 		{ "CalculateDesignWeaponFeatures", &UHelperCalculationFunctions::execCalculateDesignWeaponFeatures },
+		{ "CalculateGameDifficultyByCountries", &UHelperCalculationFunctions::execCalculateGameDifficultyByCountries },
 		{ "CalculateWeaponProductionTime", &UHelperCalculationFunctions::execCalculateWeaponProductionTime },
 		{ "CompareWeaponPowerAndTechnoligies", &UHelperCalculationFunctions::execCompareWeaponPowerAndTechnoligies },
 		{ "SortCompaniesByCompanyValues", &UHelperCalculationFunctions::execSortCompaniesByCompanyValues },
@@ -339,6 +388,7 @@ struct Z_Construct_UClass_UHelperCalculationFunctions_Statics
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures, "CalculateDesignWeaponFeatures" }, // 2760996271
+		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries, "CalculateGameDifficultyByCountries" }, // 3578361905
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime, "CalculateWeaponProductionTime" }, // 3502352295
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies, "CompareWeaponPowerAndTechnoligies" }, // 1880048125
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues, "SortCompaniesByCompanyValues" }, // 1047267460
@@ -391,10 +441,10 @@ UHelperCalculationFunctions::~UHelperCalculationFunctions() {}
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UHelperCalculationFunctions, UHelperCalculationFunctions::StaticClass, TEXT("UHelperCalculationFunctions"), &Z_Registration_Info_UClass_UHelperCalculationFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHelperCalculationFunctions), 3210082722U) },
+		{ Z_Construct_UClass_UHelperCalculationFunctions, UHelperCalculationFunctions::StaticClass, TEXT("UHelperCalculationFunctions"), &Z_Registration_Info_UClass_UHelperCalculationFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHelperCalculationFunctions), 2469509856U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_1608840814(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_2113808454(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

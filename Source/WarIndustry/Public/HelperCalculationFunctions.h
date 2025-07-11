@@ -29,6 +29,9 @@ class WARINDUSTRY_API UHelperCalculationFunctions : public UBlueprintFunctionLib
 
         UFUNCTION(BlueprintCallable, Category = "Sortting")
         static void SortCompaniesByCompanyValues(UObject* WorldContextObject, TArray<int32>& AllCompanyPlacements, int32& MyCompanyPlacement);
+
+        UFUNCTION(BlueprintCallable, Category = "Calculations")
+        static TMap<FString, float> CalculateGameDifficultyByCountries();
 			
 	private:
 

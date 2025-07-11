@@ -110,7 +110,15 @@ template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FNewDesignedProduc
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FWeaponFeatures>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_955_INCLASS_NO_PURE_DECLS \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_954_GENERATED_BODY \
+	friend struct Z_Construct_UScriptStruct_FCountryWeaponsStartData_Statics; \
+	WARINDUSTRY_API static class UScriptStruct* StaticStruct(); \
+	typedef FTableRowBase Super;
+
+
+template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FCountryWeaponsStartData>();
+
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_971_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUAllStructs(); \
 	friend struct Z_Construct_UClass_UAllStructs_Statics; \
@@ -119,7 +127,7 @@ public: \
 	DECLARE_SERIALIZER(UAllStructs)
 
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_955_ENHANCED_CONSTRUCTORS \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_971_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UAllStructs(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 private: \
@@ -133,12 +141,12 @@ public: \
 	NO_API virtual ~UAllStructs();
 
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_951_PROLOG
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_955_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_967_PROLOG
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_971_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_955_INCLASS_NO_PURE_DECLS \
-	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_955_ENHANCED_CONSTRUCTORS \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_971_INCLASS_NO_PURE_DECLS \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_971_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

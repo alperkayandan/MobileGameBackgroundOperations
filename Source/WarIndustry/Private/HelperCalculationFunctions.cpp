@@ -6,7 +6,6 @@
 #include "Kismet/GameplayStatics.h"
 #include "AsyncBackgroundOperations.h"
 
-
 void UHelperCalculationFunctions::CompareWeaponPowerAndTechnoligies(FCountrys FirstCountryStruct, FCountrys SecondCountryStruct, FRebellion Rebellions, UObject* WorldContextObject, TArray<int32>& WeaponCompareResults, int64& FirstCountryTotalPower) {
 	
 	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
@@ -593,4 +592,125 @@ void UHelperCalculationFunctions::SortCompaniesByCompanyValues(UObject* WorldCon
 	
 	}
 
+}
+
+TMap<FString, float> UHelperCalculationFunctions::CalculateGameDifficultyByCountries() {
+
+	UDataTable* AllCountriesData = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/CountryDatas.CountryDatas")));
+	UDataTable* AllCountriesWeaponsStartData = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/CountryWeaponsStart.CountryWeaponsStart")));
+	UDataTable* AllWeaponPartsData = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/AllWeaponParts.AllWeaponParts")));
+	TMap<FString, float> CountryAndDifficultyMap;
+
+	if (!AllCountriesWeaponsStartData && !AllCountriesData) {
+
+		UE_LOG(LogTemp, Error, TEXT("AllCountriesData and AllCountriesWeaponsStartData not assigned."));
+
+	}
+	else {
+
+		TArray<FName> AllCountriesDataRowNames = AllCountriesData->GetRowNames();
+		TArray<FName> CountriesWeaponsStartDataRowNames = AllCountriesWeaponsStartData->GetRowNames();
+		TArray<FName> WeaponParsDataRowNames = AllWeaponPartsData->GetRowNames();
+
+		int64 MostPower = 0;
+		int64 LeastPower = 1000000000;
+		int32 MostEmbargoWeaponPartCount = 0;
+		int32 BestRelations = 0;
+		int32 WorstRelations = 1000000;
+
+		for (int32 counter = 1; counter <= 2; counter++) {
+
+			for (int32 index = 0; index < AllCountriesDataRowNames.Num(); index++) {
+
+				FName CountryDataRowName = AllCountriesDataRowNames[index];
+				FCountrys* CountryFoundRow = AllCountriesData->FindRow<FCountrys>(CountryDataRowName, TEXT("Bu ulke tablodan alinamadi"));
+
+				FName WeaponsStartRowName = CountriesWeaponsStartDataRowNames[index];
+				FCountryWeaponsStartData* WeaponsStartFoundRow = AllCountriesWeaponsStartData->FindRow<FCountryWeaponsStartData>(WeaponsStartRowName, TEXT("Bu ulke tablodan alinamadi"));
+
+				if (!WeaponsStartFoundRow->CountryName.Equals(CountryFoundRow->CountryName, ESearchCase::IgnoreCase)) {
+
+					for (FName RowName : CountriesWeaponsStartDataRowNames) {
+
+						WeaponsStartFoundRow = AllCountriesWeaponsStartData->FindRow<FCountryWeaponsStartData>(RowName, TEXT("Bu ulke tablodan alinamadi"));
+
+						if (WeaponsStartFoundRow->CountryName.Equals(CountryFoundRow->CountryName, ESearchCase::IgnoreCase)) {
+							break;
+						}
+
+					}
+
+				}
+
+				TArray<int32> CountryWeaponCounts = WeaponsStartFoundRow->CountryWeaponCountsGoal;
+				TArray<int32> CountryWeaponOveralls = WeaponsStartFoundRow->CountryWeaponOverallsGoal;
+				TMap<FName, int32> Relationships = CountryFoundRow->Relationships;
+				int64 CalculatedTotalPower = 0;
+				int32 EmbargoCount = 0;
+				int32 CalculatedRelations = 0;
+
+				for (int i = 0; i < CountryWeaponCounts.Num(); i++) {
+
+					CalculatedTotalPower += CountryWeaponCounts[i] * CountryWeaponOveralls[i];
+
+				}
+				if (counter == 1 && CalculatedTotalPower > MostPower) {
+					MostPower = CalculatedTotalPower;
+				}
+				if (counter == 1 && CalculatedTotalPower < LeastPower) {
+					LeastPower = CalculatedTotalPower;
+				}
+				int32 alper = 1;
+				for (FName WeaponPartRowName : WeaponParsDataRowNames) {
+
+					FResearchItems* WeaponPartFoundRow = AllWeaponPartsData->FindRow<FResearchItems>(WeaponPartRowName, TEXT("Bu silah parcasi tablodan alinamadi"));
+
+					if (int32* Relation = Relationships.Find(FName(WeaponPartFoundRow->Country))) {
+						
+						if (*Relation <= -50) {
+							EmbargoCount += 1;
+						}
+
+					}
+					else {
+						UE_LOG(LogTemp, Error, TEXT("Bulunamayan data: hangi ulke icinde araniyor : %s [%d] aranan ulke : %s"), *CountryFoundRow->CountryName, alper, *WeaponPartFoundRow->Country);
+					}
+					alper += 1;
+				
+				}
+				if (counter == 1 && EmbargoCount > MostEmbargoWeaponPartCount) {
+					MostEmbargoWeaponPartCount = EmbargoCount;
+				}
+
+				for (const TPair<FName, int32>& Pair : Relationships) {
+
+					CalculatedRelations += Pair.Value;
+
+				}
+				if (counter == 1 && CalculatedRelations > BestRelations) {
+					BestRelations = CalculatedRelations;
+				}
+				if (counter == 1 && CalculatedRelations < WorstRelations) {
+					WorstRelations = CalculatedRelations;
+				}
+
+				if (counter == 2) {
+
+					float MappedTotalPower = FMath::GetMappedRangeValueClamped(FVector2D(LeastPower, MostPower), FVector2D(0.0f, 1.0f), CalculatedTotalPower);
+					float MappedEmbargoCount = FMath::GetMappedRangeValueClamped(FVector2D(0, MostEmbargoWeaponPartCount), FVector2D(0.0f, 1.0f), EmbargoCount);
+					float MappedRelation = FMath::GetMappedRangeValueClamped(FVector2D(WorstRelations, BestRelations), FVector2D(0.0f, 1.0f), CalculatedRelations);
+
+					float WeightedScore = ((1.0f - MappedTotalPower) * 0.35f) + (MappedEmbargoCount * 0.5f) + ((1 - MappedRelation) * 0.15f);
+
+					float FinalScore = FMath::Lerp(0.0f, 6.0f, FMath::Clamp(WeightedScore, 0.0f, 1.0f));
+					CountryAndDifficultyMap.Add(CountryFoundRow->CountryName, FinalScore);
+
+				}
+
+			}
+		}
+
+	}
+
+	return CountryAndDifficultyMap;
 }
