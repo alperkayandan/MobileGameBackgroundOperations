@@ -404,6 +404,10 @@ struct Z_Construct_UScriptStruct_FGeneralDatas_Statics
 		{ "Category", "GeneralDatas" },
 		{ "ModuleRelativePath", "Public/AllStructs.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_NextTimeControlContractOffer_MetaData[] = {
+		{ "Category", "GeneralDatas" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FDoublePropertyParams NewProp_TotalMoney;
 	static const UECodeGen_Private::FStrPropertyParams NewProp_CompanyName;
@@ -457,6 +461,7 @@ struct Z_Construct_UScriptStruct_FGeneralDatas_Statics
 	static const UECodeGen_Private::FIntPropertyParams NewProp_SendedSpiesCountryIndexs_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_SendedSpiesCountryIndexs;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_NextTimeControlGlobalFactories;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_NextTimeControlContractOffer;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static void* NewStructOps()
 	{
@@ -522,6 +527,7 @@ const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FGeneral
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_SendedSpiesCountryIndexs_Inner = { "SendedSpiesCountryIndexs", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_SendedSpiesCountryIndexs = { "SendedSpiesCountryIndexs", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FGeneralDatas, SendedSpiesCountryIndexs), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SendedSpiesCountryIndexs_MetaData), NewProp_SendedSpiesCountryIndexs_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_NextTimeControlGlobalFactories = { "NextTimeControlGlobalFactories", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FGeneralDatas, NextTimeControlGlobalFactories), Z_Construct_UScriptStruct_FDateTime, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NextTimeControlGlobalFactories_MetaData), NewProp_NextTimeControlGlobalFactories_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_NextTimeControlContractOffer = { "NextTimeControlContractOffer", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FGeneralDatas, NextTimeControlContractOffer), Z_Construct_UScriptStruct_FDateTime, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NextTimeControlContractOffer_MetaData), NewProp_NextTimeControlContractOffer_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FGeneralDatas_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_TotalMoney,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_CompanyName,
@@ -573,6 +579,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FG
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_SendedSpiesCountryIndexs_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_SendedSpiesCountryIndexs,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_NextTimeControlGlobalFactories,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_NextTimeControlContractOffer,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FGeneralDatas_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FGeneralDatas_Statics::StructParams = {
@@ -1674,6 +1681,10 @@ struct Z_Construct_UScriptStruct_FRebellion_Statics
 		{ "Category", "Rebellion" },
 		{ "ModuleRelativePath", "Public/AllStructs.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SupportedCountryName_MetaData[] = {
+		{ "Category", "Rebellion" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_PossibilityOfRebellion_MetaData[] = {
 		{ "Category", "Rebellion" },
 		{ "ModuleRelativePath", "Public/AllStructs.h" },
@@ -1704,6 +1715,7 @@ struct Z_Construct_UScriptStruct_FRebellion_Statics
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FIntPropertyParams NewProp_SupportedRebellionCountryIndex;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_SupportedCountryName;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_PossibilityOfRebellion;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_TotalMoneyOfRebellions;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_RebellionStartTime;
@@ -1725,6 +1737,7 @@ struct Z_Construct_UScriptStruct_FRebellion_Statics
 	static const UECodeGen_Private::FStructParams StructParams;
 };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_SupportedRebellionCountryIndex = { "SupportedRebellionCountryIndex", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FRebellion, SupportedRebellionCountryIndex), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SupportedRebellionCountryIndex_MetaData), NewProp_SupportedRebellionCountryIndex_MetaData) };
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_SupportedCountryName = { "SupportedCountryName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FRebellion, SupportedCountryName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SupportedCountryName_MetaData), NewProp_SupportedCountryName_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_PossibilityOfRebellion = { "PossibilityOfRebellion", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FRebellion, PossibilityOfRebellion), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_PossibilityOfRebellion_MetaData), NewProp_PossibilityOfRebellion_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_TotalMoneyOfRebellions = { "TotalMoneyOfRebellions", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FRebellion, TotalMoneyOfRebellions), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TotalMoneyOfRebellions_MetaData), NewProp_TotalMoneyOfRebellions_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_RebellionStartTime = { "RebellionStartTime", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FRebellion, RebellionStartTime), Z_Construct_UScriptStruct_FDateTime, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RebellionStartTime_MetaData), NewProp_RebellionStartTime_MetaData) };
@@ -1746,6 +1759,7 @@ const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FRebellion
 const UECodeGen_Private::FMapPropertyParams Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_AllWeaponsIndexsAndCount = { "AllWeaponsIndexsAndCount", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FRebellion, AllWeaponsIndexsAndCount), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AllWeaponsIndexsAndCount_MetaData), NewProp_AllWeaponsIndexsAndCount_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FRebellion_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_SupportedRebellionCountryIndex,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_SupportedCountryName,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_PossibilityOfRebellion,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_TotalMoneyOfRebellions,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FRebellion_Statics::NewProp_RebellionStartTime,
@@ -2679,14 +2693,14 @@ struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndust
 		{ EWeaponType_StaticEnum, TEXT("EWeaponType"), &Z_Registration_Info_UEnum_EWeaponType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2690430185U) },
 	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FGeneralDatas::StaticStruct, Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewStructOps, TEXT("GeneralDatas"), &Z_Registration_Info_UScriptStruct_GeneralDatas, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FGeneralDatas), 3939461807U) },
+		{ FGeneralDatas::StaticStruct, Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewStructOps, TEXT("GeneralDatas"), &Z_Registration_Info_UScriptStruct_GeneralDatas, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FGeneralDatas), 3506553625U) },
 		{ FLastSlot::StaticStruct, Z_Construct_UScriptStruct_FLastSlot_Statics::NewStructOps, TEXT("LastSlot"), &Z_Registration_Info_UScriptStruct_LastSlot, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FLastSlot), 2546034666U) },
 		{ FCountrys::StaticStruct, Z_Construct_UScriptStruct_FCountrys_Statics::NewStructOps, TEXT("Countrys"), &Z_Registration_Info_UScriptStruct_Countrys, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCountrys), 4030937518U) },
 		{ FFactorys::StaticStruct, Z_Construct_UScriptStruct_FFactorys_Statics::NewStructOps, TEXT("Factorys"), &Z_Registration_Info_UScriptStruct_Factorys, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FFactorys), 499567656U) },
 		{ FMyFactorys::StaticStruct, Z_Construct_UScriptStruct_FMyFactorys_Statics::NewStructOps, TEXT("MyFactorys"), &Z_Registration_Info_UScriptStruct_MyFactorys, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FMyFactorys), 827706395U) },
 		{ FResearchItems::StaticStruct, Z_Construct_UScriptStruct_FResearchItems_Statics::NewStructOps, TEXT("ResearchItems"), &Z_Registration_Info_UScriptStruct_ResearchItems, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FResearchItems), 1047416769U) },
 		{ FContracts::StaticStruct, Z_Construct_UScriptStruct_FContracts_Statics::NewStructOps, TEXT("Contracts"), &Z_Registration_Info_UScriptStruct_Contracts, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FContracts), 2041926957U) },
-		{ FRebellion::StaticStruct, Z_Construct_UScriptStruct_FRebellion_Statics::NewStructOps, TEXT("Rebellion"), &Z_Registration_Info_UScriptStruct_Rebellion, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FRebellion), 4286398604U) },
+		{ FRebellion::StaticStruct, Z_Construct_UScriptStruct_FRebellion_Statics::NewStructOps, TEXT("Rebellion"), &Z_Registration_Info_UScriptStruct_Rebellion, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FRebellion), 842799746U) },
 		{ FCurrentWars::StaticStruct, Z_Construct_UScriptStruct_FCurrentWars_Statics::NewStructOps, TEXT("CurrentWars"), &Z_Registration_Info_UScriptStruct_CurrentWars, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCurrentWars), 849588056U) },
 		{ FNews::StaticStruct, Z_Construct_UScriptStruct_FNews_Statics::NewStructOps, TEXT("News"), &Z_Registration_Info_UScriptStruct_News, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FNews), 3825443321U) },
 		{ FDesignedProductsProduction::StaticStruct, Z_Construct_UScriptStruct_FDesignedProductsProduction_Statics::NewStructOps, TEXT("DesignedProductsProduction"), &Z_Registration_Info_UScriptStruct_DesignedProductsProduction, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FDesignedProductsProduction), 3789060387U) },
@@ -2698,7 +2712,7 @@ struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndust
 		{ Z_Construct_UClass_UAllStructs, UAllStructs::StaticClass, TEXT("UAllStructs"), &Z_Registration_Info_UClass_UAllStructs, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllStructs), 2848953886U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_1706143863(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_1378570875(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ScriptStructInfo),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::EnumInfo));

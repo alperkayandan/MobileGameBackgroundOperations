@@ -3,6 +3,29 @@
 
 #include "AllStructs.h"
 
+TArray<FName> UAllStructs::AllWeaponCategories = {
+	"Long Range Rifles",
+	"Rockets",
+	"Tanks",
+	"Armored Vehicles",
+	"Unmanned Air Vehicles",
+	"Helicopters",
+	"Fighter Jets",
+	"Air Defense Systems"
+};
+
+TArray<FName> UAllStructs::AllWeaponTypes = {
+	"Assult Rifle", "Sniper Rifle", "Submachine Gun", "Air Attack Machine Gun", "Coactional Machine Gun", 
+	"Land To Air Missile", "Air To Land Missile", "Air To Air Missile",
+	"Light Tank", "Main Battle Tank", "Heavy Tank", "Amphibious Tank",
+    "Wheeled Armored Personnel Carrier", "Tracked Armored Personnel Carrier", "Armored Fighting Vehicle", "Amphibious Armored Personnel Carrier",
+	"Unmanned Air Vehicle", "Kamikaze UAV", "Armed UAV", "Unmanned Fighter Jet",
+	"Landing Helicopter", "Attack Helicopter", "Cargo Helicopter", "Marine Helicopter",
+	"Train Aircraft", "Fighter Jet", "Bomber Plane", "Vertical TakeOff Jet",
+	"Anti Drone System", "Medium Range Air Defense System", "Long Range Air Defense System" };
+
+
+
 EWeaponCategory UAllStructs::ConvertWeaponCategoryToEnum(const FString& WeaponCategory) {
 
 	if (WeaponCategory == "Long Range Rifles")

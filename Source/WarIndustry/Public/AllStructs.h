@@ -190,6 +190,9 @@ struct FGeneralDatas
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FDateTime NextTimeControlGlobalFactories;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FDateTime NextTimeControlContractOffer;
+
 	FGeneralDatas()
 		: TotalMoney(200000)
 		, CompanyName("")
@@ -232,6 +235,7 @@ struct FGeneralDatas
 		, SpiesSentTime()
 		, SendedSpiesCountryIndexs()
 		, NextTimeControlGlobalFactories()
+		, NextTimeControlContractOffer()
 	{
 		AvailableDesigns.Init(0, 8);
 		MaxDesignCount.Init(10, 8);
@@ -648,7 +652,10 @@ struct FRebellion
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int SupportedRebellionCountryIndex;
+	int32 SupportedRebellionCountryIndex;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString SupportedCountryName;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float PossibilityOfRebellion;
@@ -673,6 +680,7 @@ struct FRebellion
 
 	FRebellion()
 		: SupportedRebellionCountryIndex(-1)
+		, SupportedCountryName("")
 		, PossibilityOfRebellion(0)
 		, TotalMoneyOfRebellions(0)
 		, RebellionStartTime()
@@ -974,6 +982,10 @@ public:
 
 	static EWeaponCategory ConvertWeaponCategoryToEnum(const FString& WeaponCategory);
 	static EWeaponType ConvertWeaponTypeToEnum(const FName& WeaponType);
+	
+	static TArray<FName> AllWeaponCategories;
+	static TArray<FName> AllWeaponTypes;
+	
 
 };
 

@@ -15,8 +15,9 @@ UAsyncBackgroundOperations* UAsyncBackgroundOperations::CreateAsyncBackgroundOpe
 void UAsyncBackgroundOperations::StartAsyncCreateRandomWeaponsData(UObject* WorldContextObject) {
        
         CountriesHasLocalProductions = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/CountriesHasLocalProductions.CountriesHasLocalProductions")));
-    
-        Async(EAsyncExecution::Thread, [this, WorldContextObject]() {
+        UDataTable* AllFeaturesDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/AllWeaponFeatures.AllWeaponFeatures")));
+        
+        Async(EAsyncExecution::Thread, [this, WorldContextObject, AllFeaturesDataTable]() {
 
             TArray<FNewDesignedProductsStruct> CreatedData;
             UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
@@ -26,7 +27,7 @@ void UAsyncBackgroundOperations::StartAsyncCreateRandomWeaponsData(UObject* Worl
            
             TArray<FFactorys> AllGlobalFactories = LoadedSave->Factorys;
 
-            CreateRandomWeapon(CreatedData, AllGlobalFactories);
+            CreateRandomWeapon(AllFeaturesDataTable, CreatedData, AllGlobalFactories);
 
             ISaveInterface::Execute_SaveDesignedProducts(GI, CreatedData, false);
             ISaveInterface::Execute_SaveGlobalFactory(GI, AllGlobalFactories, false);
@@ -61,9 +62,9 @@ void UAsyncBackgroundOperations::StartAsyncRandomWeaponsToCountries(UObject* Wor
 
 }
 
-void UAsyncBackgroundOperations::CreateRandomWeapon(TArray<FNewDesignedProductsStruct>& DesignedProductsArray, TArray<FFactorys>& AllGlobalFactories){
+void UAsyncBackgroundOperations::CreateRandomWeapon(UDataTable* AllFeaturesDataTable, TArray<FNewDesignedProductsStruct>& DesignedProductsArray, TArray<FFactorys>& AllGlobalFactories){
     
-    //TArray<FNewDesignedProductsStruct> DesignedProductsArray;
+    
     int32 WeaponTypeCount = 31;
     FName WeaponClass;
     FName WeaponType;
@@ -322,11 +323,6 @@ void UAsyncBackgroundOperations::CreateRandomWeapon(TArray<FNewDesignedProductsS
 
                 while (!IsCountryFound) {
 
-                        /*int32 RandomIndex = FMath::RandRange(0, AllCountiresHasLocalWeaponsRows.Num() - 1);
-                        RowName = AllCountiresHasLocalWeaponsRows[RandomIndex];
-                        const FCountriesThatCanProduceWeapons* FoundRow = CountriesHasLocalProductions->FindRow<FCountriesThatCanProduceWeapons>(RowName, TEXT("ReadCountriesLocalWeaponsData"));
-                        */
-
                         int32 RandomGlobalFactoryIndex = FMath::RandRange(0, AllGlobalFactories.Num() - 1);
                         
 
@@ -335,12 +331,6 @@ void UAsyncBackgroundOperations::CreateRandomWeapon(TArray<FNewDesignedProductsS
                             AllGlobalFactories[RandomGlobalFactoryIndex].LastTimeCollectedProducts.Add(DesignedProductsArray.Num(),CurrentTime);
                             IsCountryFound = true;
                         }
-                        
-                        /*if (DesignOverall <= FoundRow->CategoriesTechRanges[TechRangeArrayRef]) {
-                            DesignedProductsStruct.Country = FoundRow->Country;
-                            IsCountryFound = true;
-                            UE_LOG(LogTemp, Error, TEXT("ulke ismi = %s"),*FoundRow->Country);
-                        }*/
 
                 }
 
@@ -357,7 +347,7 @@ void UAsyncBackgroundOperations::CreateRandomWeapon(TArray<FNewDesignedProductsS
                 DesignedProductsStruct.FightingAgainstAndStrength = WeaponsFightingAgainstAndStrengthsMap;
 
                 DesignedProductsStruct.ProductionTime = UHelperCalculationFunctions::CalculateWeaponProductionTime(DesignedProductsStruct);
-                DesignedProductsStruct.FeaturesAndValues = UHelperCalculationFunctions::CalculateDesignWeaponFeatures(DesignedProductsStruct);
+                DesignedProductsStruct.FeaturesAndValues = UHelperCalculationFunctions::CalculateDesignWeaponFeatures(AllFeaturesDataTable, DesignedProductsStruct);
 
                 DesignedProductsArray.Add(DesignedProductsStruct);
             }

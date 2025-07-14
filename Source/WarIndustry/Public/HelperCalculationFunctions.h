@@ -16,13 +16,13 @@ class WARINDUSTRY_API UHelperCalculationFunctions : public UBlueprintFunctionLib
 	public:
 
         UFUNCTION(BlueprintCallable, Category = "Calculations")
-		static void CompareWeaponPowerAndTechnoligies(FCountrys FirstCountryStruct, FCountrys SecondCountryStruct, FRebellion Rebellions, UObject* WorldContextObject, TArray<int32>& WeaponCompareResults, int64& FirstCountryTotalPower);
+		static void CompareWeaponPowerAndTechnoligies(FCountrys FirstCountryStruct, FCountrys SecondCountryStruct, FRebellion Rebellions, UObject* WorldContextObject, TArray<int32>& WeaponCompareResults, TArray<int32>& WeaponNightCompareResults, int64& FirstCountryTotalPower);
 
         UFUNCTION(BlueprintCallable, Category = "Calculations|WeaponDesign")
         static FTimespan CalculateWeaponProductionTime(FNewDesignedProductsStruct DesignedProduct);
 
         UFUNCTION(BlueprintCallable, Category = "Calculations|WeaponDesign")
-        static TMap<FString, int32> CalculateDesignWeaponFeatures(FNewDesignedProductsStruct DesignedProduct);
+        static TMap<FString, int32> CalculateDesignWeaponFeatures(UDataTable* AllFeaturesDataTable, FNewDesignedProductsStruct DesignedProduct);
 
         UFUNCTION(BlueprintCallable, Category = "Sortting")
         static void SortCountriesByPower(UObject* WorldContextObject, TArray<int32>& TopTenCountryIndexs, int32& MyCountryPlacement, int32& MyCountryIndex);
@@ -32,6 +32,12 @@ class WARINDUSTRY_API UHelperCalculationFunctions : public UBlueprintFunctionLib
 
         UFUNCTION(BlueprintCallable, Category = "Calculations")
         static TMap<FString, float> CalculateGameDifficultyByCountries();
+
+        UFUNCTION(BlueprintCallable, Category = "Calculations")
+        static TMap<FString, float> WeaponsCountryRates(UObject* WorldContextObject, FCountrys CountryStruct, FRebellion RebellionStruct);
+
+        UFUNCTION(BlueprintCallable, Category = "Calculations")
+        static void FindSelectedCountryWeaponNeeds(UObject* WorldContextObject, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInCountry, TMap<FName, int32>& WeaponCategoriesAndCountDiff, TMap<FName, int32>& WeaponTypesAndCountDiff, TArray<FName>& FirstCountryDoesntHaveTheseWeaponTypes, TMap<FString, FName>& FirstCountryBadThisWeaponFeatureNameAndCategory);
 			
 	private:
 

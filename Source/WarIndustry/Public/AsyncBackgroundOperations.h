@@ -66,7 +66,7 @@ private:
 
 	TArray<FName> ReadCountriesLocalWeaponsData();
 	TArray<FName> ReadCountriesStartWeaponsData();
-	void CreateRandomWeapon(TArray<FNewDesignedProductsStruct>& DesignedProductsData, TArray<FFactorys>& AllGlobalFactories);
+	void CreateRandomWeapon(UDataTable* AllFeaturesDataTable, TArray<FNewDesignedProductsStruct>& DesignedProductsData, TArray<FFactorys>& AllGlobalFactories);
 	UDataTable* CountriesHasLocalProductions;
 	UDataTable* CountriesStartWeaponsDataTable;
 	void RandomWeaponsToCountries(UObject* WorldContextObject);

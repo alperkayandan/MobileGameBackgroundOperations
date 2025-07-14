@@ -18,6 +18,7 @@ struct FFactorys;
 #define WARINDUSTRY_BackgroundLogicOperations_generated_h
 
 #define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execFindCountryOffer); \
 	DECLARE_FUNCTION(execDistributeProducedWeapons); \
 	DECLARE_FUNCTION(execCreateAsyncBackgroundLogicOperations);
 

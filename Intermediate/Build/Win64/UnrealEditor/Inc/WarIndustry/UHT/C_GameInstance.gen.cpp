@@ -62,7 +62,7 @@ UObject* (*const Z_Construct_UClass_UC_GameInstance_Statics::DependentSingletons
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UC_GameInstance_Statics::DependentSingletons) < 16);
 const UECodeGen_Private::FImplementedInterfaceParams Z_Construct_UClass_UC_GameInstance_Statics::InterfaceParams[] = {
-	{ Z_Construct_UClass_USaveInterface_NoRegister, (int32)VTABLE_OFFSET(UC_GameInstance, ISaveInterface), false },  // 539054956
+	{ Z_Construct_UClass_USaveInterface_NoRegister, (int32)VTABLE_OFFSET(UC_GameInstance, ISaveInterface), false },  // 185591570
 };
 const UECodeGen_Private::FClassParams Z_Construct_UClass_UC_GameInstance_Statics::ClassParams = {
 	&UC_GameInstance::StaticClass,
@@ -100,10 +100,10 @@ UC_GameInstance::~UC_GameInstance() {}
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UC_GameInstance, UC_GameInstance::StaticClass, TEXT("UC_GameInstance"), &Z_Registration_Info_UClass_UC_GameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UC_GameInstance), 3007578104U) },
+		{ Z_Construct_UClass_UC_GameInstance, UC_GameInstance::StaticClass, TEXT("UC_GameInstance"), &Z_Registration_Info_UClass_UC_GameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UC_GameInstance), 3007322706U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_1458899557(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_265717069(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_GameInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

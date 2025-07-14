@@ -112,6 +112,49 @@ DEFINE_FUNCTION(UBackgroundLogicOperations::execDistributeProducedWeapons)
 }
 // End Class UBackgroundLogicOperations Function DistributeProducedWeapons
 
+// Begin Class UBackgroundLogicOperations Function FindCountryOffer
+struct Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics
+{
+	struct BackgroundLogicOperations_eventFindCountryOffer_Parms
+	{
+		UObject* WorldContextObject;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "AsyncBackgroundLogic" },
+		{ "ModuleRelativePath", "Public/BackgroundLogicOperations.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_WorldContextObject;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BackgroundLogicOperations_eventFindCountryOffer_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::NewProp_WorldContextObject,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UBackgroundLogicOperations, nullptr, "FindCountryOffer", nullptr, nullptr, Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::PropPointers), sizeof(Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::BackgroundLogicOperations_eventFindCountryOffer_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::Function_MetaDataParams), Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::BackgroundLogicOperations_eventFindCountryOffer_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UBackgroundLogicOperations::execFindCountryOffer)
+{
+	P_GET_OBJECT(UObject,Z_Param_WorldContextObject);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->FindCountryOffer(Z_Param_WorldContextObject);
+	P_NATIVE_END;
+}
+// End Class UBackgroundLogicOperations Function FindCountryOffer
+
 // Begin Class UBackgroundLogicOperations
 void UBackgroundLogicOperations::StaticRegisterNativesUBackgroundLogicOperations()
 {
@@ -119,6 +162,7 @@ void UBackgroundLogicOperations::StaticRegisterNativesUBackgroundLogicOperations
 	static const FNameNativePtrPair Funcs[] = {
 		{ "CreateAsyncBackgroundLogicOperations", &UBackgroundLogicOperations::execCreateAsyncBackgroundLogicOperations },
 		{ "DistributeProducedWeapons", &UBackgroundLogicOperations::execDistributeProducedWeapons },
+		{ "FindCountryOffer", &UBackgroundLogicOperations::execFindCountryOffer },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -139,6 +183,7 @@ struct Z_Construct_UClass_UBackgroundLogicOperations_Statics
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_UBackgroundLogicOperations_CreateAsyncBackgroundLogicOperations, "CreateAsyncBackgroundLogicOperations" }, // 1521723656
 		{ &Z_Construct_UFunction_UBackgroundLogicOperations_DistributeProducedWeapons, "DistributeProducedWeapons" }, // 1838244887
+		{ &Z_Construct_UFunction_UBackgroundLogicOperations_FindCountryOffer, "FindCountryOffer" }, // 1919977627
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -187,10 +232,10 @@ UBackgroundLogicOperations::~UBackgroundLogicOperations() {}
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UBackgroundLogicOperations, UBackgroundLogicOperations::StaticClass, TEXT("UBackgroundLogicOperations"), &Z_Registration_Info_UClass_UBackgroundLogicOperations, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBackgroundLogicOperations), 1974944175U) },
+		{ Z_Construct_UClass_UBackgroundLogicOperations, UBackgroundLogicOperations::StaticClass, TEXT("UBackgroundLogicOperations"), &Z_Registration_Info_UClass_UBackgroundLogicOperations, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBackgroundLogicOperations), 620958740U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_352271720(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_1156064259(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
