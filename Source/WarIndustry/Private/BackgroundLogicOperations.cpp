@@ -64,7 +64,7 @@ void UBackgroundLogicOperations::ControlGlobalFactorysProducedWeapons(UObject* W
 
 }
 
-void UBackgroundLogicOperations::FindCountryOffer(UObject* WorldContextObject) {
+void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldContextObject) {
 
 	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
 	GI->Implements<USaveInterface>();
@@ -126,7 +126,7 @@ void UBackgroundLogicOperations::FindCountryOffer(UObject* WorldContextObject) {
 
 				}
 
-				FindCountryWeaponNeeds(FoundFirstCountryStruct, FoundOppeonentCountryStruct, RebellionsInSelectedCountry);
+				SelectOfferForCountry(WorldContextObject, FoundFirstCountryStruct, FoundOppeonentCountryStruct, RebellionsInSelectedCountry);
 			}
 			else {
 
@@ -141,7 +141,19 @@ void UBackgroundLogicOperations::FindCountryOffer(UObject* WorldContextObject) {
 
 }
 
-void UBackgroundLogicOperations::FindCountryWeaponNeeds(FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInSelectedCountry) {
+void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObject, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInSelectedCountry) {
+
+	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
+	GI->Implements<USaveInterface>();
+	UC_SaveGame* LoadedSave;
+	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
+
+	FGeneralDatas GeneralDatas = LoadedSave->GeneralDatas;
+
+	TMap<FName, int32> WeaponCategoriesAndCountDiff; 
+	TMap<FName, int32> WeaponTypesAndCountDiff; 
+	TArray<FName> FirstCountryDoesntHaveTheseWeaponTypes; 
+	TMap<FString, FName> FirstCountryBadThisWeaponFeatureNameAndCategory;
 
 	//iliþkiler gelecek sonra eksikliklere bakýlacak ona göre teklif oluþturulacak.
 	TMap<FName, int32> FirstCountryRelations = FirstCountry.Relationships;
@@ -151,13 +163,41 @@ void UBackgroundLogicOperations::FindCountryWeaponNeeds(FCountrys FirstCountry, 
 	//int32* OpponentCountryToFirstCountryRelation = OpponentCountryRelations.Find(FName(FirstCountry.CountryName));
 
 	// ayný zamanda isyancýlar içinde isyan ihtimali %50 üzerine çýktý mý gibi bir kontrol lazým. ve ona göre silah satýn alabilir.
+
+	UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(WorldContextObject, FirstCountry, OpponentCountry, RebellionsInSelectedCountry, WeaponCategoriesAndCountDiff, WeaponTypesAndCountDiff, FirstCountryDoesntHaveTheseWeaponTypes, FirstCountryBadThisWeaponFeatureNameAndCategory);
+
 	if (*FirstCountryToOpponentCountryRelation < 0) {
+
+		int32 SellPossibility = FMath::RandRange(0, 100);
+
+		if (SellPossibility <= GeneralDatas.CompanyPopularity) { //Popülerlik þartý saðlanmýþtýr
+
+			OfferWeaponSellContract();
+		
+		}
+		else {
+
+			OfferTender();
+
+		}
 
 		// ya silah satýn alacak ya da ihale oluþturmasý lazým. silah satýn almasý için -> popülerlik ve daha önce silah sattýk mý ve overall -10 +10 var mý?
 															 // ihale için -> istenilen tip ya da özelliklerden en az biri bizde var mý?														
-
 	}
 	else {
+
+		int32 SellPossibility = FMath::RandRange(0, 100);
+
+		if (SellPossibility <= GeneralDatas.CompanyPopularity) {
+
+			OfferWeaponDesignContract();
+
+		}
+		else {
+
+			OfferTender();
+
+		}
 
 		// kendinde eksik olan türlere ya da özelliklere göre ya ihale ya da tasarým yaptýracak. tasarým için -> popülerlik ve daha önce silah sattýk mý o tasarým yapýlabilir mi?
 																							  // ihale için -> bizde istenilen özelliklerden en az biri varsa ihale teklifi gelir.
