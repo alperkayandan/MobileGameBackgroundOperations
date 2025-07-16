@@ -261,11 +261,14 @@ struct Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeap
 	struct HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms
 	{
 		UObject* WorldContextObject;
+		UDataTable* AllFeaturesDataTable;
 		FCountrys FirstCountry;
 		FCountrys OpponentCountry;
 		FRebellion RebellionsInCountry;
 		TMap<FName,int32> WeaponCategoriesAndCountDiff;
 		TMap<FName,int32> WeaponTypesAndCountDiff;
+		TMap<FName,int32> WeaponCategoriesAndOveralls;
+		TMap<FName,int32> WeaponTypesAndOveralls;
 		TArray<FName> FirstCountryDoesntHaveTheseWeaponTypes;
 		TMap<FString,FName> FirstCountryBadThisWeaponFeatureNameAndCategory;
 	};
@@ -276,6 +279,7 @@ struct Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeap
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_WorldContextObject;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_AllFeaturesDataTable;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_FirstCountry;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_OpponentCountry;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_RebellionsInCountry;
@@ -285,6 +289,12 @@ struct Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeap
 	static const UECodeGen_Private::FIntPropertyParams NewProp_WeaponTypesAndCountDiff_ValueProp;
 	static const UECodeGen_Private::FNamePropertyParams NewProp_WeaponTypesAndCountDiff_Key_KeyProp;
 	static const UECodeGen_Private::FMapPropertyParams NewProp_WeaponTypesAndCountDiff;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_WeaponCategoriesAndOveralls_ValueProp;
+	static const UECodeGen_Private::FNamePropertyParams NewProp_WeaponCategoriesAndOveralls_Key_KeyProp;
+	static const UECodeGen_Private::FMapPropertyParams NewProp_WeaponCategoriesAndOveralls;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_WeaponTypesAndOveralls_ValueProp;
+	static const UECodeGen_Private::FNamePropertyParams NewProp_WeaponTypesAndOveralls_Key_KeyProp;
+	static const UECodeGen_Private::FMapPropertyParams NewProp_WeaponTypesAndOveralls;
 	static const UECodeGen_Private::FNamePropertyParams NewProp_FirstCountryDoesntHaveTheseWeaponTypes_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_FirstCountryDoesntHaveTheseWeaponTypes;
 	static const UECodeGen_Private::FNamePropertyParams NewProp_FirstCountryBadThisWeaponFeatureNameAndCategory_ValueProp;
@@ -294,6 +304,7 @@ struct Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeap
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_AllFeaturesDataTable = { "AllFeaturesDataTable", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms, AllFeaturesDataTable), Z_Construct_UClass_UDataTable_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_FirstCountry = { "FirstCountry", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms, FirstCountry), Z_Construct_UScriptStruct_FCountrys, METADATA_PARAMS(0, nullptr) }; // 4030937518
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_OpponentCountry = { "OpponentCountry", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms, OpponentCountry), Z_Construct_UScriptStruct_FCountrys, METADATA_PARAMS(0, nullptr) }; // 4030937518
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_RebellionsInCountry = { "RebellionsInCountry", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms, RebellionsInCountry), Z_Construct_UScriptStruct_FRebellion, METADATA_PARAMS(0, nullptr) }; // 842799746
@@ -303,6 +314,12 @@ const UECodeGen_Private::FMapPropertyParams Z_Construct_UFunction_UHelperCalcula
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndCountDiff_ValueProp = { "WeaponTypesAndCountDiff", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndCountDiff_Key_KeyProp = { "WeaponTypesAndCountDiff_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FMapPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndCountDiff = { "WeaponTypesAndCountDiff", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms, WeaponTypesAndCountDiff), EMapPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponCategoriesAndOveralls_ValueProp = { "WeaponCategoriesAndOveralls", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponCategoriesAndOveralls_Key_KeyProp = { "WeaponCategoriesAndOveralls_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponCategoriesAndOveralls = { "WeaponCategoriesAndOveralls", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms, WeaponCategoriesAndOveralls), EMapPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndOveralls_ValueProp = { "WeaponTypesAndOveralls", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndOveralls_Key_KeyProp = { "WeaponTypesAndOveralls_Key", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FMapPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndOveralls = { "WeaponTypesAndOveralls", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms, WeaponTypesAndOveralls), EMapPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_FirstCountryDoesntHaveTheseWeaponTypes_Inner = { "FirstCountryDoesntHaveTheseWeaponTypes", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_FirstCountryDoesntHaveTheseWeaponTypes = { "FirstCountryDoesntHaveTheseWeaponTypes", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms, FirstCountryDoesntHaveTheseWeaponTypes), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_FirstCountryBadThisWeaponFeatureNameAndCategory_ValueProp = { "FirstCountryBadThisWeaponFeatureNameAndCategory", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 1, METADATA_PARAMS(0, nullptr) };
@@ -310,6 +327,7 @@ const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UHelperCalcula
 const UECodeGen_Private::FMapPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_FirstCountryBadThisWeaponFeatureNameAndCategory = { "FirstCountryBadThisWeaponFeatureNameAndCategory", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventFindSelectedCountryWeaponNeeds_Parms, FirstCountryBadThisWeaponFeatureNameAndCategory), EMapPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WorldContextObject,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_AllFeaturesDataTable,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_FirstCountry,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_OpponentCountry,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_RebellionsInCountry,
@@ -319,6 +337,12 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHelpe
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndCountDiff_ValueProp,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndCountDiff_Key_KeyProp,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndCountDiff,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponCategoriesAndOveralls_ValueProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponCategoriesAndOveralls_Key_KeyProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponCategoriesAndOveralls,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndOveralls_ValueProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndOveralls_Key_KeyProp,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_WeaponTypesAndOveralls,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_FirstCountryDoesntHaveTheseWeaponTypes_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_FirstCountryDoesntHaveTheseWeaponTypes,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds_Statics::NewProp_FirstCountryBadThisWeaponFeatureNameAndCategory_ValueProp,
@@ -340,16 +364,19 @@ UFunction* Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountry
 DEFINE_FUNCTION(UHelperCalculationFunctions::execFindSelectedCountryWeaponNeeds)
 {
 	P_GET_OBJECT(UObject,Z_Param_WorldContextObject);
+	P_GET_OBJECT(UDataTable,Z_Param_AllFeaturesDataTable);
 	P_GET_STRUCT(FCountrys,Z_Param_FirstCountry);
 	P_GET_STRUCT(FCountrys,Z_Param_OpponentCountry);
 	P_GET_STRUCT(FRebellion,Z_Param_RebellionsInCountry);
 	P_GET_TMAP_REF(FName,int32,Z_Param_Out_WeaponCategoriesAndCountDiff);
 	P_GET_TMAP_REF(FName,int32,Z_Param_Out_WeaponTypesAndCountDiff);
+	P_GET_TMAP_REF(FName,int32,Z_Param_Out_WeaponCategoriesAndOveralls);
+	P_GET_TMAP_REF(FName,int32,Z_Param_Out_WeaponTypesAndOveralls);
 	P_GET_TARRAY_REF(FName,Z_Param_Out_FirstCountryDoesntHaveTheseWeaponTypes);
 	P_GET_TMAP_REF(FString,FName,Z_Param_Out_FirstCountryBadThisWeaponFeatureNameAndCategory);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(Z_Param_WorldContextObject,Z_Param_FirstCountry,Z_Param_OpponentCountry,Z_Param_RebellionsInCountry,Z_Param_Out_WeaponCategoriesAndCountDiff,Z_Param_Out_WeaponTypesAndCountDiff,Z_Param_Out_FirstCountryDoesntHaveTheseWeaponTypes,Z_Param_Out_FirstCountryBadThisWeaponFeatureNameAndCategory);
+	UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(Z_Param_WorldContextObject,Z_Param_AllFeaturesDataTable,Z_Param_FirstCountry,Z_Param_OpponentCountry,Z_Param_RebellionsInCountry,Z_Param_Out_WeaponCategoriesAndCountDiff,Z_Param_Out_WeaponTypesAndCountDiff,Z_Param_Out_WeaponCategoriesAndOveralls,Z_Param_Out_WeaponTypesAndOveralls,Z_Param_Out_FirstCountryDoesntHaveTheseWeaponTypes,Z_Param_Out_FirstCountryBadThisWeaponFeatureNameAndCategory);
 	P_NATIVE_END;
 }
 // End Class UHelperCalculationFunctions Function FindSelectedCountryWeaponNeeds
@@ -569,7 +596,7 @@ struct Z_Construct_UClass_UHelperCalculationFunctions_Statics
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries, "CalculateGameDifficultyByCountries" }, // 3578361905
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime, "CalculateWeaponProductionTime" }, // 3502352295
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CompareWeaponPowerAndTechnoligies, "CompareWeaponPowerAndTechnoligies" }, // 1367889741
-		{ &Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds, "FindSelectedCountryWeaponNeeds" }, // 2246241521
+		{ &Z_Construct_UFunction_UHelperCalculationFunctions_FindSelectedCountryWeaponNeeds, "FindSelectedCountryWeaponNeeds" }, // 3311745729
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_SortCompaniesByCompanyValues, "SortCompaniesByCompanyValues" }, // 1047267460
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_SortCountriesByPower, "SortCountriesByPower" }, // 2184963336
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_WeaponsCountryRates, "WeaponsCountryRates" }, // 2428699414
@@ -621,10 +648,10 @@ UHelperCalculationFunctions::~UHelperCalculationFunctions() {}
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UHelperCalculationFunctions, UHelperCalculationFunctions::StaticClass, TEXT("UHelperCalculationFunctions"), &Z_Registration_Info_UClass_UHelperCalculationFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHelperCalculationFunctions), 3147180506U) },
+		{ Z_Construct_UClass_UHelperCalculationFunctions, UHelperCalculationFunctions::StaticClass, TEXT("UHelperCalculationFunctions"), &Z_Registration_Info_UClass_UHelperCalculationFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHelperCalculationFunctions), 1126807393U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_2223388786(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_4043899900(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

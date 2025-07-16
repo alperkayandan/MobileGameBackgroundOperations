@@ -778,7 +778,7 @@ TMap<FString, float> UHelperCalculationFunctions::WeaponsCountryRates(UObject* W
 	return CountryAndWeaponRate;
 }
 
-void UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(UObject* WorldContextObject, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInCountry, TMap<FName, int32>& WeaponCategoriesAndCountDiff, TMap<FName, int32>& WeaponTypesAndCountDiff, TArray<FName>& FirstCountryDoesntHaveTheseWeaponTypes, TMap<FString, FName>& FirstCountryBadThisWeaponFeatureNameAndCategory) {
+void UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInCountry, TMap<FName, int32>& WeaponCategoriesAndCountDiff, TMap<FName, int32>& WeaponTypesAndCountDiff, TMap<FName, int32>& WeaponCategoriesAndOveralls, TMap<FName, int32>& WeaponTypesAndOveralls, TArray<FName>& FirstCountryDoesntHaveTheseWeaponTypes, TMap<FString, FName>& FirstCountryBadThisWeaponFeatureNameAndCategory) {
 
 	struct FCountryFeatureValues
 	{
@@ -798,7 +798,13 @@ void UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(UObject* WorldC
 	TMap<int32, int32> OpponentCountryAllWeapons = OpponentCountry.WeaponsIndexsAndCountsInStorage;
 	OpponentCountryAllWeapons.Append(RebellionsInCountry.AllWeaponsIndexsAndCount);
 
-	UDataTable* AllFeaturesDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/AllWeaponFeatures.AllWeaponFeatures")));
+	//UDataTable* AllFeaturesDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/AllWeaponFeatures.AllWeaponFeatures")));
+
+	if (!AllFeaturesDataTable)
+	{
+		UE_LOG(LogTemp, Error, TEXT("AllFeaturesDataTable yüklenemedi."));
+		return;
+	}
 
 	TMap<FName, int32> FirstCountryWeaponCategoriesAndCounts;
 	TMap<FName, int32> OpponentsWeaponCategoriesAndCounts;
@@ -829,11 +835,19 @@ void UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(UObject* WorldC
 			FirstCountryDoesntHaveTheseWeaponTypes.RemoveAt(FoundedTypeIndex);
 		}
 
+
+		int32& CategoryOverallInMap = WeaponCategoriesAndOveralls.FindOrAdd(DesignedProducts[Weapons.Key].Class);
 		int32& CategoryCountInMap = FirstCountryWeaponCategoriesAndCounts.FindOrAdd(DesignedProducts[Weapons.Key].Class);
+
+		CategoryOverallInMap = FMath::RoundToInt(((CategoryOverallInMap * CategoryCountInMap) + (DesignedProducts[Weapons.Key].Overall * Weapons.Value)) / float(CategoryCountInMap + Weapons.Value));
 		CategoryCountInMap += Weapons.Value;
 
+		int32& TypeOverallInMap = WeaponTypesAndOveralls.FindOrAdd(DesignedProducts[Weapons.Key].Type);
 		int32& TypeCountInMap = FirstCountryWeaponTypesAndCounts.FindOrAdd(DesignedProducts[Weapons.Key].Type);
+	
+		TypeOverallInMap = FMath::RoundToInt(((TypeOverallInMap * TypeCountInMap) + (DesignedProducts[Weapons.Key].Overall * Weapons.Value)) / float(TypeCountInMap + Weapons.Value));
 		TypeCountInMap += Weapons.Value;
+
 
 		if (DesignedProducts[Weapons.Key].FeaturesAndValues.Num() > 0) {
 
@@ -887,17 +901,51 @@ void UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(UObject* WorldC
 	for (int i = 0; i < UAllStructs::AllWeaponCategories.Num(); i++) {
 
 		int32* FirstCountryCategoryTotalWeaponCount = FirstCountryWeaponCategoriesAndCounts.Find(UAllStructs::AllWeaponCategories[i]);
-		int32* OpponentsCategoryTotalWeaponCount = OpponentsWeaponCategoriesAndCounts.Find(UAllStructs::AllWeaponCategories[i]);
+		int32 FirstCountryTotalWeaponCountByCategory;
+		
+		if (FirstCountryCategoryTotalWeaponCount == nullptr) {
+			FirstCountryTotalWeaponCountByCategory = 0;
+		}
+		else {
+			FirstCountryTotalWeaponCountByCategory = *FirstCountryCategoryTotalWeaponCount;
+		}
 
-		WeaponCategoriesAndCountDiff.Add(UAllStructs::AllWeaponCategories[i], (*FirstCountryCategoryTotalWeaponCount - *OpponentsCategoryTotalWeaponCount));
+		int32* OpponentsCategoryTotalWeaponCount = OpponentsWeaponCategoriesAndCounts.Find(UAllStructs::AllWeaponCategories[i]);
+		int32 OpponentsTotalWeaponCountByCategory;
+
+		if (OpponentsCategoryTotalWeaponCount == nullptr) {
+			OpponentsTotalWeaponCountByCategory = 0;
+		}
+		else {
+			OpponentsTotalWeaponCountByCategory = *OpponentsCategoryTotalWeaponCount;
+		}
+
+		WeaponCategoriesAndCountDiff.Add(UAllStructs::AllWeaponCategories[i], (FirstCountryTotalWeaponCountByCategory - OpponentsTotalWeaponCountByCategory));
 	}
 
 	for (int i = 0; i < UAllStructs::AllWeaponTypes.Num(); i++) {
 
 		int32* FirstCountryTypeTotalWeaponCount = FirstCountryWeaponTypesAndCounts.Find(UAllStructs::AllWeaponTypes[i]);
-		int32* OpponentsTypeTotalWeaponCount = OpponentsWeaponTypesAndCounts.Find(UAllStructs::AllWeaponTypes[i]);
+		int32 FirstCountryTotalWeaponCountByType;
 
-		WeaponTypesAndCountDiff.Add(UAllStructs::AllWeaponTypes[i], (*FirstCountryTypeTotalWeaponCount - *OpponentsTypeTotalWeaponCount));
+		if (FirstCountryTypeTotalWeaponCount == nullptr) {
+			FirstCountryTotalWeaponCountByType = 0;
+		}
+		else {
+			FirstCountryTotalWeaponCountByType = *FirstCountryTypeTotalWeaponCount;
+		}
+
+		int32* OpponentsTypeTotalWeaponCount = OpponentsWeaponTypesAndCounts.Find(UAllStructs::AllWeaponTypes[i]);
+		int32 OpponentsTotalWeaponCountByType;
+
+		if (OpponentsTypeTotalWeaponCount == nullptr) {
+			OpponentsTotalWeaponCountByType = 0;
+		}
+		else {
+			OpponentsTotalWeaponCountByType = *OpponentsTypeTotalWeaponCount;
+		}
+
+		WeaponTypesAndCountDiff.Add(UAllStructs::AllWeaponTypes[i], (FirstCountryTotalWeaponCountByType - OpponentsTotalWeaponCountByType));
 	}
 
 }

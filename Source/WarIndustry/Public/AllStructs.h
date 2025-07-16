@@ -143,7 +143,7 @@ struct FGeneralDatas
 	UTexture2D* ProfilePicture;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FDateTime TenderTime;
+	FDateTime TenderLastTime;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool AreWeAtWar;
@@ -219,7 +219,7 @@ struct FGeneralDatas
 		, LastEntrance()
 		, InstalledVersion("")
 		, ProfilePicture()
-		, TenderTime()
+		, TenderLastTime()
 		, AreWeAtWar(false)
 		, AvailableDesigns()
 		, MaxDesignCount()

@@ -7,8 +7,57 @@
 
 #include "Kismet/GameplayStatics.h"
 
+
+
 UBackgroundLogicOperations* UBackgroundLogicOperations::CreateAsyncBackgroundLogicOperations() {
 	return NewObject<UBackgroundLogicOperations>();
+}
+
+void UBackgroundLogicOperations::StartAsyncControlForBackgroundOperations(UObject* WorldContextObject) {
+	
+	UDataTable* AllFeaturesDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/AllWeaponFeatures.AllWeaponFeatures")));
+	
+	Async(EAsyncExecution::Thread, [this, WorldContextObject, AllFeaturesDataTable]() {
+
+		bool IsTenderOffer = false;
+		bool IsSellContractOffer = false;
+		bool IsDesignContractOffer = false;
+		FString RequestedCountryName; 
+		FName RequestedWeaponCategory; 
+		TArray<FString> RequestedWeaponFeatures; 
+		int32 RequestedWeaponCount;
+
+		// strcut tanýmlasam veri kontrolü daha kolay olacak. ya da enum
+
+		CheckCountryBordersForOffer(WorldContextObject, AllFeaturesDataTable, IsTenderOffer, IsSellContractOffer, IsDesignContractOffer, RequestedCountryName, RequestedWeaponCategory, RequestedWeaponFeatures, RequestedWeaponCount); // silah satýþ kontratý, silah tasarým kontratý ve ihale teklifini kontrol eden fonksiyon.
+		
+		if (IsTenderOffer) {
+
+			AsyncTask(ENamedThreads::GameThread, [this, RequestedWeaponCategory, RequestedWeaponFeatures, RequestedCountryName, RequestedWeaponCount]() {
+
+				CreateTenderPage.Broadcast(RequestedWeaponCategory, RequestedWeaponFeatures, RequestedCountryName, RequestedWeaponCount);
+
+			});
+
+		}else if (IsSellContractOffer) {
+
+			//CreateSellContractPage.Broadcast();
+
+		}
+		else if (IsDesignContractOffer) {
+
+			//CreateDesignContractPage.Broadcast();
+
+		}
+		else {
+			UE_LOG(LogTemp, Warning, TEXT("Hicbir teklif gönderilmedi"))
+		}
+
+
+
+
+	});
+
 }
 
 void UBackgroundLogicOperations::DistributeProducedWeapons(UObject* WorldContextObject, TArray<FFactorys>& GlobalFactorysData) {
@@ -64,7 +113,7 @@ void UBackgroundLogicOperations::ControlGlobalFactorysProducedWeapons(UObject* W
 
 }
 
-void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldContextObject) {
+void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, bool& IsTenderOffer, bool& IsSellContractOffer, bool& IsDesignContractOffer, FString& RequestedCountryName, FName& RequestedWeaponCategory, TArray<FString>& RequestedWeaponFeatures, int32& RequestedWeaponCount) {
 
 	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
 	GI->Implements<USaveInterface>();
@@ -75,7 +124,6 @@ void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldConte
 	TArray<FRebellion> AllRebellions = LoadedSave->Rebellion;
 	int32 RandomSelectedCountryIndex;
 	
-
 	for (int i = 0; i < 5; i++) {
 
 		FCountrys FoundFirstCountryStruct;
@@ -86,6 +134,7 @@ void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldConte
 		RandomSelectedCountryIndex = FMath::RandRange(0, AllCountrys.Num() - 1);
 
 		FoundFirstCountryStruct = AllCountrys[RandomSelectedCountryIndex];
+		RequestedCountryName = FoundFirstCountryStruct.CountryName;
 	
 		CountryBorders = AllCountrys[RandomSelectedCountryIndex].LandBorders;
 		CountryBorders.Append(AllCountrys[RandomSelectedCountryIndex].WaterBorders);
@@ -126,7 +175,12 @@ void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldConte
 
 				}
 
-				SelectOfferForCountry(WorldContextObject, FoundFirstCountryStruct, FoundOppeonentCountryStruct, RebellionsInSelectedCountry);
+				SelectOfferForCountry(WorldContextObject, AllFeaturesDataTable, FoundFirstCountryStruct, FoundOppeonentCountryStruct, RebellionsInSelectedCountry, IsTenderOffer, IsSellContractOffer, IsDesignContractOffer, RequestedWeaponCategory, RequestedWeaponFeatures, RequestedWeaponCount);
+				
+				if (IsTenderOffer || IsSellContractOffer || IsDesignContractOffer) {
+					return;
+				}
+			
 			}
 			else {
 
@@ -136,12 +190,11 @@ void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldConte
 
 		}     
 
-		
 	}
 
 }
 
-void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObject, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInSelectedCountry) {
+void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInSelectedCountry, bool& IsTenderOffer, bool& IsSellContractOffer, bool& IsDesignContractOffer, FName& RequestedWeaponCategory, TArray<FString>& RequestedWeaponFeatures, int32& RequestedWeaponCount) {
 
 	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
 	GI->Implements<USaveInterface>();
@@ -154,67 +207,154 @@ void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObje
 	TMap<FName, int32> WeaponTypesAndCountDiff; 
 	TArray<FName> FirstCountryDoesntHaveTheseWeaponTypes; 
 	TMap<FString, FName> FirstCountryBadThisWeaponFeatureNameAndCategory;
+	TMap<FName, int32> WeaponOverallsByCategories;
+	TMap<FName, int32> WeaponOverallsByTypes;
 
 	//iliþkiler gelecek sonra eksikliklere bakýlacak ona göre teklif oluþturulacak.
 	TMap<FName, int32> FirstCountryRelations = FirstCountry.Relationships;
-	//TMap<FName, int32> OpponentCountryRelations = OpponentCountry.Relationships;
-
 	int32* FirstCountryToOpponentCountryRelation = FirstCountryRelations.Find(FName(OpponentCountry.CountryName));
-	//int32* OpponentCountryToFirstCountryRelation = OpponentCountryRelations.Find(FName(FirstCountry.CountryName));
 
 	// ayný zamanda isyancýlar içinde isyan ihtimali %50 üzerine çýktý mý gibi bir kontrol lazým. ve ona göre silah satýn alabilir.
 
-	UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(WorldContextObject, FirstCountry, OpponentCountry, RebellionsInSelectedCountry, WeaponCategoriesAndCountDiff, WeaponTypesAndCountDiff, FirstCountryDoesntHaveTheseWeaponTypes, FirstCountryBadThisWeaponFeatureNameAndCategory);
+	UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(WorldContextObject, AllFeaturesDataTable, FirstCountry, OpponentCountry, RebellionsInSelectedCountry, WeaponCategoriesAndCountDiff, WeaponTypesAndCountDiff, WeaponOverallsByCategories, WeaponOverallsByTypes, FirstCountryDoesntHaveTheseWeaponTypes, FirstCountryBadThisWeaponFeatureNameAndCategory);
 
+	// ya silah satýn alacak ya da ihale oluþturmasý lazým.
 	if (*FirstCountryToOpponentCountryRelation < 0) {
 
 		int32 SellPossibility = FMath::RandRange(0, 100);
 
-		if (SellPossibility <= GeneralDatas.CompanyPopularity) { //Popülerlik þartý saðlanmýþtýr
+		if (SellPossibility <= GeneralDatas.CompanyPopularity) { //Popülerlik þartý saðlanmýþtýr.
 
-			OfferWeaponSellContract();
+			//silah satýn almasý için -> popülerlik ve düþmanlarýnýn silahlarýnýn çoðu bizim mi? ve overall -10 +10 var mý?
+			IsSellContractOffer = OfferWeaponSellContract();
 		
 		}
 		else {
 
-			OfferTender();
+			FDateTime CurrentTime = FDateTime::UtcNow();
 
+			if (CurrentTime >= GeneralDatas.TenderLastTime) {
+
+				//ihale için -> istenilen tip ya da özelliklerden en az biri bizde var mý?
+				IsTenderOffer = OfferTender(WorldContextObject, WeaponCategoriesAndCountDiff, WeaponOverallsByCategories, FirstCountryBadThisWeaponFeatureNameAndCategory, RequestedWeaponCategory, RequestedWeaponFeatures, RequestedWeaponCount);
+
+			}
+			else {
+				UE_LOG(LogTemp, Warning, TEXT("Zaten devam eden bir ihale var."));
+			}
+		
 		}
-
-		// ya silah satýn alacak ya da ihale oluþturmasý lazým. silah satýn almasý için -> popülerlik ve daha önce silah sattýk mý ve overall -10 +10 var mý?
-															 // ihale için -> istenilen tip ya da özelliklerden en az biri bizde var mý?														
+																										
 	}
+	// kendinde eksik olan türlere ya da özelliklere göre ya ihale ya da tasarým yaptýracak.
 	else {
 
 		int32 SellPossibility = FMath::RandRange(0, 100);
 
 		if (SellPossibility <= GeneralDatas.CompanyPopularity) {
-
-			OfferWeaponDesignContract();
+			//tasarým için -> popülerlik ve daha önce silah sattýk mý o tasarým yapýlabilir mi?
+			IsDesignContractOffer = OfferWeaponDesignContract();
 
 		}
 		else {
 
-			OfferTender();
+			FDateTime CurrentTime = FDateTime::UtcNow();
+
+			if (CurrentTime >= GeneralDatas.TenderLastTime) {
+
+				//ihale için -> istenilen tip ya da özelliklerden en az biri bizde var mý?
+				IsTenderOffer = OfferTender(WorldContextObject, WeaponCategoriesAndCountDiff, WeaponOverallsByCategories, FirstCountryBadThisWeaponFeatureNameAndCategory, RequestedWeaponCategory, RequestedWeaponFeatures, RequestedWeaponCount);
+
+			}
+			else {
+				UE_LOG(LogTemp, Warning, TEXT("Zaten devam eden bir ihale var."));
+			}
 
 		}
-
-		// kendinde eksik olan türlere ya da özelliklere göre ya ihale ya da tasarým yaptýracak. tasarým için -> popülerlik ve daha önce silah sattýk mý o tasarým yapýlabilir mi?
-																							  // ihale için -> bizde istenilen özelliklerden en az biri varsa ihale teklifi gelir.
 
 	}
 
 }
 
-void UBackgroundLogicOperations::OfferWeaponSellContract() {
+bool UBackgroundLogicOperations::OfferWeaponSellContract() {
+	
+	
+	bool MyCompanyAvailableToSellOffer = false;
+
+
+	return MyCompanyAvailableToSellOffer;
+}
+
+bool UBackgroundLogicOperations::OfferTender(UObject* WorldContextObject, TMap<FName, int32> WeaponCountDiffByCategories, TMap<FName, int32>WeaponOverallsByCategories, TMap<FString, FName> SelectedCountryFeatureNeedsAndCategories, FName& RequestedWeaponCategory, TArray<FString>& RequestedWeaponFeatures, int32& RequestedWeaponCount) {
+
+	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
+	GI->Implements<USaveInterface>();
+	UC_SaveGame* LoadedSave;
+	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
+
+	TArray<FMyFactorys> MyFactorys = LoadedSave->MyFactorys;
+	TArray<FNewDesignedProductsStruct> DesignedProducts;
+
+	if (MyFactorys.Num() < 1 && DesignedProducts.Num() < 1) {
+		return false;
+	}
+	else {
+		FName RandomSelectedWeaponCategory = MyFactorys[FMath::RandRange(0, MyFactorys.Num() - 1)].ProductionClass;
+		int32* CountDiff = WeaponCountDiffByCategories.Find(RandomSelectedWeaponCategory);
+		int32* CountryWeaponOverallByCategory = WeaponOverallsByCategories.Find(RandomSelectedWeaponCategory);
+		bool MyCompanyAvailableToTenderOffer = false;
+		TArray<FString> RequestingFeatures;
+
+		if (*CountDiff < 10000) {
+
+			for (FNewDesignedProductsStruct DesignedProduct : DesignedProducts) {
+
+				if (DesignedProduct.IsDesignedByMyCompany) {
+
+					if (DesignedProduct.Class == RandomSelectedWeaponCategory && DesignedProduct.Overall <= (*CountryWeaponOverallByCategory + 15) && DesignedProduct.Overall >= (*CountryWeaponOverallByCategory - 15)) {
+						MyCompanyAvailableToTenderOffer = true;
+						break;
+					}
+
+				}
+
+			}
+
+			if (MyCompanyAvailableToTenderOffer) {
+
+				for (TPair<FString, FName> Pair : SelectedCountryFeatureNeedsAndCategories) {
+
+					if (Pair.Value == RandomSelectedWeaponCategory) {
+
+						RequestingFeatures.Add(Pair.Key);
+
+					}
+
+				}
+			}
+
+		}
+
+
+		RequestedWeaponCategory = RandomSelectedWeaponCategory;
+		RequestedWeaponFeatures = RequestingFeatures;
+		// istenilen silah kategorisi
+		// istenilen özellikler
+		// ihaleyi isteyen ülke
+		// satýn alýnacak adet
+		// ihaleye uygun mu deðerleri deðer olarak geri döndürülecek
+
+		// ihale sayfasý oluþturulacak ve 24 saatlik periyotta ihale devam edecek arada diðer ülkelerin ihaleye katýlmasý fiyat deðiþtirme gibi durumlarý da ekle.
+
+		return MyCompanyAvailableToTenderOffer;
+	}
 
 }
 
-void UBackgroundLogicOperations::OfferTender() {
+bool UBackgroundLogicOperations::OfferWeaponDesignContract() {
+	bool MyCompanyAvailableToDesignOffer = false;
 
-}
 
-void UBackgroundLogicOperations::OfferWeaponDesignContract() {
-
+	return MyCompanyAvailableToDesignOffer;
 }
 

@@ -37,7 +37,7 @@ class WARINDUSTRY_API UHelperCalculationFunctions : public UBlueprintFunctionLib
         static TMap<FString, float> WeaponsCountryRates(UObject* WorldContextObject, FCountrys CountryStruct, FRebellion RebellionStruct);
 
         UFUNCTION(BlueprintCallable, Category = "Calculations")
-        static void FindSelectedCountryWeaponNeeds(UObject* WorldContextObject, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInCountry, TMap<FName, int32>& WeaponCategoriesAndCountDiff, TMap<FName, int32>& WeaponTypesAndCountDiff, TArray<FName>& FirstCountryDoesntHaveTheseWeaponTypes, TMap<FString, FName>& FirstCountryBadThisWeaponFeatureNameAndCategory);
+        static void FindSelectedCountryWeaponNeeds(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInCountry, TMap<FName, int32>& WeaponCategoriesAndCountDiff, TMap<FName, int32>& WeaponTypesAndCountDiff, TMap<FName, int32>& WeaponCategoriesAndOveralls, TMap<FName, int32>& WeaponTypesAndOveralls, TArray<FName>& FirstCountryDoesntHaveTheseWeaponTypes, TMap<FString, FName>& FirstCountryBadThisWeaponFeatureNameAndCategory);
 			
 	private:
 
