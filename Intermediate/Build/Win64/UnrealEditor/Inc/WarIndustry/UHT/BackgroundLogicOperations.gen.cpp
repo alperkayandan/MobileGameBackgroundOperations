@@ -76,6 +76,18 @@ struct Z_Construct_UScriptStruct_FTenderOfferData_Statics
 		{ "Category", "TenderOfferData" },
 		{ "ModuleRelativePath", "Public/BackgroundLogicOperations.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RequestingFeatureNames_MetaData[] = {
+		{ "Category", "TenderOfferData" },
+		{ "ModuleRelativePath", "Public/BackgroundLogicOperations.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RequestingAvarageWeaponOverall_MetaData[] = {
+		{ "Category", "TenderOfferData" },
+		{ "ModuleRelativePath", "Public/BackgroundLogicOperations.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RequstingMinOrMaxPropertyValues_MetaData[] = {
+		{ "Category", "TenderOfferData" },
+		{ "ModuleRelativePath", "Public/BackgroundLogicOperations.h" },
+	};
 #endif // WITH_METADATA
 	static void NewProp_IsTenderOffer_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_IsTenderOffer;
@@ -89,6 +101,11 @@ struct Z_Construct_UScriptStruct_FTenderOfferData_Statics
 	static const UECodeGen_Private::FStrPropertyParams NewProp_RequestedCountryName;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_RequestedWeaponCount;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_SelectedProductForSellOffer;
+	static const UECodeGen_Private::FStrPropertyParams NewProp_RequestingFeatureNames_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_RequestingFeatureNames;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_RequestingAvarageWeaponOverall;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_RequstingMinOrMaxPropertyValues_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_RequstingMinOrMaxPropertyValues;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static void* NewStructOps()
 	{
@@ -117,6 +134,11 @@ const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FTenderO
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequestedCountryName = { "RequestedCountryName", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FTenderOfferData, RequestedCountryName), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RequestedCountryName_MetaData), NewProp_RequestedCountryName_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequestedWeaponCount = { "RequestedWeaponCount", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FTenderOfferData, RequestedWeaponCount), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RequestedWeaponCount_MetaData), NewProp_RequestedWeaponCount_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_SelectedProductForSellOffer = { "SelectedProductForSellOffer", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FTenderOfferData, SelectedProductForSellOffer), Z_Construct_UScriptStruct_FNewDesignedProductsStruct, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SelectedProductForSellOffer_MetaData), NewProp_SelectedProductForSellOffer_MetaData) }; // 4217424401
+const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequestingFeatureNames_Inner = { "RequestingFeatureNames", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequestingFeatureNames = { "RequestingFeatureNames", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FTenderOfferData, RequestingFeatureNames), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RequestingFeatureNames_MetaData), NewProp_RequestingFeatureNames_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequestingAvarageWeaponOverall = { "RequestingAvarageWeaponOverall", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FTenderOfferData, RequestingAvarageWeaponOverall), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RequestingAvarageWeaponOverall_MetaData), NewProp_RequestingAvarageWeaponOverall_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequstingMinOrMaxPropertyValues_Inner = { "RequstingMinOrMaxPropertyValues", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequstingMinOrMaxPropertyValues = { "RequstingMinOrMaxPropertyValues", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FTenderOfferData, RequstingMinOrMaxPropertyValues), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RequstingMinOrMaxPropertyValues_MetaData), NewProp_RequstingMinOrMaxPropertyValues_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FTenderOfferData_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_IsTenderOffer,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_IsSellContractOffer,
@@ -127,6 +149,11 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FT
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequestedCountryName,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequestedWeaponCount,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_SelectedProductForSellOffer,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequestingFeatureNames_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequestingFeatureNames,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequestingAvarageWeaponOverall,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequstingMinOrMaxPropertyValues_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewProp_RequstingMinOrMaxPropertyValues,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FTenderOfferData_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FTenderOfferData_Statics::StructParams = {
@@ -168,7 +195,7 @@ struct Z_Construct_UDelegateFunction_WarIndustry_Offer__DelegateSignature_Static
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_WarIndustry_Offer__DelegateSignature_Statics::NewProp_TenderOfferData = { "TenderOfferData", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_WarIndustry_eventOffer_Parms, TenderOfferData), Z_Construct_UScriptStruct_FTenderOfferData, METADATA_PARAMS(0, nullptr) }; // 2970708843
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UDelegateFunction_WarIndustry_Offer__DelegateSignature_Statics::NewProp_TenderOfferData = { "TenderOfferData", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(_Script_WarIndustry_eventOffer_Parms, TenderOfferData), Z_Construct_UScriptStruct_FTenderOfferData, METADATA_PARAMS(0, nullptr) }; // 205649942
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_WarIndustry_Offer__DelegateSignature_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_WarIndustry_Offer__DelegateSignature_Statics::NewProp_TenderOfferData,
 };
@@ -219,7 +246,7 @@ struct Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOf
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_AllFeaturesDataTable = { "AllFeaturesDataTable", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms, AllFeaturesDataTable), Z_Construct_UClass_UDataTable_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_OfferData = { "OfferData", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms, OfferData), Z_Construct_UScriptStruct_FTenderOfferData, METADATA_PARAMS(0, nullptr) }; // 2970708843
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_OfferData = { "OfferData", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms, OfferData), Z_Construct_UScriptStruct_FTenderOfferData, METADATA_PARAMS(0, nullptr) }; // 205649942
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_WorldContextObject,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_AllFeaturesDataTable,
@@ -419,7 +446,7 @@ struct Z_Construct_UClass_UBackgroundLogicOperations_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer, "CheckCountryBordersForOffer" }, // 2692995652
+		{ &Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer, "CheckCountryBordersForOffer" }, // 3132776717
 		{ &Z_Construct_UFunction_UBackgroundLogicOperations_CreateAsyncBackgroundLogicOperations, "CreateAsyncBackgroundLogicOperations" }, // 1521723656
 		{ &Z_Construct_UFunction_UBackgroundLogicOperations_DistributeProducedWeapons, "DistributeProducedWeapons" }, // 1838244887
 		{ &Z_Construct_UFunction_UBackgroundLogicOperations_StartAsyncControlForBackgroundOperations, "StartAsyncControlForBackgroundOperations" }, // 955861803
@@ -430,7 +457,7 @@ struct Z_Construct_UClass_UBackgroundLogicOperations_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UBackgroundLogicOperations_Statics::NewProp_CreateOfferPage = { "CreateOfferPage", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UBackgroundLogicOperations, CreateOfferPage), Z_Construct_UDelegateFunction_WarIndustry_Offer__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CreateOfferPage_MetaData), NewProp_CreateOfferPage_MetaData) }; // 2702465928
+const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UBackgroundLogicOperations_Statics::NewProp_CreateOfferPage = { "CreateOfferPage", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UBackgroundLogicOperations, CreateOfferPage), Z_Construct_UDelegateFunction_WarIndustry_Offer__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CreateOfferPage_MetaData), NewProp_CreateOfferPage_MetaData) }; // 2755686618
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UBackgroundLogicOperations_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UBackgroundLogicOperations_Statics::NewProp_CreateOfferPage,
 };
@@ -476,13 +503,13 @@ UBackgroundLogicOperations::~UBackgroundLogicOperations() {}
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FTenderOfferData::StaticStruct, Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewStructOps, TEXT("TenderOfferData"), &Z_Registration_Info_UScriptStruct_TenderOfferData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FTenderOfferData), 2970708843U) },
+		{ FTenderOfferData::StaticStruct, Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewStructOps, TEXT("TenderOfferData"), &Z_Registration_Info_UScriptStruct_TenderOfferData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FTenderOfferData), 205649942U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UBackgroundLogicOperations, UBackgroundLogicOperations::StaticClass, TEXT("UBackgroundLogicOperations"), &Z_Registration_Info_UClass_UBackgroundLogicOperations, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBackgroundLogicOperations), 3527939118U) },
+		{ Z_Construct_UClass_UBackgroundLogicOperations, UBackgroundLogicOperations::StaticClass, TEXT("UBackgroundLogicOperations"), &Z_Registration_Info_UClass_UBackgroundLogicOperations, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBackgroundLogicOperations), 1242931761U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_883580229(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_3156551860(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics::ScriptStructInfo),
 	nullptr, 0);

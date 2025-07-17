@@ -4,6 +4,7 @@
 #include "BackgroundLogicOperations.h"
 #include "C_GameInstance.h"
 #include "HelperCalculationFunctions.h"
+#include "AsyncBackgroundOperations.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -236,7 +237,7 @@ void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObje
 
 		if (SellPossibility <= GeneralDatas.CompanyPopularity) {
 			//tasarým için -> popülerlik ve daha önce silah sattýk mý o tasarým yapýlabilir mi?
-			OfferData.IsDesignContractOffer = OfferWeaponDesignContract();
+			OfferData.IsDesignContractOffer = OfferWeaponDesignContract(WorldContextObject, FirstCountryDoesntHaveTheseWeaponTypes, FirstCountryBadThisWeaponFeatureNameAndCategory, WeaponOverallsByCategories, WeaponOverallsByTypes, OfferData);
 
 		}
 		else {
@@ -432,9 +433,145 @@ bool UBackgroundLogicOperations::OfferTender(UObject* WorldContextObject, TMap<F
 
 }
 
-bool UBackgroundLogicOperations::OfferWeaponDesignContract() {
+bool UBackgroundLogicOperations::OfferWeaponDesignContract(UObject* WorldContextObject, TArray<FName> FirstCountryDoesntHaveTheseWeaponTypes, TMap<FString, FName> FirstCountryBadThisWeaponFeatureNameAndCategory, TMap<FName, int32> WeaponOverallsByCategories, TMap<FName, int32> WeaponOverallsByTypes, FTenderOfferData& OfferData) {
+	
+	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
+	GI->Implements<USaveInterface>();
+	UC_SaveGame* LoadedSave;
+	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
+
+	TArray<FMyFactorys> MyFactorys = LoadedSave->MyFactorys;
+	TArray<FString> MissingFeatures;
 	bool MyCompanyAvailableToDesignOffer = false;
 
+	if (MyFactorys.Num() >= 1){
+
+		FName RandomSelectedWeaponType;
+		FName SelectedWeaponCategory;
+		int32* AvarageOverall = 0;
+
+		if (FirstCountryDoesntHaveTheseWeaponTypes.Num() >= 1) {
+
+			RandomSelectedWeaponType = FirstCountryDoesntHaveTheseWeaponTypes[FMath::RandRange(0, FirstCountryDoesntHaveTheseWeaponTypes.Num() - 1)];
+			SelectedWeaponCategory = UAllStructs::FindWeaponCategoryByType(RandomSelectedWeaponType);
+
+			if (WeaponOverallsByCategories.Find(SelectedWeaponCategory)) {
+				
+				AvarageOverall = WeaponOverallsByCategories.Find(SelectedWeaponCategory);
+			
+			}
+			else {
+
+				for (TPair<FName, int32> WeaponCategoryAndOverall : WeaponOverallsByCategories) {
+
+					*AvarageOverall += WeaponCategoryAndOverall.Value;
+
+				}
+
+				*AvarageOverall = *AvarageOverall / WeaponOverallsByCategories.Num();
+
+			}
+
+
+
+		}
+		else {
+			*AvarageOverall = 200;
+			// en düþük overall a göre bak.
+			for (TPair<FName, int32> WeaponTypesAndOveralls : WeaponOverallsByTypes) {
+				if (*AvarageOverall > WeaponTypesAndOveralls.Value) {
+					*AvarageOverall = WeaponTypesAndOveralls.Value;
+					RandomSelectedWeaponType = WeaponTypesAndOveralls.Key;
+				}
+			}
+
+			SelectedWeaponCategory = UAllStructs::FindWeaponCategoryByType(RandomSelectedWeaponType);
+
+		}
+
+		if (FirstCountryBadThisWeaponFeatureNameAndCategory.Num() >= 1) {
+
+			for (TPair<FString, FName> FeatureNameAndWeaponCategory : FirstCountryBadThisWeaponFeatureNameAndCategory) {
+
+				if (FeatureNameAndWeaponCategory.Value == SelectedWeaponCategory) {
+
+					MissingFeatures.Add(FeatureNameAndWeaponCategory.Key);
+
+				}
+
+			}
+
+		}
+
+		for (FMyFactorys MyFactory : MyFactorys) {
+
+			// biz üretebiliyor muyuz kontrol et üretemiyorsak teklif olmaz üretebiliyorsak: 
+			// 1. seçilen silahýn tipine ve kategorisine göre overall a bak 1-6 arasýndaki özelliklere göre overallý denk getirerek teklif sunulabilir.
+			// 2. seçilen silahýn kötü olduðu özelliklere göre teklif sunulabilir.
+			// 3. seçilen silahýn hem özelliðine hem de kötü olduðu özellikler beraber teklif sunulabilir.																				
+
+			if (MyFactory.ProductionClass == SelectedWeaponCategory) {
+
+				TArray<int32> WeaponTypeMaxValues;
+				TArray<int32> WeaponTypeMinValues;
+				TArray<float> WeaponTypeWeightMultipliers;
+				int32 MaxRequestingPropertyCount = 0;
+
+				UAsyncBackgroundOperations* BackgroundOperationsObj = NewObject<UAsyncBackgroundOperations>();
+				BackgroundOperationsObj->WeaponsMaxAndMinValues(RandomSelectedWeaponType, WeaponTypeMaxValues, WeaponTypeMinValues, WeaponTypeWeightMultipliers);
+
+
+				if (MissingFeatures.Num() >= 1) {
+
+					int32 MaxRequestingFeatureCount = FMath::RandRange(1, 5);
+					MaxRequestingPropertyCount = FMath::RandRange(0, 4);
+
+					for (int32 i = 1; i <= MaxRequestingFeatureCount; i++) {
+
+						OfferData.RequestingFeatureNames.AddUnique(MissingFeatures[FMath::RandRange(0, MissingFeatures.Num() - 1)]);
+
+					}
+
+					if (MaxRequestingPropertyCount != 0) {
+
+						OfferData.RequstingMinOrMaxPropertyValues.SetNum(6);
+
+						for (int32 i = 1; i <= MaxRequestingPropertyCount; i++) {
+
+							int32 PropertyIndex = FMath::RandRange(0, 5);
+							OfferData.RequstingMinOrMaxPropertyValues[PropertyIndex] = FMath::RandRange(WeaponTypeMinValues[PropertyIndex], WeaponTypeMaxValues[PropertyIndex]);
+
+						}
+
+					}
+					
+					OfferData.RequestingAvarageWeaponOverall = *AvarageOverall;
+					break;
+
+				}
+				else {
+
+					MaxRequestingPropertyCount = FMath::RandRange(2, 5);
+
+					OfferData.RequstingMinOrMaxPropertyValues.SetNum(6);
+
+					for (int32 i = 1; i <= MaxRequestingPropertyCount; i++) {
+
+						int32 PropertyIndex = FMath::RandRange(0, 5);
+						OfferData.RequstingMinOrMaxPropertyValues[PropertyIndex] = FMath::RandRange(WeaponTypeMinValues[PropertyIndex], WeaponTypeMaxValues[PropertyIndex]);
+
+					}
+
+					OfferData.RequestingAvarageWeaponOverall = *AvarageOverall;
+					break;
+
+				}
+
+			}
+
+		}
+
+	}
 
 	return MyCompanyAvailableToDesignOffer;
 }

@@ -117,3 +117,25 @@ EWeaponType UAllStructs::ConvertWeaponTypeToEnum(const FName& WeaponType) {
 		return EWeaponType::Empty;
 
 }
+
+FName UAllStructs::FindWeaponCategoryByType(const FName& WeaponType) {
+
+	if (WeaponType == FName(TEXT("Assult Rifle")) || WeaponType == FName(TEXT("Sniper Rifle")) || WeaponType == FName(TEXT("Submachine Gun")) || WeaponType == FName(TEXT("Air Attack Machine Gun")) || WeaponType == FName(TEXT("Coactional Machine Gun")))
+		return AllWeaponCategories[0];
+	if (WeaponType == FName(TEXT("Land To Air Missile")) || WeaponType == FName(TEXT("Air To Land Missile")) || WeaponType == FName(TEXT("Air To Air Missile")))
+		return AllWeaponCategories[1];
+	if (WeaponType == FName(TEXT("Light Tank")) || WeaponType == FName(TEXT("Main Battle Tank")) || WeaponType == FName(TEXT("Heavy Tank")) || WeaponType == FName(TEXT("Amphibious Tank")))
+		return AllWeaponCategories[2];
+	if (WeaponType == FName(TEXT("Wheeled Armored Personnel Carrier")) || WeaponType == FName(TEXT("Tracked Armored Personnel Carrier")) || WeaponType == FName(TEXT("Armored Fighting Vehicle")) || WeaponType == FName(TEXT("Amphibious Armored Personnel Carrier")))
+		return AllWeaponCategories[3];
+	if (WeaponType == FName(TEXT("Unmanned Air Vehicle")) || WeaponType == FName(TEXT("Kamikaze UAV")) || WeaponType == FName(TEXT("Armed UAV")) || WeaponType == FName(TEXT("Unmanned Fighter Jet")))
+		return AllWeaponCategories[4];
+	if (WeaponType == FName(TEXT("Landing Helicopter")) || WeaponType == FName(TEXT("Attack Helicopter")) || WeaponType == FName(TEXT("Cargo Helicopter")) || WeaponType == FName(TEXT("Marine Helicopter")))
+		return AllWeaponCategories[5];
+	if (WeaponType == FName(TEXT("Train Aircraft")) || WeaponType == FName(TEXT("Fighter Jet")) || WeaponType == FName(TEXT("Bomber Plane")) || WeaponType == FName(TEXT("Vertical TakeOff Jet")))
+		return AllWeaponCategories[6];
+	if (WeaponType == FName(TEXT("Anti Drone System")) || WeaponType == FName(TEXT("Medium Range Air Defense System")) || WeaponType == FName(TEXT("Long Range Air Defense System")))
+		return AllWeaponCategories[7];
+	else
+		return "";
+}

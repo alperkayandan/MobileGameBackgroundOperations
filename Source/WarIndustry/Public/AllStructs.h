@@ -982,6 +982,7 @@ public:
 
 	static EWeaponCategory ConvertWeaponCategoryToEnum(const FString& WeaponCategory);
 	static EWeaponType ConvertWeaponTypeToEnum(const FName& WeaponType);
+	static FName FindWeaponCategoryByType(const FName& WeaponType);
 	
 	static TArray<FName> AllWeaponCategories;
 	static TArray<FName> AllWeaponTypes;
