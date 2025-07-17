@@ -798,8 +798,6 @@ void UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(UObject* WorldC
 	TMap<int32, int32> OpponentCountryAllWeapons = OpponentCountry.WeaponsIndexsAndCountsInStorage;
 	OpponentCountryAllWeapons.Append(RebellionsInCountry.AllWeaponsIndexsAndCount);
 
-	//UDataTable* AllFeaturesDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/AllWeaponFeatures.AllWeaponFeatures")));
-
 	if (!AllFeaturesDataTable)
 	{
 		UE_LOG(LogTemp, Error, TEXT("AllFeaturesDataTable yüklenemedi."));

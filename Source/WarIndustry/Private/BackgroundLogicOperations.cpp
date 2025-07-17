@@ -209,7 +209,7 @@ void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObje
 		if (SellPossibility <= GeneralDatas.CompanyPopularity) { //Popülerlik þartý saðlanmýþtýr.
 
 			//silah satýn almasý için -> popülerlik ve düþmanlarýnýn silahlarýnýn çoðu bizim mi? ve overall -10 +10 var mý?
-			OfferData.IsSellContractOffer = OfferWeaponSellContract();
+			OfferData.IsSellContractOffer = OfferWeaponSellContract(WorldContextObject, FirstCountry, WeaponTypesAndCountDiff, WeaponOverallsByCategories, WeaponOverallsByTypes, FirstCountryDoesntHaveTheseWeaponTypes, OfferData);
 		
 		}
 		else {
@@ -259,11 +259,113 @@ void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObje
 
 }
 
-bool UBackgroundLogicOperations::OfferWeaponSellContract() {
+bool UBackgroundLogicOperations::OfferWeaponSellContract(UObject* WorldContextObject, FCountrys SelectedCountry, TMap<FName, int32> WeaponTypesAndCountDiff, TMap<FName, int32> WeaponOverallsByCategories, TMap<FName, int32> WeaponOverallsByTypes, TArray<FName> FirstCountryDoesntHaveTheseWeaponTypes, FTenderOfferData& OfferData) {
 	
-	
+	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
+	GI->Implements<USaveInterface>();
+	UC_SaveGame* LoadedSave;
+	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
+
+	TArray<FNewDesignedProductsStruct> DesignedProducts = LoadedSave->DesignedProducts;
+	TArray<FNewDesignedProductsStruct> AvailableDesigns;
+	TArray<FName> MissingTypes;
+	TMap<int32, int32> SelectedCountryAllWeapons = SelectedCountry.WeaponsIndexsAndCountsInStorage;
 	bool MyCompanyAvailableToSellOffer = false;
 
+	for (TPair<FName, int32> TypesAndCountDiffs : WeaponTypesAndCountDiff) {
+
+		if (TypesAndCountDiffs.Value <= 10000) {
+			MissingTypes.Add(TypesAndCountDiffs.Key);
+		}
+
+	}
+
+	FName RandomSelectedWeaponType;
+
+	if (MissingTypes.Num() >= 1) {
+
+		RandomSelectedWeaponType = MissingTypes[FMath::RandRange(0, MissingTypes.Num() - 1)];
+
+	}
+	else if (FirstCountryDoesntHaveTheseWeaponTypes.Num() >= 1) {
+
+		RandomSelectedWeaponType = FirstCountryDoesntHaveTheseWeaponTypes[FMath::RandRange(0, FirstCountryDoesntHaveTheseWeaponTypes.Num() - 1)];
+
+	}
+	else {
+		RandomSelectedWeaponType = UAllStructs::AllWeaponTypes[FMath::RandRange(0, UAllStructs::AllWeaponTypes.Num() - 1)];
+	}
+
+	for (int i = 0; i < DesignedProducts.Num(); i++) {
+
+		if (DesignedProducts[i].IsDesignedByMyCompany && DesignedProducts[i].Type == RandomSelectedWeaponType) {
+
+			int32* AvarageOverall = 0;
+
+			if (WeaponOverallsByTypes.Find(DesignedProducts[i].Type)) {
+
+				 AvarageOverall = WeaponOverallsByTypes.Find(DesignedProducts[i].Type);
+
+				if (DesignedProducts[i].Overall >= (*AvarageOverall - 10) && DesignedProducts[i].Overall <= (*AvarageOverall + 15)) {
+					AvailableDesigns.Add(DesignedProducts[i]);
+				}
+
+			}
+			else if (WeaponOverallsByCategories.Find(DesignedProducts[i].Class)) {
+
+				AvarageOverall = WeaponOverallsByCategories.Find(DesignedProducts[i].Class);
+
+				if (DesignedProducts[i].Overall >= (*AvarageOverall - 5) && DesignedProducts[i].Overall <= (*AvarageOverall + 10)) {
+					AvailableDesigns.Add(DesignedProducts[i]);
+				}
+
+			}
+			else {
+
+				for (TPair<FName, int32> OverallsByCategories : WeaponOverallsByCategories) {
+					*AvarageOverall += OverallsByCategories.Value;
+				}
+
+				*AvarageOverall = *AvarageOverall / WeaponOverallsByCategories.Num();
+				
+				if (DesignedProducts[i].Overall >= (*AvarageOverall - 5) && DesignedProducts[i].Overall <= (*AvarageOverall + 5)) {
+					AvailableDesigns.Add(DesignedProducts[i]);
+				}
+				
+			}
+			
+		}
+
+	}
+
+	FNewDesignedProductsStruct SelectedProductForSell;
+
+	if (AvailableDesigns.Num() >= 1) {
+
+		SelectedProductForSell = AvailableDesigns[FMath::RandRange(0, AvailableDesigns.Num() - 1)];
+		MyCompanyAvailableToSellOffer = true;
+
+	}
+	else {
+		
+		for (TPair<int32, int32> CountryWeaponIndexsAndCounts : SelectedCountryAllWeapons) {
+
+			if (DesignedProducts[CountryWeaponIndexsAndCounts.Key].IsDesignedByMyCompany && DesignedProducts[CountryWeaponIndexsAndCounts.Key].Type == RandomSelectedWeaponType) {
+				AvailableDesigns.Add(DesignedProducts[CountryWeaponIndexsAndCounts.Key]);
+			}
+
+		}
+
+		SelectedProductForSell = AvailableDesigns[FMath::RandRange(0, AvailableDesigns.Num() - 1)];
+
+		MyCompanyAvailableToSellOffer = true;
+	}
+
+	OfferData.SelectedProductForSellOffer = SelectedProductForSell;
+
+	// satýþ adedi
+	// satýþýn son geçerlilik süresi
+	// kazanýlacak para
 
 	return MyCompanyAvailableToSellOffer;
 }
@@ -276,7 +378,7 @@ bool UBackgroundLogicOperations::OfferTender(UObject* WorldContextObject, TMap<F
 	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
 
 	TArray<FMyFactorys> MyFactorys = LoadedSave->MyFactorys;
-	TArray<FNewDesignedProductsStruct> DesignedProducts;
+	TArray<FNewDesignedProductsStruct> DesignedProducts = LoadedSave->DesignedProducts;
 
 	if (MyFactorys.Num() < 1 && DesignedProducts.Num() < 1) {
 		return false;

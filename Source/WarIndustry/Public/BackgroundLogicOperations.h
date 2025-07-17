@@ -33,6 +33,9 @@ struct FTenderOfferData
 
 	UPROPERTY(BlueprintReadWrite)
 	int32 RequestedWeaponCount;
+
+	UPROPERTY(BlueprintReadWrite)
+	FNewDesignedProductsStruct SelectedProductForSellOffer;
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOffer, FTenderOfferData, TenderOfferData);
@@ -64,6 +67,6 @@ class WARINDUSTRY_API UBackgroundLogicOperations : public UObject
 		void ControlGlobalFactorysProducedWeapons(UObject* WorldContextObject, TArray<FFactorys>& GlobalFactorysData);
 		void SelectOfferForCountry(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInSelectedCountry, FTenderOfferData& OfferData);
 		bool OfferTender(UObject* WorldContextObject, TMap<FName, int32> WeaponCountDiffByCategories, TMap<FName, int32>WeaponOverallsByCategories, TMap<FString, FName> SelectedCountryFeatureNeedsAndCategories, FTenderOfferData& OfferData);
-		bool OfferWeaponSellContract();
+		bool OfferWeaponSellContract(UObject* WorldContextObject, FCountrys SelectedCountry, TMap<FName, int32> WeaponTypesAndCountDiff, TMap<FName, int32> WeaponOverallsByCategories, TMap<FName, int32> WeaponOverallsByTypes, TArray<FName> FirstCountryDoesntHaveTheseWeaponTypes, FTenderOfferData& OfferData);
 		bool OfferWeaponDesignContract();
 };
