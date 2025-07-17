@@ -8,12 +8,36 @@
 
 #include "BackgroundLogicOperations.generated.h"
 
+USTRUCT(BlueprintType)
+struct FTenderOfferData
+{
+	GENERATED_BODY()
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSellContractOffer, float, Progress);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDesignContractOffer, float, Progress);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FTenderOffer, FName, RequestedWeaponCategory, TArray<FString>, RequestedWeaponFeatures, FString, RequestedCountryName, int32, RequestedWeaponCount);
+	UPROPERTY(BlueprintReadWrite)
+	bool IsTenderOffer;
 
-UCLASS()
+	UPROPERTY(BlueprintReadWrite)
+	bool IsSellContractOffer;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool IsDesignContractOffer;
+
+	UPROPERTY(BlueprintReadWrite)
+	FName RequestedWeaponCategory;
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<FString> RequestedWeaponFeatures;
+
+	UPROPERTY(BlueprintReadWrite)
+	FString RequestedCountryName;
+
+	UPROPERTY(BlueprintReadWrite)
+	int32 RequestedWeaponCount;
+};
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOffer, FTenderOfferData, TenderOfferData);
+
+UCLASS(Blueprintable)
 class WARINDUSTRY_API UBackgroundLogicOperations : public UObject
 {
 	GENERATED_BODY()
@@ -30,22 +54,16 @@ class WARINDUSTRY_API UBackgroundLogicOperations : public UObject
 		void DistributeProducedWeapons(UObject* WorldContextObject, TArray<FFactorys>& GlobalFactorysData);
 
 		UFUNCTION(BlueprintCallable, Category = "AsyncBackgroundLogic")
-		void CheckCountryBordersForOffer(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, bool& IsTenderOffer, bool& SellContractOffer, bool& DesignContractOffer, FString& RequestedCountryName ,FName& RequestedWeaponCategory, TArray<FString>& RequestedWeaponFeatures, int32& RequestedWeaponCount);
+		void CheckCountryBordersForOffer(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FTenderOfferData& OfferData);
 
 		UPROPERTY(BlueprintAssignable)
-		FSellContractOffer CreateSellContractPage;
-
-		UPROPERTY(BlueprintAssignable)
-		FDesignContractOffer CreateDesignContractPage;
-
-		UPROPERTY(BlueprintAssignable)
-		FTenderOffer CreateTenderPage;
+		FOffer CreateOfferPage;
 
 	private:
 
 		void ControlGlobalFactorysProducedWeapons(UObject* WorldContextObject, TArray<FFactorys>& GlobalFactorysData);
-		void SelectOfferForCountry(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInSelectedCountry, bool& IsTenderOffer, bool& IsSellContractOffer, bool& IsDesignContractOffer, FName& RequestedWeaponCategory, TArray<FString>& RequestedWeaponFeatures, int32& RequestedWeaponCount);
-		bool OfferTender(UObject* WorldContextObject, TMap<FName, int32> WeaponCountDiffByCategories, TMap<FName, int32>WeaponOverallsByCategories, TMap<FString, FName> SelectedCountryFeatureNeedsAndCategories, FName& RequestedWeaponCategory, TArray<FString>& RequestedWeaponFeatures, int32& RequestedWeaponCount);
+		void SelectOfferForCountry(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInSelectedCountry, FTenderOfferData& OfferData);
+		bool OfferTender(UObject* WorldContextObject, TMap<FName, int32> WeaponCountDiffByCategories, TMap<FName, int32>WeaponOverallsByCategories, TMap<FString, FName> SelectedCountryFeatureNeedsAndCategories, FTenderOfferData& OfferData);
 		bool OfferWeaponSellContract();
 		bool OfferWeaponDesignContract();
 };
