@@ -947,3 +947,64 @@ void UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(UObject* WorldC
 	}
 
 }
+
+void UHelperCalculationFunctions::AddRandomForeignWeaponsToTender(UObject* WorldContextObject, int32& SelectedProductIndexForTender) {
+
+	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
+	GI->Implements<USaveInterface>();
+	UC_SaveGame* LoadedSave;
+	ISaveInterface::Execute_GetGameData(GI, LoadedSave);
+
+	FGeneralDatas GeneralDatas = LoadedSave->GeneralDatas;
+	FLastTenderDetails ActiveTenderDetails = GeneralDatas.LastActiveTenderData;
+	SelectedProductIndexForTender = -1;
+
+	FDateTime CurrentTime = FDateTime::UtcNow();
+	
+	if (CurrentTime >= ActiveTenderDetails.LastTimeAddedProductToTender + FTimespan(0, 1, 0, 0) && ActiveTenderDetails.WeaponIndexsInTenderAndSellPrices.Num() < 8) {
+
+		TArray<FNewDesignedProductsStruct> AllDesignedProducts = LoadedSave->DesignedProducts;
+		TArray<int32> AvailableDesignIndexsForTender;
+		UE_LOG(LogTemp, Error, TEXT("True"));
+
+		for (int i = 0; i < AllDesignedProducts.Num(); i++) {
+
+			if (!AllDesignedProducts[i].IsDesignedByMyCompany && AllDesignedProducts[i].Class == ActiveTenderDetails.CountryRequestedWeaponCategory) {
+
+				if (!ActiveTenderDetails.WeaponIndexsInTenderAndSellPrices.Contains(i)) {
+
+					if (ActiveTenderDetails.RequestedWeaponFeatures.Num() >= 1) {
+
+						for (FString RequestedFeatureName : ActiveTenderDetails.RequestedWeaponFeatures) {
+
+							if (AllDesignedProducts[i].FeaturesAndValues.Find(RequestedFeatureName)) {
+
+								AvailableDesignIndexsForTender.Add(i);
+								break;
+
+							}
+						}
+
+					}
+					else {
+
+						AvailableDesignIndexsForTender.Add(i);
+
+					}
+
+				}
+
+			}
+
+		}
+
+		SelectedProductIndexForTender = AvailableDesignIndexsForTender[FMath::RandRange(0, AvailableDesignIndexsForTender.Num() - 1)];
+	}
+	else {
+
+		UE_LOG(LogTemp, Error, TEXT("Uygun Olacagi Zaman = %s, Suanki Zaman = %s"), *(ActiveTenderDetails.LastTimeAddedProductToTender + FTimespan(0,1,0,0)).ToString(), *CurrentTime.ToString());
+		return;
+	}
+
+
+}

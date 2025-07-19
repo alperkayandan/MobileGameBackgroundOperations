@@ -589,7 +589,7 @@ struct Z_Construct_UFunction_USaveInterface_SaveGeneralData_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_USaveInterface_SaveGeneralData_Statics::NewProp_DataToSave = { "DataToSave", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(SaveInterface_eventSaveGeneralData_Parms, DataToSave), Z_Construct_UScriptStruct_FGeneralDatas, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DataToSave_MetaData), NewProp_DataToSave_MetaData) }; // 3928181812
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_USaveInterface_SaveGeneralData_Statics::NewProp_DataToSave = { "DataToSave", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(SaveInterface_eventSaveGeneralData_Parms, DataToSave), Z_Construct_UScriptStruct_FGeneralDatas, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DataToSave_MetaData), NewProp_DataToSave_MetaData) }; // 3846640314
 void Z_Construct_UFunction_USaveInterface_SaveGeneralData_Statics::NewProp_IsAsync_SetBit(void* Obj)
 {
 	((SaveInterface_eventSaveGeneralData_Parms*)Obj)->IsAsync = 1;
@@ -1302,7 +1302,7 @@ struct Z_Construct_UClass_USaveInterface_Statics
 		{ &Z_Construct_UFunction_USaveInterface_SaveCountrys, "SaveCountrys" }, // 2897598851
 		{ &Z_Construct_UFunction_USaveInterface_SaveDesignedProducts, "SaveDesignedProducts" }, // 2376391068
 		{ &Z_Construct_UFunction_USaveInterface_SaveGameDatas, "SaveGameDatas" }, // 415340370
-		{ &Z_Construct_UFunction_USaveInterface_SaveGeneralData, "SaveGeneralData" }, // 531686689
+		{ &Z_Construct_UFunction_USaveInterface_SaveGeneralData, "SaveGeneralData" }, // 3973819426
 		{ &Z_Construct_UFunction_USaveInterface_SaveGlobalFactory, "SaveGlobalFactory" }, // 3291209160
 		{ &Z_Construct_UFunction_USaveInterface_SaveLastSlots, "SaveLastSlots" }, // 3231737680
 		{ &Z_Construct_UFunction_USaveInterface_SaveMyFactorysData, "SaveMyFactorysData" }, // 2135816707
@@ -1359,10 +1359,10 @@ USaveInterface::~USaveInterface() {}
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_SaveInterface_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_USaveInterface, USaveInterface::StaticClass, TEXT("USaveInterface"), &Z_Registration_Info_UClass_USaveInterface, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(USaveInterface), 3860430805U) },
+		{ Z_Construct_UClass_USaveInterface, USaveInterface::StaticClass, TEXT("USaveInterface"), &Z_Registration_Info_UClass_USaveInterface, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(USaveInterface), 2271407248U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_SaveInterface_h_1789661777(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_SaveInterface_h_3144189701(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_SaveInterface_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_SaveInterface_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

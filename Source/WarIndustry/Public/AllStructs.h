@@ -76,11 +76,15 @@ struct FLastTenderDetails
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FString> RequestedWeaponFeatures;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FDateTime LastTimeAddedProductToTender;
+
 	FLastTenderDetails()
 		: CountryRequestedTender()
 		, CountryRequestedWeaponCategory()
 		, WeaponIndexsInTenderAndSellPrices()
 		, RequestedWeaponFeatures()
+		, LastTimeAddedProductToTender()
 	{
 	}
 };

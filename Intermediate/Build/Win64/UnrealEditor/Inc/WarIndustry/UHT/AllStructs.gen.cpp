@@ -253,6 +253,10 @@ struct Z_Construct_UScriptStruct_FLastTenderDetails_Statics
 		{ "Category", "LastTenderDetails" },
 		{ "ModuleRelativePath", "Public/AllStructs.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_LastTimeAddedProductToTender_MetaData[] = {
+		{ "Category", "LastTenderDetails" },
+		{ "ModuleRelativePath", "Public/AllStructs.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FNamePropertyParams NewProp_CountryRequestedTender;
 	static const UECodeGen_Private::FNamePropertyParams NewProp_CountryRequestedWeaponCategory;
@@ -261,6 +265,7 @@ struct Z_Construct_UScriptStruct_FLastTenderDetails_Statics
 	static const UECodeGen_Private::FMapPropertyParams NewProp_WeaponIndexsInTenderAndSellPrices;
 	static const UECodeGen_Private::FStrPropertyParams NewProp_RequestedWeaponFeatures_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_RequestedWeaponFeatures;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_LastTimeAddedProductToTender;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static void* NewStructOps()
 	{
@@ -275,6 +280,7 @@ const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FLastTende
 const UECodeGen_Private::FMapPropertyParams Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewProp_WeaponIndexsInTenderAndSellPrices = { "WeaponIndexsInTenderAndSellPrices", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FLastTenderDetails, WeaponIndexsInTenderAndSellPrices), EMapPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeaponIndexsInTenderAndSellPrices_MetaData), NewProp_WeaponIndexsInTenderAndSellPrices_MetaData) };
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewProp_RequestedWeaponFeatures_Inner = { "RequestedWeaponFeatures", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewProp_RequestedWeaponFeatures = { "RequestedWeaponFeatures", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FLastTenderDetails, RequestedWeaponFeatures), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RequestedWeaponFeatures_MetaData), NewProp_RequestedWeaponFeatures_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewProp_LastTimeAddedProductToTender = { "LastTimeAddedProductToTender", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FLastTenderDetails, LastTimeAddedProductToTender), Z_Construct_UScriptStruct_FDateTime, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastTimeAddedProductToTender_MetaData), NewProp_LastTimeAddedProductToTender_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FLastTenderDetails_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewProp_CountryRequestedTender,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewProp_CountryRequestedWeaponCategory,
@@ -283,6 +289,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FL
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewProp_WeaponIndexsInTenderAndSellPrices,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewProp_RequestedWeaponFeatures_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewProp_RequestedWeaponFeatures,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewProp_LastTimeAddedProductToTender,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FLastTenderDetails_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FLastTenderDetails_Statics::StructParams = {
@@ -595,7 +602,7 @@ const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FGenera
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_InstalledVersion = { "InstalledVersion", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FGeneralDatas, InstalledVersion), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InstalledVersion_MetaData), NewProp_InstalledVersion_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_ProfilePicture = { "ProfilePicture", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FGeneralDatas, ProfilePicture), Z_Construct_UClass_UTexture2D_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ProfilePicture_MetaData), NewProp_ProfilePicture_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_TenderLastTime = { "TenderLastTime", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FGeneralDatas, TenderLastTime), Z_Construct_UScriptStruct_FDateTime, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TenderLastTime_MetaData), NewProp_TenderLastTime_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_LastActiveTenderData = { "LastActiveTenderData", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FGeneralDatas, LastActiveTenderData), Z_Construct_UScriptStruct_FLastTenderDetails, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastActiveTenderData_MetaData), NewProp_LastActiveTenderData_MetaData) }; // 1347919281
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_LastActiveTenderData = { "LastActiveTenderData", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FGeneralDatas, LastActiveTenderData), Z_Construct_UScriptStruct_FLastTenderDetails, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastActiveTenderData_MetaData), NewProp_LastActiveTenderData_MetaData) }; // 548049532
 void Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewProp_AreWeAtWar_SetBit(void* Obj)
 {
 	((FGeneralDatas*)Obj)->AreWeAtWar = 1;
@@ -2793,8 +2800,8 @@ struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndust
 		{ EWeaponType_StaticEnum, TEXT("EWeaponType"), &Z_Registration_Info_UEnum_EWeaponType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2690430185U) },
 	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FLastTenderDetails::StaticStruct, Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewStructOps, TEXT("LastTenderDetails"), &Z_Registration_Info_UScriptStruct_LastTenderDetails, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FLastTenderDetails), 1347919281U) },
-		{ FGeneralDatas::StaticStruct, Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewStructOps, TEXT("GeneralDatas"), &Z_Registration_Info_UScriptStruct_GeneralDatas, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FGeneralDatas), 3928181812U) },
+		{ FLastTenderDetails::StaticStruct, Z_Construct_UScriptStruct_FLastTenderDetails_Statics::NewStructOps, TEXT("LastTenderDetails"), &Z_Registration_Info_UScriptStruct_LastTenderDetails, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FLastTenderDetails), 548049532U) },
+		{ FGeneralDatas::StaticStruct, Z_Construct_UScriptStruct_FGeneralDatas_Statics::NewStructOps, TEXT("GeneralDatas"), &Z_Registration_Info_UScriptStruct_GeneralDatas, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FGeneralDatas), 3846640314U) },
 		{ FLastSlot::StaticStruct, Z_Construct_UScriptStruct_FLastSlot_Statics::NewStructOps, TEXT("LastSlot"), &Z_Registration_Info_UScriptStruct_LastSlot, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FLastSlot), 2546034666U) },
 		{ FCountrys::StaticStruct, Z_Construct_UScriptStruct_FCountrys_Statics::NewStructOps, TEXT("Countrys"), &Z_Registration_Info_UScriptStruct_Countrys, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCountrys), 4030937518U) },
 		{ FFactorys::StaticStruct, Z_Construct_UScriptStruct_FFactorys_Statics::NewStructOps, TEXT("Factorys"), &Z_Registration_Info_UScriptStruct_Factorys, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FFactorys), 499567656U) },
@@ -2813,7 +2820,7 @@ struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndust
 		{ Z_Construct_UClass_UAllStructs, UAllStructs::StaticClass, TEXT("UAllStructs"), &Z_Registration_Info_UClass_UAllStructs, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAllStructs), 2848953886U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_4253513201(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_2290075903(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::ScriptStructInfo),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_Statics::EnumInfo));

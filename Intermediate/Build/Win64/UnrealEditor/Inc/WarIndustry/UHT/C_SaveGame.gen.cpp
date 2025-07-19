@@ -119,7 +119,7 @@ struct Z_Construct_UClass_UC_SaveGame_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UC_SaveGame_Statics::NewProp_GeneralDatas = { "GeneralDatas", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UC_SaveGame, GeneralDatas), Z_Construct_UScriptStruct_FGeneralDatas, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GeneralDatas_MetaData), NewProp_GeneralDatas_MetaData) }; // 3928181812
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UC_SaveGame_Statics::NewProp_GeneralDatas = { "GeneralDatas", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UC_SaveGame, GeneralDatas), Z_Construct_UScriptStruct_FGeneralDatas, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_GeneralDatas_MetaData), NewProp_GeneralDatas_MetaData) }; // 3846640314
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UC_SaveGame_Statics::NewProp_LastSlot = { "LastSlot", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UC_SaveGame, LastSlot), Z_Construct_UScriptStruct_FLastSlot, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LastSlot_MetaData), NewProp_LastSlot_MetaData) }; // 2546034666
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UC_SaveGame_Statics::NewProp_Countrys_Inner = { "Countrys", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FCountrys, METADATA_PARAMS(0, nullptr) }; // 4030937518
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UC_SaveGame_Statics::NewProp_Countrys = { "Countrys", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UC_SaveGame, Countrys), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Countrys_MetaData), NewProp_Countrys_MetaData) }; // 4030937518
@@ -203,10 +203,10 @@ UC_SaveGame::~UC_SaveGame() {}
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_SaveGame_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UC_SaveGame, UC_SaveGame::StaticClass, TEXT("UC_SaveGame"), &Z_Registration_Info_UClass_UC_SaveGame, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UC_SaveGame), 2496570065U) },
+		{ Z_Construct_UClass_UC_SaveGame, UC_SaveGame::StaticClass, TEXT("UC_SaveGame"), &Z_Registration_Info_UClass_UC_SaveGame, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UC_SaveGame), 259121305U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_SaveGame_h_2157539367(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_SaveGame_h_969322466(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_SaveGame_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_C_SaveGame_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

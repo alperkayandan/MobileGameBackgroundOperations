@@ -38,6 +38,9 @@ class WARINDUSTRY_API UHelperCalculationFunctions : public UBlueprintFunctionLib
 
         UFUNCTION(BlueprintCallable, Category = "Calculations")
         static void FindSelectedCountryWeaponNeeds(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FCountrys FirstCountry, FCountrys OpponentCountry, FRebellion RebellionsInCountry, TMap<FName, int32>& WeaponCategoriesAndCountDiff, TMap<FName, int32>& WeaponTypesAndCountDiff, TMap<FName, int32>& WeaponCategoriesAndOveralls, TMap<FName, int32>& WeaponTypesAndOveralls, TArray<FName>& FirstCountryDoesntHaveTheseWeaponTypes, TMap<FString, FName>& FirstCountryBadThisWeaponFeatureNameAndCategory);
+
+        UFUNCTION(BlueprintCallable, Category = "Calculations|SelectRandomWeapon")
+        static void AddRandomForeignWeaponsToTender(UObject* WorldContextObject, int32& SelectedProductIndexForTender);
 			
 	private:
 

@@ -22,6 +22,7 @@ struct FTimespan;
 #define WARINDUSTRY_HelperCalculationFunctions_generated_h
 
 #define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execAddRandomForeignWeaponsToTender); \
 	DECLARE_FUNCTION(execFindSelectedCountryWeaponNeeds); \
 	DECLARE_FUNCTION(execWeaponsCountryRates); \
 	DECLARE_FUNCTION(execCalculateGameDifficultyByCountries); \

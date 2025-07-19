@@ -23,6 +23,54 @@ WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FNewDesignedProductsStr
 WARINDUSTRY_API UScriptStruct* Z_Construct_UScriptStruct_FRebellion();
 // End Cross Module References
 
+// Begin Class UHelperCalculationFunctions Function AddRandomForeignWeaponsToTender
+struct Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics
+{
+	struct HelperCalculationFunctions_eventAddRandomForeignWeaponsToTender_Parms
+	{
+		UObject* WorldContextObject;
+		int32 SelectedProductIndexForTender;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Calculations|SelectRandomWeapon" },
+		{ "ModuleRelativePath", "Public/HelperCalculationFunctions.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_WorldContextObject;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_SelectedProductIndexForTender;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventAddRandomForeignWeaponsToTender_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::NewProp_SelectedProductIndexForTender = { "SelectedProductIndexForTender", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(HelperCalculationFunctions_eventAddRandomForeignWeaponsToTender_Parms, SelectedProductIndexForTender), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::NewProp_WorldContextObject,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::NewProp_SelectedProductIndexForTender,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UHelperCalculationFunctions, nullptr, "AddRandomForeignWeaponsToTender", nullptr, nullptr, Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::PropPointers), sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::HelperCalculationFunctions_eventAddRandomForeignWeaponsToTender_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::Function_MetaDataParams), Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::HelperCalculationFunctions_eventAddRandomForeignWeaponsToTender_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UHelperCalculationFunctions::execAddRandomForeignWeaponsToTender)
+{
+	P_GET_OBJECT(UObject,Z_Param_WorldContextObject);
+	P_GET_PROPERTY_REF(FIntProperty,Z_Param_Out_SelectedProductIndexForTender);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	UHelperCalculationFunctions::AddRandomForeignWeaponsToTender(Z_Param_WorldContextObject,Z_Param_Out_SelectedProductIndexForTender);
+	P_NATIVE_END;
+}
+// End Class UHelperCalculationFunctions Function AddRandomForeignWeaponsToTender
+
 // Begin Class UHelperCalculationFunctions Function CalculateDesignWeaponFeatures
 struct Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures_Statics
 {
@@ -566,6 +614,7 @@ void UHelperCalculationFunctions::StaticRegisterNativesUHelperCalculationFunctio
 {
 	UClass* Class = UHelperCalculationFunctions::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "AddRandomForeignWeaponsToTender", &UHelperCalculationFunctions::execAddRandomForeignWeaponsToTender },
 		{ "CalculateDesignWeaponFeatures", &UHelperCalculationFunctions::execCalculateDesignWeaponFeatures },
 		{ "CalculateGameDifficultyByCountries", &UHelperCalculationFunctions::execCalculateGameDifficultyByCountries },
 		{ "CalculateWeaponProductionTime", &UHelperCalculationFunctions::execCalculateWeaponProductionTime },
@@ -592,6 +641,7 @@ struct Z_Construct_UClass_UHelperCalculationFunctions_Statics
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_UHelperCalculationFunctions_AddRandomForeignWeaponsToTender, "AddRandomForeignWeaponsToTender" }, // 1754522347
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CalculateDesignWeaponFeatures, "CalculateDesignWeaponFeatures" }, // 1634834366
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CalculateGameDifficultyByCountries, "CalculateGameDifficultyByCountries" }, // 3578361905
 		{ &Z_Construct_UFunction_UHelperCalculationFunctions_CalculateWeaponProductionTime, "CalculateWeaponProductionTime" }, // 3502352295
@@ -648,10 +698,10 @@ UHelperCalculationFunctions::~UHelperCalculationFunctions() {}
 struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UHelperCalculationFunctions, UHelperCalculationFunctions::StaticClass, TEXT("UHelperCalculationFunctions"), &Z_Registration_Info_UClass_UHelperCalculationFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHelperCalculationFunctions), 1126807393U) },
+		{ Z_Construct_UClass_UHelperCalculationFunctions, UHelperCalculationFunctions::StaticClass, TEXT("UHelperCalculationFunctions"), &Z_Registration_Info_UClass_UHelperCalculationFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UHelperCalculationFunctions), 1651519071U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_4043899900(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_2744043236(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_HelperCalculationFunctions_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
