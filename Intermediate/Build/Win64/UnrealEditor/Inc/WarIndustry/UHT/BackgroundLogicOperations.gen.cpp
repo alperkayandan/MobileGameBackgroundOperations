@@ -13,6 +13,7 @@ void EmptyLinkFunctionForGeneratedCodeBackgroundLogicOperations() {}
 // Begin Cross Module References
 COREUOBJECT_API UClass* Z_Construct_UClass_UObject();
 COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRandomStream();
 ENGINE_API UClass* Z_Construct_UClass_UDataTable_NoRegister();
 UPackage* Z_Construct_UPackage__Script_WarIndustry();
 WARINDUSTRY_API UClass* Z_Construct_UClass_UBackgroundLogicOperations();
@@ -231,6 +232,7 @@ struct Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOf
 		UObject* WorldContextObject;
 		UDataTable* AllFeaturesDataTable;
 		FTenderOfferData OfferData;
+		FRandomStream RandStream;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -241,19 +243,22 @@ struct Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOf
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_WorldContextObject;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_AllFeaturesDataTable;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_OfferData;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_RandStream;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_AllFeaturesDataTable = { "AllFeaturesDataTable", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms, AllFeaturesDataTable), Z_Construct_UClass_UDataTable_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_OfferData = { "OfferData", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms, OfferData), Z_Construct_UScriptStruct_FTenderOfferData, METADATA_PARAMS(0, nullptr) }; // 205649942
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_RandStream = { "RandStream", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms, RandStream), Z_Construct_UScriptStruct_FRandomStream, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_WorldContextObject,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_AllFeaturesDataTable,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_OfferData,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::NewProp_RandStream,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UBackgroundLogicOperations, nullptr, "CheckCountryBordersForOffer", nullptr, nullptr, Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::PropPointers), sizeof(Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::Function_MetaDataParams), Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::Function_MetaDataParams) };
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UBackgroundLogicOperations, nullptr, "CheckCountryBordersForOffer", nullptr, nullptr, Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::PropPointers), sizeof(Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04C20401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::Function_MetaDataParams), Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::Function_MetaDataParams) };
 static_assert(sizeof(Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer_Statics::BackgroundLogicOperations_eventCheckCountryBordersForOffer_Parms) < MAX_uint16);
 UFunction* Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer()
 {
@@ -269,9 +274,10 @@ DEFINE_FUNCTION(UBackgroundLogicOperations::execCheckCountryBordersForOffer)
 	P_GET_OBJECT(UObject,Z_Param_WorldContextObject);
 	P_GET_OBJECT(UDataTable,Z_Param_AllFeaturesDataTable);
 	P_GET_STRUCT_REF(FTenderOfferData,Z_Param_Out_OfferData);
+	P_GET_STRUCT(FRandomStream,Z_Param_RandStream);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	P_THIS->CheckCountryBordersForOffer(Z_Param_WorldContextObject,Z_Param_AllFeaturesDataTable,Z_Param_Out_OfferData);
+	P_THIS->CheckCountryBordersForOffer(Z_Param_WorldContextObject,Z_Param_AllFeaturesDataTable,Z_Param_Out_OfferData,Z_Param_RandStream);
 	P_NATIVE_END;
 }
 // End Class UBackgroundLogicOperations Function CheckCountryBordersForOffer
@@ -446,7 +452,7 @@ struct Z_Construct_UClass_UBackgroundLogicOperations_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer, "CheckCountryBordersForOffer" }, // 3132776717
+		{ &Z_Construct_UFunction_UBackgroundLogicOperations_CheckCountryBordersForOffer, "CheckCountryBordersForOffer" }, // 3408839954
 		{ &Z_Construct_UFunction_UBackgroundLogicOperations_CreateAsyncBackgroundLogicOperations, "CreateAsyncBackgroundLogicOperations" }, // 1521723656
 		{ &Z_Construct_UFunction_UBackgroundLogicOperations_DistributeProducedWeapons, "DistributeProducedWeapons" }, // 1838244887
 		{ &Z_Construct_UFunction_UBackgroundLogicOperations_StartAsyncControlForBackgroundOperations, "StartAsyncControlForBackgroundOperations" }, // 955861803
@@ -506,10 +512,10 @@ struct Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndust
 		{ FTenderOfferData::StaticStruct, Z_Construct_UScriptStruct_FTenderOfferData_Statics::NewStructOps, TEXT("TenderOfferData"), &Z_Registration_Info_UScriptStruct_TenderOfferData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FTenderOfferData), 205649942U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UBackgroundLogicOperations, UBackgroundLogicOperations::StaticClass, TEXT("UBackgroundLogicOperations"), &Z_Registration_Info_UClass_UBackgroundLogicOperations, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBackgroundLogicOperations), 1242931761U) },
+		{ Z_Construct_UClass_UBackgroundLogicOperations, UBackgroundLogicOperations::StaticClass, TEXT("UBackgroundLogicOperations"), &Z_Registration_Info_UClass_UBackgroundLogicOperations, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UBackgroundLogicOperations), 1779792494U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_3156551860(TEXT("/Script/WarIndustry"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_4164809728(TEXT("/Script/WarIndustry"),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_BackgroundLogicOperations_h_Statics::ScriptStructInfo),
 	nullptr, 0);

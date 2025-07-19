@@ -17,12 +17,14 @@ UBackgroundLogicOperations* UBackgroundLogicOperations::CreateAsyncBackgroundLog
 void UBackgroundLogicOperations::StartAsyncControlForBackgroundOperations(UObject* WorldContextObject) {
 	
 	UDataTable* AllFeaturesDataTable = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, TEXT("/Game/Datas/AllWeaponFeatures.AllWeaponFeatures")));
-	
-	Async(EAsyncExecution::Thread, [this, WorldContextObject, AllFeaturesDataTable]() {
+	int64 UniqueSeed = FDateTime::Now().GetTicks() ^ FPlatformTime::Cycles64();
+	FRandomStream RandStream(UniqueSeed);
+
+	Async(EAsyncExecution::Thread, [this, WorldContextObject, AllFeaturesDataTable, RandStream]() {
 
 		FTenderOfferData OfferData;
 
-		CheckCountryBordersForOffer(WorldContextObject, AllFeaturesDataTable, OfferData); // silah satýþ kontratý, silah tasarým kontratý ve ihale teklifini kontrol eden fonksiyon.
+		CheckCountryBordersForOffer(WorldContextObject, AllFeaturesDataTable, OfferData, RandStream); // silah satýþ kontratý, silah tasarým kontratý ve ihale teklifini kontrol eden fonksiyon.
 		
 		if (OfferData.IsTenderOffer || OfferData.IsSellContractOffer || OfferData.IsDesignContractOffer) {
 
@@ -97,7 +99,7 @@ void UBackgroundLogicOperations::ControlGlobalFactorysProducedWeapons(UObject* W
 
 }
 
-void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FTenderOfferData& OfferData) {
+void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FTenderOfferData& OfferData, FRandomStream RandStream) {
 
 	UC_GameInstance* GI = Cast<UC_GameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
 	GI->Implements<USaveInterface>();
@@ -115,7 +117,9 @@ void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldConte
 		FRebellion RebellionsInSelectedCountry;
 
 		TArray<FName> CountryBorders;
-		RandomSelectedCountryIndex = FMath::RandRange(0, AllCountrys.Num() - 1);
+
+		RandomSelectedCountryIndex = RandStream.RandRange(0, AllCountrys.Num() - 1);
+		UE_LOG(LogTemp, Error, TEXT("index : %d, lastIndex : %d"), RandomSelectedCountryIndex, AllCountrys.Num() - 1);
 
 		FoundFirstCountryStruct = AllCountrys[RandomSelectedCountryIndex];
 		OfferData.RequestedCountryName = FoundFirstCountryStruct.CountryName;
@@ -124,7 +128,7 @@ void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldConte
 		CountryBorders.Append(AllCountrys[RandomSelectedCountryIndex].WaterBorders);
 
 		// Ýçindeki isyancýlarý buluyor.
-		if (AllRebellions.Num() < 0) {
+		if (AllRebellions.Num() >= 0) {
 
 			for (FRebellion Rebels : AllRebellions) {
 
@@ -142,7 +146,7 @@ void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldConte
 		for (int j = 0; j < 5; j++) {
 			
 			int32 RandomSelectedBorderIndex = -1;
-
+			
 			RandomSelectedBorderIndex = FMath::RandRange(0, CountryBorders.Num() - 1);
 
 			if (RandomSelectedBorderIndex != -1) {
@@ -152,6 +156,11 @@ void UBackgroundLogicOperations::CheckCountryBordersForOffer(UObject* WorldConte
 				for (FCountrys OpponentCountry : AllCountrys) {
 
 					if (OpponentCountry.CountryName.Equals(BorderCountryName.ToString(), ESearchCase::IgnoreCase)) {
+
+						FoundOppeonentCountryStruct = OpponentCountry;
+						break;
+
+					}else if (OpponentCountry.WaterBorders.Find(BorderCountryName) != -1) {
 
 						FoundOppeonentCountryStruct = OpponentCountry;
 						break;
@@ -198,12 +207,19 @@ void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObje
 	TMap<FName, int32> FirstCountryRelations = FirstCountry.Relationships;
 	int32* FirstCountryToOpponentCountryRelation = FirstCountryRelations.Find(FName(OpponentCountry.CountryName));
 
+	if (FirstCountryToOpponentCountryRelation == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("iliski bulunamadi: %s - %s"), *FirstCountry.CountryName, *OpponentCountry.CountryName);
+		return;
+	}
 	// ayný zamanda isyancýlar içinde isyan ihtimali %50 üzerine çýktý mý gibi bir kontrol lazým. ve ona göre silah satýn alabilir.
 
 	UHelperCalculationFunctions::FindSelectedCountryWeaponNeeds(WorldContextObject, AllFeaturesDataTable, FirstCountry, OpponentCountry, RebellionsInSelectedCountry, WeaponCategoriesAndCountDiff, WeaponTypesAndCountDiff, WeaponOverallsByCategories, WeaponOverallsByTypes, FirstCountryDoesntHaveTheseWeaponTypes, FirstCountryBadThisWeaponFeatureNameAndCategory);
 
+	UE_LOG(LogTemp, Warning, TEXT("1. ulke %s ve 2 ulke %s iliski : %d"), *FirstCountry.CountryName, *OpponentCountry.CountryName, *FirstCountryToOpponentCountryRelation);
+
 	// ya silah satýn alacak ya da ihale oluþturmasý lazým.
-	if (*FirstCountryToOpponentCountryRelation < 0) {
+	if (*FirstCountryToOpponentCountryRelation < 0 && WeaponOverallsByCategories.Num() >= 1) {
 
 		int32 SellPossibility = FMath::RandRange(0, 100);
 
@@ -217,7 +233,7 @@ void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObje
 
 			FDateTime CurrentTime = FDateTime::UtcNow();
 
-			if (CurrentTime >= GeneralDatas.TenderLastTime) {
+			if (CurrentTime >= GeneralDatas.TenderLastTime && WeaponOverallsByCategories.Num() >= 1) {
 
 				//ihale için -> istenilen tip ya da özelliklerden en az biri bizde var mý?
 				OfferData.IsTenderOffer = OfferTender(WorldContextObject, WeaponCategoriesAndCountDiff, WeaponOverallsByCategories, FirstCountryBadThisWeaponFeatureNameAndCategory, OfferData);
@@ -235,7 +251,7 @@ void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObje
 
 		int32 SellPossibility = FMath::RandRange(0, 100);
 
-		if (SellPossibility <= GeneralDatas.CompanyPopularity) {
+		if (SellPossibility <= GeneralDatas.CompanyPopularity && WeaponOverallsByCategories.Num() >= 1) {
 			//tasarým için -> popülerlik ve daha önce silah sattýk mý o tasarým yapýlabilir mi?
 			OfferData.IsDesignContractOffer = OfferWeaponDesignContract(WorldContextObject, FirstCountryDoesntHaveTheseWeaponTypes, FirstCountryBadThisWeaponFeatureNameAndCategory, WeaponOverallsByCategories, WeaponOverallsByTypes, OfferData);
 
@@ -244,7 +260,7 @@ void UBackgroundLogicOperations::SelectOfferForCountry(UObject* WorldContextObje
 
 			FDateTime CurrentTime = FDateTime::UtcNow();
 
-			if (CurrentTime >= GeneralDatas.TenderLastTime) {
+			if (CurrentTime >= GeneralDatas.TenderLastTime && WeaponOverallsByCategories.Num() >= 1) {
 
 				//ihale için -> istenilen tip ya da özelliklerden en az biri bizde var mý?
 				OfferData.IsTenderOffer = OfferTender(WorldContextObject, WeaponCategoriesAndCountDiff, WeaponOverallsByCategories, FirstCountryBadThisWeaponFeatureNameAndCategory, OfferData);
@@ -302,10 +318,12 @@ bool UBackgroundLogicOperations::OfferWeaponSellContract(UObject* WorldContextOb
 		if (DesignedProducts[i].IsDesignedByMyCompany && DesignedProducts[i].Type == RandomSelectedWeaponType) {
 
 			int32* AvarageOverall = 0;
+			int32 RequestedOverall = 0;
 
 			if (WeaponOverallsByTypes.Find(DesignedProducts[i].Type)) {
 
 				 AvarageOverall = WeaponOverallsByTypes.Find(DesignedProducts[i].Type);
+				 RequestedOverall = *AvarageOverall;
 
 				if (DesignedProducts[i].Overall >= (*AvarageOverall - 10) && DesignedProducts[i].Overall <= (*AvarageOverall + 15)) {
 					AvailableDesigns.Add(DesignedProducts[i]);
@@ -315,6 +333,7 @@ bool UBackgroundLogicOperations::OfferWeaponSellContract(UObject* WorldContextOb
 			else if (WeaponOverallsByCategories.Find(DesignedProducts[i].Class)) {
 
 				AvarageOverall = WeaponOverallsByCategories.Find(DesignedProducts[i].Class);
+				RequestedOverall = *AvarageOverall;
 
 				if (DesignedProducts[i].Overall >= (*AvarageOverall - 5) && DesignedProducts[i].Overall <= (*AvarageOverall + 10)) {
 					AvailableDesigns.Add(DesignedProducts[i]);
@@ -324,12 +343,12 @@ bool UBackgroundLogicOperations::OfferWeaponSellContract(UObject* WorldContextOb
 			else {
 
 				for (TPair<FName, int32> OverallsByCategories : WeaponOverallsByCategories) {
-					*AvarageOverall += OverallsByCategories.Value;
+					RequestedOverall += OverallsByCategories.Value;
 				}
 
-				*AvarageOverall = *AvarageOverall / WeaponOverallsByCategories.Num();
+				RequestedOverall = RequestedOverall / WeaponOverallsByCategories.Num();
 				
-				if (DesignedProducts[i].Overall >= (*AvarageOverall - 5) && DesignedProducts[i].Overall <= (*AvarageOverall + 5)) {
+				if (DesignedProducts[i].Overall >= (RequestedOverall - 5) && DesignedProducts[i].Overall <= (RequestedOverall + 5)) {
 					AvailableDesigns.Add(DesignedProducts[i]);
 				}
 				
@@ -357,9 +376,13 @@ bool UBackgroundLogicOperations::OfferWeaponSellContract(UObject* WorldContextOb
 
 		}
 
-		SelectedProductForSell = AvailableDesigns[FMath::RandRange(0, AvailableDesigns.Num() - 1)];
+		if (AvailableDesigns.Num() >= 1) {
+			SelectedProductForSell = AvailableDesigns[FMath::RandRange(0, AvailableDesigns.Num() - 1)];
 
-		MyCompanyAvailableToSellOffer = true;
+			MyCompanyAvailableToSellOffer = true;
+		}
+
+		
 	}
 
 	OfferData.SelectedProductForSellOffer = SelectedProductForSell;
@@ -381,7 +404,7 @@ bool UBackgroundLogicOperations::OfferTender(UObject* WorldContextObject, TMap<F
 	TArray<FMyFactorys> MyFactorys = LoadedSave->MyFactorys;
 	TArray<FNewDesignedProductsStruct> DesignedProducts = LoadedSave->DesignedProducts;
 
-	if (MyFactorys.Num() < 1 && DesignedProducts.Num() < 1) {
+	if (MyFactorys.Num() < 1 || DesignedProducts.Num() < 1) {
 		return false;
 	}
 	else {
@@ -449,6 +472,7 @@ bool UBackgroundLogicOperations::OfferWeaponDesignContract(UObject* WorldContext
 		FName RandomSelectedWeaponType;
 		FName SelectedWeaponCategory;
 		int32* AvarageOverall = 0;
+		int32 RequestedOverall = 0;
 
 		if (FirstCountryDoesntHaveTheseWeaponTypes.Num() >= 1) {
 
@@ -458,17 +482,18 @@ bool UBackgroundLogicOperations::OfferWeaponDesignContract(UObject* WorldContext
 			if (WeaponOverallsByCategories.Find(SelectedWeaponCategory)) {
 				
 				AvarageOverall = WeaponOverallsByCategories.Find(SelectedWeaponCategory);
+				RequestedOverall = *AvarageOverall;
 			
 			}
 			else {
 
 				for (TPair<FName, int32> WeaponCategoryAndOverall : WeaponOverallsByCategories) {
 
-					*AvarageOverall += WeaponCategoryAndOverall.Value;
+					RequestedOverall += WeaponCategoryAndOverall.Value;
 
 				}
 
-				*AvarageOverall = *AvarageOverall / WeaponOverallsByCategories.Num();
+				RequestedOverall = RequestedOverall / WeaponOverallsByCategories.Num();
 
 			}
 
@@ -476,13 +501,15 @@ bool UBackgroundLogicOperations::OfferWeaponDesignContract(UObject* WorldContext
 
 		}
 		else {
-			*AvarageOverall = 200;
+			RequestedOverall = 200;
 			// en düþük overall a göre bak.
 			for (TPair<FName, int32> WeaponTypesAndOveralls : WeaponOverallsByTypes) {
-				if (*AvarageOverall > WeaponTypesAndOveralls.Value) {
-					*AvarageOverall = WeaponTypesAndOveralls.Value;
+				
+				if (RequestedOverall > WeaponTypesAndOveralls.Value) {
+					RequestedOverall = WeaponTypesAndOveralls.Value;
 					RandomSelectedWeaponType = WeaponTypesAndOveralls.Key;
 				}
+
 			}
 
 			SelectedWeaponCategory = UAllStructs::FindWeaponCategoryByType(RandomSelectedWeaponType);
@@ -545,7 +572,7 @@ bool UBackgroundLogicOperations::OfferWeaponDesignContract(UObject* WorldContext
 
 					}
 					
-					OfferData.RequestingAvarageWeaponOverall = *AvarageOverall;
+					OfferData.RequestingAvarageWeaponOverall = RequestedOverall;
 					break;
 
 				}
@@ -562,7 +589,7 @@ bool UBackgroundLogicOperations::OfferWeaponDesignContract(UObject* WorldContext
 
 					}
 
-					OfferData.RequestingAvarageWeaponOverall = *AvarageOverall;
+					OfferData.RequestingAvarageWeaponOverall = RequestedOverall;
 					break;
 
 				}

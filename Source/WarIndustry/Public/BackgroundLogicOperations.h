@@ -66,7 +66,7 @@ class WARINDUSTRY_API UBackgroundLogicOperations : public UObject
 		void DistributeProducedWeapons(UObject* WorldContextObject, TArray<FFactorys>& GlobalFactorysData);
 
 		UFUNCTION(BlueprintCallable, Category = "AsyncBackgroundLogic")
-		void CheckCountryBordersForOffer(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FTenderOfferData& OfferData);
+		void CheckCountryBordersForOffer(UObject* WorldContextObject, UDataTable* AllFeaturesDataTable, FTenderOfferData& OfferData, FRandomStream RandStream);
 
 		UPROPERTY(BlueprintAssignable)
 		FOffer CreateOfferPage;

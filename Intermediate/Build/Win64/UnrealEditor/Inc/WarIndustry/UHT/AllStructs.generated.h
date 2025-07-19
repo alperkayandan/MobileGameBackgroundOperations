@@ -15,20 +15,27 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define WARINDUSTRY_AllStructs_generated_h
 
 #define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_65_GENERATED_BODY \
+	friend struct Z_Construct_UScriptStruct_FLastTenderDetails_Statics; \
+	WARINDUSTRY_API static class UScriptStruct* StaticStruct();
+
+
+template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FLastTenderDetails>();
+
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_91_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FGeneralDatas_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct();
 
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FGeneralDatas>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_252_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_282_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FLastSlot_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct();
 
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FLastSlot>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_266_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_296_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FCountrys_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -36,7 +43,7 @@ template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FLastSlot>();
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FCountrys>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_335_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_365_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FFactorys_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -44,7 +51,7 @@ template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FCountrys>();
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FFactorys>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_393_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_423_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FMyFactorys_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -52,7 +59,7 @@ template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FFactorys>();
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FMyFactorys>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_451_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_481_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FResearchItems_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -60,49 +67,49 @@ template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FMyFactorys>();
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FResearchItems>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_594_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_624_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FContracts_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct();
 
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FContracts>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_652_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_682_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FRebellion_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct();
 
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FRebellion>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_698_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_728_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FCurrentWars_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct();
 
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FCurrentWars>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_756_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_786_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FNews_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct();
 
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FNews>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_783_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_813_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FDesignedProductsProduction_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct();
 
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FDesignedProductsProduction>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_804_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_834_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FNewDesignedProductsStruct_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct();
 
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FNewDesignedProductsStruct>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_915_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_945_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FWeaponFeatures_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -110,7 +117,7 @@ template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FNewDesignedProduc
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FWeaponFeatures>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_962_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_992_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FCountryWeaponsStartData_Statics; \
 	WARINDUSTRY_API static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -118,7 +125,7 @@ template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FWeaponFeatures>()
 
 template<> WARINDUSTRY_API UScriptStruct* StaticStruct<struct FCountryWeaponsStartData>();
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_979_INCLASS_NO_PURE_DECLS \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_1009_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUAllStructs(); \
 	friend struct Z_Construct_UClass_UAllStructs_Statics; \
@@ -127,7 +134,7 @@ public: \
 	DECLARE_SERIALIZER(UAllStructs)
 
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_979_ENHANCED_CONSTRUCTORS \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_1009_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UAllStructs(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 private: \
@@ -141,12 +148,12 @@ public: \
 	NO_API virtual ~UAllStructs();
 
 
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_975_PROLOG
-#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_979_GENERATED_BODY \
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_1005_PROLOG
+#define FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_1009_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_979_INCLASS_NO_PURE_DECLS \
-	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_979_ENHANCED_CONSTRUCTORS \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_1009_INCLASS_NO_PURE_DECLS \
+	FID_Users_alper_Documents_Unreal_Projects_WarIndustry_Source_WarIndustry_Public_AllStructs_h_1009_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

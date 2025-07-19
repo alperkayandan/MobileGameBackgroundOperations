@@ -60,6 +60,32 @@ enum class EWeaponType : uint8
 };
 
 USTRUCT(BlueprintType)
+struct FLastTenderDetails
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName CountryRequestedTender;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName CountryRequestedWeaponCategory;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TMap<int32, float> WeaponIndexsInTenderAndSellPrices;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FString> RequestedWeaponFeatures;
+
+	FLastTenderDetails()
+		: CountryRequestedTender()
+		, CountryRequestedWeaponCategory()
+		, WeaponIndexsInTenderAndSellPrices()
+		, RequestedWeaponFeatures()
+	{
+	}
+};
+
+USTRUCT(BlueprintType)
 struct FGeneralDatas 
 {
 	GENERATED_BODY()
@@ -146,6 +172,9 @@ struct FGeneralDatas
 	FDateTime TenderLastTime;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FLastTenderDetails LastActiveTenderData;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool AreWeAtWar;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -220,6 +249,7 @@ struct FGeneralDatas
 		, InstalledVersion("")
 		, ProfilePicture()
 		, TenderLastTime()
+		, LastActiveTenderData()
 		, AreWeAtWar(false)
 		, AvailableDesigns()
 		, MaxDesignCount()

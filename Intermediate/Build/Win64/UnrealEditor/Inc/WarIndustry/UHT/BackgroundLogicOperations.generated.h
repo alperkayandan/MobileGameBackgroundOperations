@@ -13,6 +13,7 @@ class UBackgroundLogicOperations;
 class UDataTable;
 class UObject;
 struct FFactorys;
+struct FRandomStream;
 struct FTenderOfferData;
 #ifdef WARINDUSTRY_BackgroundLogicOperations_generated_h
 #error "BackgroundLogicOperations.generated.h already included, missing '#pragma once' in BackgroundLogicOperations.h"
